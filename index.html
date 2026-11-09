@@ -735,6 +735,66 @@ button{-webkit-appearance:none;appearance:none}
 .pinfo .seg{width:auto}
 .sndp{width:30px;height:30px;border-radius:6px;background:rgba(128,128,128,.14);color:inherit;font-size:11px;margin-left:6px}
 .empty .ei,.empty-ico,.emptyico{display:grid;place-items:center}
+
+/* v7.8: prop firms, markten, kalender, sessietype zonder vorm */
+.stype{font-size:12.5px;font-weight:700;color:var(--accent);white-space:nowrap;background:none;border:0;padding:0}
+.stype.pf{color:#e0a33a}.stype.pos{color:#2fbf71}.stype.neg{color:#e5534b}.stype.acc{color:var(--accent)}
+.psub{color:var(--ink2);margin-top:6px;font-size:14px;max-width:640px}
+.phead .row{display:flex;gap:10px;flex-wrap:wrap}
+.soon{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-left:4px}
+.pfhow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.pfhow .box{display:flex;flex-direction:column;gap:6px}.pfhow .ci,.empty-pf .ci{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--accentSoft);color:var(--accent);margin-bottom:4px}
+.pfhow small,.empty-pf small{color:var(--ink3);font-size:13px;line-height:1.45}
+.pfstrict{display:flex;align-items:center;gap:18px;justify-content:space-between;flex-wrap:wrap;margin-bottom:6px}.pfstrict small{display:block;color:var(--ink3);margin-top:4px;font-size:13px}
+.sech{margin:22px 0 12px;font-size:16px}.sech small{font-weight:400;color:var(--ink3);font-size:12.5px;margin-left:8px}
+.pfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.pfcard,.pffirm{display:flex;flex-direction:column;gap:10px}
+.pfh{display:flex;align-items:center;gap:12px}.pfh>div{flex:1}.pfh b{display:block;font-size:15px}.pfh small{color:var(--ink3);font-size:12.5px}
+.flogo{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;background:var(--panel2);overflow:hidden;aspect-ratio:1/1}.flogo img{width:100%;height:100%;object-fit:cover}
+.pfm{display:flex;align-items:baseline;gap:8px;font-size:13px}.pfm span{color:var(--ink3);flex:1}.pfm em{font-style:normal;color:var(--ink3);font-size:12px}
+.pbar{height:6px;border-radius:4px;background:rgba(128,128,128,.15);overflow:hidden;margin-top:-4px}.pbar i{display:block;height:100%;border-radius:4px;background:#2fbf71}.pbar.neg i{background:linear-gradient(90deg,#e0a33a,#e5534b)}
+.pff{display:flex;gap:14px;flex-wrap:wrap}.pfb{display:flex;gap:8px;margin-top:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{font-size:12px;font-weight:600;padding:5px 9px;border-radius:8px;background:rgba(128,128,128,.1);color:var(--ink2)}
+.empty-pf{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:30px}
+.rcm{width:min(760px,96vw)!important;max-width:none!important}.rc{max-height:72vh;overflow:auto}
+.rcsum{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}.rcsum div{padding:10px 12px;border-radius:10px;background:rgba(128,128,128,.08)}.rcsum small{display:block;color:var(--ink3);font-size:11.5px}.rcsum b{font-size:15px}
+.rcpay{display:flex;gap:12px;align-items:center;padding:14px;border-radius:12px;margin-bottom:12px}.rcpay small{display:block;color:var(--ink3);margin-top:2px}
+.rcpay.ok{background:rgba(47,191,113,.1);color:#2fbf71}.rcpay.bad{background:rgba(229,83,75,.1);color:#e5534b}.rcpay b{color:var(--ink)}
+.rcrow{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--line)}.rcrow:first-child{border-top:0}
+.rcic{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;aspect-ratio:1/1}.rcrow.ok .rcic{background:rgba(47,191,113,.15);color:#2fbf71}.rcrow.bad .rcic{background:rgba(229,83,75,.15);color:#e5534b}
+.rcv{font-weight:700;font-size:13.5px;white-space:nowrap}.rc h4{margin:18px 0 6px;font-size:14px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ms{position:relative}.ms .box2{padding-right:38px!important;cursor:pointer}
+.mschev{position:absolute;right:12px;top:14px;width:16px;height:16px;display:grid;place-items:center;color:var(--ink3);pointer-events:none;transition:transform .15s}
+.mschev svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.7}.ms.open .mschev{transform:rotate(180deg)}
+.mkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.mkcard{position:relative;text-align:left;border-radius:16px;overflow:hidden;background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:0;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+.mkcard:hover{transform:translateY(-2px);border-color:var(--accent)}
+.mkban{height:96px;background-size:cover;background-position:center;position:relative}.mkban.big{height:150px;border-radius:12px;display:flex;align-items:flex-start;justify-content:flex-end;gap:6px;padding:10px}
+.mklogo{position:absolute;top:66px;left:18px;border-radius:50%;padding:3px;background:var(--panel)}.mklogo .sym{width:54px;height:54px;font-size:12px}
+.mklogo.big{position:relative;top:auto;left:auto;margin:-38px 0 0 20px;width:max-content}.mklogo.big .sym{width:76px;height:76px;font-size:16px}.mklogo.big .pcam{position:absolute;right:-4px;bottom:0;width:30px!important;height:30px!important}
+.mkbody{padding:30px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mkt{display:flex;align-items:center;gap:10px}.mkt b{font-size:19px}.mkn{color:var(--ink2);font-size:13.5px}
+.mkbody p{color:var(--ink3);font-size:13px;line-height:1.45;margin:2px 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mkst{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:auto;padding-top:8px}.mkst small{display:block;color:var(--ink3);font-size:11px}.mkst b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.mkm{width:min(820px,96vw)!important;max-width:none!important}.mkedit{max-height:72vh;overflow:auto}.mkhero{margin-bottom:10px}.mksub{margin:14px 0 8px;font-size:14px}
+.sym.slogo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.cdate{display:inline-flex!important;align-items:center;gap:10px;text-align:left;cursor:pointer;width:100%}
+.cdate .cdi{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;opacity:.65}.cdate .ph{color:var(--ink3)}.cdate.open{border-color:var(--accent)!important}
+.calm{position:fixed;z-index:10000;width:292px;padding:12px;border-radius:14px;background:var(--panel,#151a23);border:1px solid var(--line);box-shadow:0 22px 60px rgba(0,0,0,.5);animation:cselIn .12s ease;color:var(--ink)}
+body.theme-light .calm{background:#fff;box-shadow:0 22px 60px rgba(20,30,60,.2)}
+.calh{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.calnav{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--ink2);padding:0}.calnav:hover{background:rgba(128,128,128,.12)}
+.calnav svg,.calt svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8}
+.calt{flex:1;height:32px;border-radius:8px;font-weight:700;font-size:14.5px;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px;text-transform:capitalize}.calt:hover{background:rgba(128,128,128,.1)}
+.calg{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}.calg.wd span{font-size:11px;font-weight:700;color:var(--ink3);text-align:center;padding:4px 0}
+.calg button{height:36px;border-radius:9px;font-size:13.5px;color:var(--ink);padding:0;font-variant-numeric:tabular-nums}
+.calg button:hover:not(:disabled){background:rgba(128,128,128,.13)}.calg button.td{box-shadow:inset 0 0 0 1px var(--accent)}
+.calg button.on{background:var(--accent);color:#fff;font-weight:700}.calg button:disabled{opacity:.25;cursor:default}
+.calg.mo{grid-template-columns:repeat(3,1fr);gap:6px}.calg.mo button{height:44px;text-transform:capitalize}
+.calf{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.calf button{flex:1;height:30px;border-radius:8px;font-size:12px;font-weight:600;color:var(--accent);background:var(--accentSoft)}
+@media(max-width:820px){.pfhow{grid-template-columns:1fr}.rcsum{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:1fr}}
+.phead .row{width:100%}
 /* ---------- Responsive ---------- */
 @media (max-width:1200px){.hero{grid-template-columns:1fr 1fr}.hero .welcome{grid-column:1/-1}.kpis{grid-template-columns:repeat(2,1fr)}.recent,.guide{grid-column:1/-1}}
 @media (max-width:900px){
@@ -825,13 +885,15 @@ button{-webkit-appearance:none;appearance:none}
       <button data-go="testing"><span data-ic="chart"></span><span class="lbl" data-t="nav.testing">Testing</span></button>
       <button data-go="accounts"><span data-ic="wallet"></span><span class="lbl" data-t="nav.accounts">Handelsrekeningen</span></button>
       <button data-go="strategies"><span data-ic="compass"></span><span class="lbl" data-t="nav.strategies">Strategieën</span></button>
+      <button data-go="prop"><span data-ic="trophy"></span><span class="lbl" data-t="nav.prop">Prop firms</span></button>
       <div class="sep"></div>
       <button data-go="journal"><span data-ic="book"></span><span class="lbl">TWF Journal</span><span class="tag ext">↗</span></button>
     </nav>
     <div class="bottom nav">
+      <button data-go="markets"><span data-ic="globe"></span><span class="lbl" data-t="nav.markets">Markten</span></button>
       <button data-go="data"><span data-ic="layers"></span><span class="lbl" data-t="nav.data">Marktdata</span></button>
       <button data-go="settings"><span data-ic="gear"></span><span class="lbl" data-t="nav.settings">Accountinstellingen</span></button>
-      <div class="ver" id="sideVer">Versie: v7.7 · TWF Backtest</div>
+      <div class="ver" id="sideVer">Versie: v7.8 · TWF Backtest</div>
     </div>
   </aside>
   <main id="main"></main>
@@ -850,7 +912,7 @@ button{-webkit-appearance:none;appearance:none}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v7.7', BUILD: '2026-11-09'
+  VERSION: 'v7.8', BUILD: '2026-11-09b'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1071,6 +1133,7 @@ const T = {
   'ds.border':'Rand','ds.endl':'Linker uiteinde','ds.endr':'Rechter uiteinde','ds.normal':'Normaal','ds.arrow':'Pijl','ds.midline':'Middellijn','ds.midpoint':'Middelpunt','ds.timelbl':'Tijdlabel',
   'ds.st.pr':'Prijsbereik','ds.st.pct':'Procentuele verandering','ds.st.pips':'Verandering in pips','ds.st.bars':'Barbereik','ds.st.dt':'Datum-/tijdbereik','ds.st.dist':'Afstand','ds.st.ang':'Hoek','ds.statpos':'Positie statistieken',
   'ds.acct':'Accountgrootte','ds.qty':'Hoeveelheid','ds.entry':'Instapprijs','ds.profitlvl':'Winstniveau','ds.stoplvl':'Stopniveau','ds.ticks':'Ticks','ds.textalign':'Tekstuitlijning','ds.pricebar':'prijs, bar','ds.amount':'Bedrag','ds.long':'Long','ds.short':'Short','ds.rr':'R:R',
+  'nav.prop':'Prop firms','nav.markets':'Markten',
   'h':'u','min':'min','y':'j','mo':'mnd','d':'d'
  },
  en:{
@@ -1166,6 +1229,7 @@ const T = {
   'ds.border':'Border','ds.endl':'Left end','ds.endr':'Right end','ds.normal':'Normal','ds.arrow':'Arrow','ds.midline':'Middle line','ds.midpoint':'Middle point','ds.timelbl':'Time label',
   'ds.st.pr':'Price range','ds.st.pct':'Percent change','ds.st.pips':'Change in pips','ds.st.bars':'Bars range','ds.st.dt':'Date/time range','ds.st.dist':'Distance','ds.st.ang':'Angle','ds.statpos':'Stats position',
   'ds.acct':'Account size','ds.qty':'Quantity','ds.entry':'Entry price','ds.profitlvl':'Profit level','ds.stoplvl':'Stop level','ds.ticks':'Ticks','ds.textalign':'Text alignment','ds.pricebar':'price, bar','ds.amount':'Amount','ds.long':'Long','ds.short':'Short','ds.rr':'R:R',
+  'nav.prop':'Prop firms','nav.markets':'Markets',
   'h':'h','min':'min','y':'y','mo':'mo','d':'d'
  }
 };
@@ -1326,7 +1390,7 @@ function enterApp(){
   { const sv=$('#sideVer'); if(sv) sv.textContent=`${LANG==='en'?'Version':'Versie'}: ${CFG.VERSION} · TWF Backtest` }
   $('#login').classList.add('hide');$('#app').classList.remove('hide');$('#fab').classList.remove('hide');
   $('#lgPass').value='';$('#rgPass').value='';
-  S.page='testing';S.tab='dash';render(); MD.loadManifest().then(()=>{ if(!SX) render() });
+  S.page='testing';S.tab='dash';render(); Promise.all([MD.loadManifest(),MK.load(),checkAdmin()]).then(()=>{ if(!SX) render() });
   toast(t('toast.welcome')+', '+(profile().name||''),'', 'ok',2500);
 }
 async function logout(){await DB.signOut();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
@@ -1349,7 +1413,7 @@ function renderSide(){
 function render(){
   applyStatic(); renderSide();
   const m=$('#main');
-  const pages={start:pageStart,testing:pageTesting,accounts:pageAccounts,strategies:pageStrategies,settings:pageSettings,data:pageData};
+  const pages={start:pageStart,testing:pageTesting,accounts:pageAccounts,strategies:pageStrategies,settings:pageSettings,data:pageData,markets:pageMarkets,prop:pageProp};
   m.innerHTML=(pages[S.page]||pageTesting)(); m.scrollTop=0;
   bindPage();
 }
@@ -1414,7 +1478,7 @@ function sessRow(s){
   return `<div class="row" style="cursor:pointer" data-open="${s.id}">
     <div style="display:flex">${(s.assets||[]).slice(0,3).map(symBadge).join('')}</div>
     <div style="flex:1;min-width:0"><b>${esc(s.name)}</b><div class="sub" style="color:var(--ink3);font-size:13px">${esc((s.assets||[]).join(', '))} · ${fmtDate(s.start)}${str?` · <span class="swatch" style="background:${str.color}"></span>${esc(str.name)}`:''}</div></div>
-    <span class="pill ${s.type==='propfirm'?'':'acc'}">${s.type==='propfirm'?t('propfirm'):t('backtest')}</span>
+    <span class="stype ${s.type==='propfirm'?'pf':''}">${s.type==='propfirm'?t('propfirm'):t('backtest')}</span>
     <div style="text-align:right;min-width:110px"><b>${fmtMoney(s.balance??(acc&&acc.balance),acc?acc.currency:'USD')}</b><div style="color:var(--ink3);font-size:12px">${(s.trades||[]).length} ${t('trades')}</div></div>
     <span style="color:var(--ink3)">${ic('next')}</span></div>`;
 }
@@ -1424,7 +1488,7 @@ function tabSessions(){
   const tb=`<div class="toolbar"><div class="search">${ic('search',16)}<input class="inp" id="q" placeholder="${t('search')}" value="${esc(S.q)}"></div><button class="btn btn-p" data-act="newsess">${ic('plus',16)} ${t('new.session')}</button></div>`;
   if(!DB.list('sessions').length) return tb+`<div class="box empty"><div class="ei">${ic('layers',24)}</div><h4>${t('sess.empty')}</h4><div>${t('sess.emptysub')}</div><button class="btn btn-p" data-act="newsess" style="margin-top:8px">${ic('plus',16)} ${t('new.session')}</button></div>`;
   return tb+`<div class="grid-cards">${ss.map(s=>{const acc=DB.get('accounts',s.account),str=DB.get('strategies',s.strategy);return `
-   <div class="ccard"><div class="top"><div><div class="ttl">${esc(s.name)}</div><div style="color:var(--ink3);font-size:13px;margin-top:4px">${t('created')} ${fmtDate(s.created)}</div></div><span class="pill ${s.type==='propfirm'?'':'acc'}">${s.type==='propfirm'?t('propfirm'):t('backtest')}</span></div>
+   <div class="ccard"><div class="top"><div><div class="ttl">${esc(s.name)}</div><div style="color:var(--ink3);font-size:13px;margin-top:4px">${t('created')} ${fmtDate(s.created)}</div></div><span class="stype ${s.type==='propfirm'?'pf':''}">${s.type==='propfirm'?t('propfirm'):t('backtest')}</span></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">${(s.assets||[]).map(a=>`<span class="pill" style="display:inline-flex;align-items:center;gap:6px">${symBadge(a).replace('sym"','sym" style="width:16px;height:16px;font-size:7px;background:'+(asset(a)||{}).col+'"')}${esc(a)}</span>`).join('')}</div>
     <div class="meta"><div><small>${t('account')}</small><b>${acc?esc(acc.name):'—'}</b></div><div><small>${t('balance')}</small><b>${fmtMoney(s.balance??(acc&&acc.balance),acc?acc.currency:'USD')}</b></div>
      <div><small>${t('strategy')}</small><b>${str?`<span class="swatch" style="background:${str.color}"></span>${esc(str.name)}`:'—'}</b></div><div><small>${t('period')}</small><b>${fmtDate(s.start)}</b></div></div>
@@ -1531,13 +1595,16 @@ function strategyModal(id,after){
 }
 
 /* ----- New / edit session ----- */
-function sessionModal(type='backtest',editId){
+function sessionModal(type='backtest',editId,opts){
   const ed=editId?DB.get('sessions',editId):null;
   const p=profile();
   const st={type:ed?ed.type:type,sec:'basics',name:ed?ed.name:'',account:ed?ed.account:(DB.list('accounts')[0]||{}).id||'',strategy:ed?ed.strategy||'':'',assets:ed?[...ed.assets]:[],
     start:ed?ed.start:'',endMode:ed?ed.endMode:'auto',end:ed?ed.end||'':'',template:ed?ed.template:(p.defaultTemplate||'tv-dark'),smooth:ed?!!ed.smooth:false,
     spreadMode:ed?ed.spreadMode:'real',spread:ed?ed.spread:0.3,comm:ed?ed.comm:7,slip:ed?ed.slip:0,hedge:ed?ed.hedge:true,
-    target:ed?ed.target:10,daily:ed?ed.daily:5,maxloss:ed?ed.maxloss:10,mindays:ed?ed.mindays:4,ddOpen:false};
+    target:ed?ed.target:10,daily:ed?ed.daily:5,maxloss:ed?ed.maxloss:10,mindays:ed?ed.mindays:4,ddOpen:false,
+    firm:ed?ed.firm||'':'',phase:ed?ed.phase||0:0,ddType:ed?ed.ddType||'static':'static',consistency:ed?ed.consistency||0:0,maxLots:ed?ed.maxLots||0:0,minHold:ed?ed.minHold||0:0,
+    maxRisk:ed?ed.maxRisk||0:0,slReq:ed?!!ed.slReq:false,weekend:ed?ed.weekend!==false:true,split:ed?ed.split||80:80,strict:ed?ed.strict||'':''};
+  if(!ed&&opts&&opts.firm){ const f=allFirms().find(x=>x.id===opts.firm); if(f){ applyFirm(st,f,opts.phase||0); st.type='propfirm'; st.sec='rules' } }
   const ov=modal('', '');
   const M=ov.querySelector('.modal');
   const presets=DB.list('presets');
@@ -1554,7 +1621,7 @@ function sessionModal(type='backtest',editId){
       <div class="field"><label>${t('ns.account')} <span class="req">*</span></label><select class="inp" id="nAcc">${accs.map(a=>`<option value="${a.id}" ${a.id===st.account?'selected':''}>${esc(a.name)} — ${fmtMoney(a.balance,a.currency)} · 1:${a.leverage}</option>`).join('')}<option value="__new">${t('ns.newacc')}</option></select></div>
       <div class="field"><label>${t('ns.strategy')}</label><select class="inp" id="nStr"><option value="">${t('ns.nostr')}</option>${strs.map(s=>`<option value="${s.id}" ${s.id===st.strategy?'selected':''}>${esc(s.name)}</option>`).join('')}<option value="__new">${t('ns.newstr')}</option></select></div>
       <div class="field"><label>${t('ns.assets')} <span class="req">*</span></label>
-        <div class="ms"><div class="box2" id="nAssets">${st.assets.length?st.assets.map(a=>`<span class="tagx">${symBadge(a).replace('class="sym"','class="sym" style="width:18px;height:18px;font-size:7px;background:'+asset(a).col+'"')}${a}<i data-rm="${a}">✕</i></span>`).join(''):`<span class="ph">${t('ns.assetsp')}</span>`}</div>
+        <div class="ms ${st.ddOpen?'open':''}"><div class="box2" id="nAssets"><span class="mschev" title="${st.ddOpen?'Inklappen':'Uitklappen'}"><svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></span>${st.assets.length?st.assets.map(a=>`<span class="tagx">${symBadge(a).replace('class="sym"','class="sym" style="width:18px;height:18px;font-size:7px;background:'+asset(a).col+'"')}${a}<i data-rm="${a}">✕</i></span>`).join(''):`<span class="ph">${t('ns.assetsp')}</span>`}</div>
         ${st.ddOpen?`<div class="dd">${ASSETS.map(a=>`<button data-as="${a.sym}"><span class="chk ${st.assets.includes(a.sym)?'on':''}">${st.assets.includes(a.sym)?ic('check',12):''}</span>${symBadge(a.sym)}<div><b>${a.sym}</b><div style="color:var(--ink3);font-size:12px">${LANG==='en'?a.nameEn:a.name}</div></div><small>${a.cat}</small></button>`).join('')}</div>`:''}</div></div>
       ${st.assets.length?`<div class="field"><label>${t('ns.period')} <span class="req">*</span></label><div class="period">
         <div class="two"><div class="field"><label>${t('ns.start')}</label><input class="inp" type="date" id="nStart" min="${minDate()}" max="${maxDate()}" value="${st.start}"></div>
@@ -1569,9 +1636,16 @@ function sessionModal(type='backtest',editId){
       <div class="two"><div class="field"><label>${t('ns.comm')}</label><input class="inp" type="number" step="0.5" min="0" id="nComm" value="${st.comm}"></div>
       <div class="field"><label>${t('ns.slip')}</label><input class="inp" type="number" step="0.1" min="0" id="nSlip" value="${st.slip}"></div></div>
       <div class="field"><div class="tog"><span>${t('ns.hedge')}</span><span class="sw ${st.hedge?'on':''}" id="nHedge"></span></div></div>`;
-    if(st.sec==='rules') c=`
-      <div class="two"><div class="field"><label>${t('ns.target')}</label><input class="inp" type="number" id="nTarget" value="${st.target}"></div><div class="field"><label>${t('ns.daily')}</label><input class="inp" type="number" id="nDaily" value="${st.daily}"></div></div>
-      <div class="two"><div class="field"><label>${t('ns.maxloss')}</label><input class="inp" type="number" id="nMaxloss" value="${st.maxloss}"></div><div class="field"><label>${t('ns.mindays')}</label><input class="inp" type="number" id="nMindays" value="${st.mindays}"></div></div>`;
+    if(st.sec==='rules'){ const F=allFirms(), f=F.find(x=>x.id===st.firm), L=(nl,en)=>LANG==='en'?en:nl;
+      c=`<div class="two"><div class="field"><label>Prop firm</label><select class="inp" id="nFirm"><option value="">${L('Eigen regels','Custom rules')}</option>${F.map(x=>`<option value="${x.id}" ${x.id===st.firm?'selected':''}>${esc(x.name)}${x.desc?' — '+esc(x.desc):''}</option>`).join('')}</select></div>
+        <div class="field"><label>${L('Fase','Phase')}</label><select class="inp" id="nPhase" ${f?'':'disabled'}>${(f?f.phases:[{name:L('Eén fase','Single phase')}]).map((p,i)=>`<option value="${i}" ${i===+st.phase?'selected':''}>${esc(p.name)}${p.target?` · ${p.target}%`:''}</option>`).join('')}</select></div></div>
+      <div class="field"><label>${L('Strengheid payout-check','Payout check strictness')}</label><div class="seg">${[['','Standaard','Default'],['soft','Soepel','Relaxed'],['normal','Normaal','Normal'],['strict','Streng','Strict']].map(([k,nl,en])=>`<button class="${st.strict===k?'on':''}" data-strict="${k}">${L(nl,en)}</button>`).join('')}</div><div class="hint">${STRICT_HINT(st.strict||(profile().prefs||{}).propStrict||'normal')}</div></div>
+      <div class="two"><div class="field"><label>${t('ns.target')}</label><input class="inp" type="number" step="0.5" id="nTarget" value="${st.target}"></div><div class="field"><label>${t('ns.daily')}</label><input class="inp" type="number" step="0.5" id="nDaily" value="${st.daily}"></div></div>
+      <div class="two"><div class="field"><label>${t('ns.maxloss')}</label><input class="inp" type="number" step="0.5" id="nMaxloss" value="${st.maxloss}"></div><div class="field"><label>${L('Soort drawdown','Drawdown type')}</label><select class="inp" id="nDd">${DDTYPES.map(([v,nl,en])=>`<option value="${v}" ${st.ddType===v?'selected':''}>${L(nl,en)}</option>`).join('')}</select></div></div>
+      <div class="two"><div class="field"><label>${t('ns.mindays')}</label><input class="inp" type="number" id="nMindays" value="${st.mindays}"></div><div class="field"><label>${L('Consistentie (max % winst op 1 dag, 0 = uit)','Consistency (max % profit in 1 day, 0 = off)')}</label><input class="inp" type="number" id="nCons" value="${st.consistency}"></div></div>
+      <div class="two"><div class="field"><label>${L('Max lots/contracts per trade (0 = uit)','Max lots/contracts per trade (0 = off)')}</label><input class="inp" type="number" step="0.01" id="nMaxLots" value="${st.maxLots}"></div><div class="field"><label>${L('Min. duur per trade in minuten (0 = uit)','Min. trade duration in minutes (0 = off)')}</label><input class="inp" type="number" id="nMinHold" value="${st.minHold}"></div></div>
+      <div class="two"><div class="field"><label>${L('Max risico per trade % (0 = uit)','Max risk per trade % (0 = off)')}</label><input class="inp" type="number" step="0.1" id="nMaxRisk" value="${st.maxRisk}"></div><div class="field"><label>${L('Winstdeling %','Profit split %')}</label><input class="inp" type="number" id="nSplit" value="${st.split}"></div></div>
+      <div class="two"><div class="field"><div class="tog"><span>${L('Stop loss verplicht','Stop loss required')}</span><span class="sw ${st.slReq?'on':''}" id="nSlReq"></span></div></div><div class="field"><div class="tog"><span>${L('Weekend aanhouden toegestaan','Weekend holding allowed')}</span><span class="sw ${st.weekend?'on':''}" id="nWknd"></span></div></div></div>` }
     M.innerHTML=`<div class="mh"><h3>${editId?t('edit'):t('ns.title')}</h3>
       <div class="seg"><button class="${st.type==='backtest'?'on':''}" data-ty="backtest">${t('backtest')}</button><button class="${st.type==='propfirm'?'on':''}" data-ty="propfirm">${t('propfirm')}</button></div>
       <div class="spacer"></div>
@@ -1590,7 +1664,8 @@ function sessionModal(type='backtest',editId){
     if(v('#nSpread')) st.spread=+v('#nSpread').value;
     if(v('#nComm')) st.comm=+v('#nComm').value;
     if(v('#nSlip')) st.slip=+v('#nSlip').value;
-    if(v('#nTarget')){st.target=+v('#nTarget').value;st.daily=+v('#nDaily').value;st.maxloss=+v('#nMaxloss').value;st.mindays=+v('#nMindays').value}
+    if(v('#nTarget')){st.target=+v('#nTarget').value;st.daily=+v('#nDaily').value;st.maxloss=+v('#nMaxloss').value;st.mindays=+v('#nMindays').value;
+      st.ddType=v('#nDd').value;st.consistency=+v('#nCons').value||0;st.maxLots=+v('#nMaxLots').value||0;st.minHold=+v('#nMinHold').value||0;st.maxRisk=+v('#nMaxRisk').value||0;st.split=+v('#nSplit').value||80}
   }
   function bind(){
     const q=s=>M.querySelectorAll(s);
@@ -1602,8 +1677,13 @@ function sessionModal(type='backtest',editId){
     const acc=M.querySelector('#nAcc'); if(acc) acc.onchange=()=>{read();if(acc.value==='__new'){accountModal(null,o=>{st.account=o.id;draw()});acc.value=st.account}else st.account=acc.value};
     const sr=M.querySelector('#nStr'); if(sr) sr.onchange=()=>{read();if(sr.value==='__new'){strategyModal(null,o=>{st.strategy=o.id;draw()});sr.value=st.strategy}else st.strategy=sr.value};
     const box=M.querySelector('#nAssets'); if(box) box.onclick=e=>{if(e.target.dataset.rm){read();st.assets=st.assets.filter(a=>a!==e.target.dataset.rm);draw();return}read();st.ddOpen=!st.ddOpen;draw()};
-    q('[data-as]').forEach(b=>b.onclick=()=>{read();const s=b.dataset.as;st.assets=st.assets.includes(s)?st.assets.filter(a=>a!==s):[...st.assets,s];if(st.start&&st.start<minDate())st.start=minDate();draw()});
+    q('[data-as]').forEach(b=>b.onclick=()=>{read();const s=b.dataset.as;st.assets=st.assets.includes(s)?st.assets.filter(a=>a!==s):[...st.assets,s];if(st.start&&st.start<minDate())st.start=minDate();st.ddOpen=false;draw()});
     const sm=M.querySelector('#nSmooth'); if(sm) sm.onclick=()=>{st.smooth=!st.smooth;sm.classList.toggle('on',st.smooth)};
+    const nf=M.querySelector('#nFirm'); if(nf) nf.onchange=()=>{read(); st.firm=nf.value; const f=allFirms().find(x=>x.id===st.firm); if(f) applyFirm(st,f,0); draw()};
+    const np=M.querySelector('#nPhase'); if(np) np.onchange=()=>{read(); const f=allFirms().find(x=>x.id===st.firm); if(f) applyFirm(st,f,+np.value); draw()};
+    q('[data-strict]').forEach(b=>b.onclick=()=>{read();st.strict=b.dataset.strict;draw()});
+    const sl2=M.querySelector('#nSlReq'); if(sl2) sl2.onclick=()=>{st.slReq=!st.slReq;sl2.classList.toggle('on',st.slReq)};
+    const wk=M.querySelector('#nWknd'); if(wk) wk.onclick=()=>{st.weekend=!st.weekend;wk.classList.toggle('on',st.weekend)};
     const hd=M.querySelector('#nHedge'); if(hd) hd.onclick=()=>{st.hedge=!st.hedge;hd.classList.toggle('on',st.hedge)};
     const ps=M.querySelector('#nPreset'); if(ps) ps.onchange=()=>{const pr=DB.get('presets',ps.value);if(pr){Object.assign(st,pr.data,{name:st.name,sec:st.sec,ddOpen:false});draw()}};
     M.querySelector('#nPresetSave').onclick=async()=>{read();const nm=await askText(t('ns.savepreset'),t('name'),st.name||'Preset');if(!nm)return;const {name,sec,ddOpen,...data}=st;await DB.put('presets',{id:uid(),name:nm,data});presets.splice(0,presets.length,...DB.list('presets'));toast(t('toast.preset'),nm,'ok');draw()};
@@ -1626,6 +1706,260 @@ function sessionModal(type='backtest',editId){
   }
   draw();
 }
+
+/* =========================================================
+   v7.8: PROP FIRMS
+   ========================================================= */
+IC.globe=IC.globe||'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.4 3 14.6 0 18M12 3c-3 3.4-3 14.6 0 18"/>';
+IC.spark=IC.spark||'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>';
+const DDTYPES=[['static','Statisch (vanaf startsaldo)','Static (from start balance)'],['trailing','Trailing (meeschuivend met hoogste equity)','Trailing (follows highest equity)'],['eod','End-of-day trailing','End-of-day trailing']];
+const PROP_FIRMS=[
+  {id:'ftmo',name:'FTMO',col:'#2962FF',kind:'CFD',desc:'2-Step Challenge',phases:[{name:'Challenge',target:10},{name:'Verification',target:5},{name:'FTMO Account',target:0}],daily:5,maxloss:10,ddType:'static',mindays:4,consistency:0,maxLots:0,minHold:0,maxRisk:0,slReq:false,weekend:true,split:80},
+  {id:'fundingpips',name:'FundingPips',col:'#22ab94',kind:'CFD',desc:'2-Step',phases:[{name:'Phase 1',target:8},{name:'Phase 2',target:5},{name:'Funded',target:0}],daily:5,maxloss:10,ddType:'static',mindays:3,consistency:0,maxLots:0,minHold:0,maxRisk:0,slReq:false,weekend:true,split:80},
+  {id:'the5ers',name:'The5ers',col:'#f0b429',kind:'CFD',desc:'High Stakes',phases:[{name:'Step 1',target:8},{name:'Step 2',target:5},{name:'Funded',target:0}],daily:5,maxloss:10,ddType:'static',mindays:3,consistency:0,maxLots:0,minHold:0,maxRisk:0,slReq:false,weekend:true,split:80},
+  {id:'topstep',name:'Topstep',col:'#ef5350',kind:'Futures',desc:'Trading Combine 50K',phases:[{name:'Trading Combine',target:6},{name:'Express Funded',target:0}],daily:2,maxloss:4,ddType:'eod',mindays:2,consistency:50,maxLots:5,minHold:0,maxRisk:0,slReq:false,weekend:false,split:90},
+  {id:'apex',name:'Apex Trader Funding',col:'#9c6bff',kind:'Futures',desc:'Evaluation 50K',phases:[{name:'Evaluation',target:6},{name:'PA (Funded)',target:0}],daily:0,maxloss:5,ddType:'trailing',mindays:1,consistency:30,maxLots:10,minHold:0,maxRisk:0,slReq:false,weekend:false,split:100}
+];
+const allFirms=()=>[...PROP_FIRMS,...DB.list('propfirms').sort((a,b)=>(a.name||'').localeCompare(b.name||''))];
+function applyFirm(st,f,ph){ const p=f.phases[ph]||f.phases[0]; Object.assign(st,{firm:f.id,phase:ph,target:p.target,daily:f.daily,maxloss:f.maxloss,ddType:f.ddType||'static',mindays:f.mindays||0,consistency:f.consistency||0,maxLots:f.maxLots||0,minHold:f.minHold||0,maxRisk:f.maxRisk||0,slReq:!!f.slReq,weekend:f.weekend!==false,split:f.split||80}) }
+const STRICT_HINT=k=>{ const L=(nl,en)=>LANG==='en'?en:nl; return {soft:L('Soepel: alleen winstdoel, dagverlies en max drawdown.','Relaxed: only profit target, daily loss and max drawdown.'),normal:L('Normaal: + minimaal aantal handelsdagen, consistentie en max lots.','Normal: + minimum trading days, consistency and max lots.'),strict:L('Streng: + minimale tradeduur, stop loss verplicht, max risico per trade en weekendregel.','Strict: + minimum trade duration, stop loss required, max risk per trade and weekend rule.')}[k]||'' };
+const propDayOf=sec=>new Date((sec-nyOff(sec)*3600+7*3600)*1000).toISOString().slice(0,10);
+function propEval(s){
+  const L=(nl,en)=>LANG==='en'?en:nl, acc=DB.get('accounts',s.account)||{}, start=s.startBalance??acc.balance??100000, sp=sym=>SPEC[sym]||{cs:1};
+  const lvl={soft:1,normal:2,strict:3}[s.strict||(profile().prefs||{}).propStrict||'normal']||2;
+  const tr=(s.trades||[]).slice().sort((a,b)=>a.closeTime-b.closeTime), days={};
+  let bal=start, peak=start, maxDD=0, eodPeak=start, lastDay=null;
+  for(const x of tr){ const d=propDayOf(x.closeTime); if(lastDay&&d!==lastDay) eodPeak=Math.max(eodPeak,bal); lastDay=d;
+    days[d]=(days[d]||0)+(x.pnl||0); bal+=x.pnl||0; peak=Math.max(peak,bal);
+    const ref=s.ddType==='trailing'?peak:s.ddType==='eod'?eodPeak:start; maxDD=Math.max(maxDD,ref-bal) }
+  const profit=bal-start, dvals=Object.values(days), bestDay=dvals.length?Math.max(...dvals):0, worstDay=dvals.length?Math.min(...dvals):0, nDays=dvals.length;
+  const pct=v=>(v/start*100).toFixed(2)+'%', checks=[], issues={};
+  const add=(k,label,ok,val,lim,level)=>{ if(level<=lvl) checks.push({k,label,ok,val,lim,level}) };
+  const flag=(x,msg)=>{ (issues[x.id]=issues[x.id]||[]).push(msg) };
+  if(+s.target>0) add('target',L('Winstdoel','Profit target'),profit>=start*s.target/100,`${money(profit)} (${pct(profit)})`,`${s.target}%`,1);
+  if(+s.daily>0) add('daily',L('Max dagverlies','Max daily loss'),-worstDay<start*s.daily/100&&s.pfStatus!=='failed',`${money(Math.min(0,worstDay))}`,`${s.daily}% (${money(-start*s.daily/100)})`,1);
+  add('maxdd',L('Max drawdown','Max drawdown')+(s.ddType&&s.ddType!=='static'?` (${s.ddType==='eod'?'EOD trailing':'trailing'})`:''),maxDD<start*(+s.maxloss||10)/100&&s.pfStatus!=='failed',`${money(-maxDD)} (${pct(maxDD)})`,`${s.maxloss||10}%`,1);
+  if(+s.mindays>0) add('mindays',L('Minimaal aantal handelsdagen','Minimum trading days'),nDays>=+s.mindays,`${nDays}`,`${s.mindays}`,2);
+  if(+s.consistency>0) add('cons',L('Consistentie (beste dag t.o.v. totale winst)','Consistency (best day vs total profit)'),profit<=0||bestDay<=profit*s.consistency/100,profit>0?`${Math.round(bestDay/profit*100)}%`:'—',`≤ ${s.consistency}%`,2);
+  if(+s.maxLots>0){ const bad=tr.filter(x=>x.qty>s.maxLots); bad.forEach(x=>flag(x,L(`Te groot: ${x.qty} (max ${s.maxLots})`,`Too large: ${x.qty} (max ${s.maxLots})`))); add('lots',L('Max positiegrootte','Max position size'),!bad.length,bad.length?L(`${bad.length} trade(s) te groot`,`${bad.length} trade(s) too large`):'OK',`${s.maxLots}`,2) }
+  if(+s.minHold>0){ const bad=tr.filter(x=>(x.closeTime-x.openTime)<s.minHold*60); bad.forEach(x=>flag(x,L(`Te kort aangehouden (${Math.round((x.closeTime-x.openTime)/60)} min)`,`Held too short (${Math.round((x.closeTime-x.openTime)/60)} min)`))); add('hold',L('Minimale tradeduur','Minimum trade duration'),!bad.length,bad.length?L(`${bad.length} te kort`,`${bad.length} too short`):'OK',`${s.minHold} min`,3) }
+  if(s.slReq){ const bad=tr.filter(x=>x.sl==null); bad.forEach(x=>flag(x,L('Geen stop loss','No stop loss'))); add('sl',L('Stop loss verplicht','Stop loss required'),!bad.length,bad.length?L(`${bad.length} zonder SL`,`${bad.length} without SL`):'OK','',3) }
+  if(+s.maxRisk>0){ const bad=tr.filter(x=>x.sl!=null&&Math.abs(x.entry-x.sl)*x.qty*sp(x.sym).cs/start*100>s.maxRisk+1e-9); bad.forEach(x=>flag(x,L(`Risico ${(Math.abs(x.entry-x.sl)*x.qty*sp(x.sym).cs/start*100).toFixed(2)}% (max ${s.maxRisk}%)`,`Risk ${(Math.abs(x.entry-x.sl)*x.qty*sp(x.sym).cs/start*100).toFixed(2)}% (max ${s.maxRisk}%)`))); add('risk',L('Max risico per trade','Max risk per trade'),!bad.length,bad.length?L(`${bad.length} te veel risico`,`${bad.length} too much risk`):'OK',`${s.maxRisk}%`,3) }
+  if(s.weekend===false){ const wk=x=>{ const a=new Date(x.openTime*1000), span=(x.closeTime-x.openTime)/86400, dow=a.getUTCDay(); return span>=2.5||(dow===5&&new Date(x.closeTime*1000).getUTCDay()!==5&&span>0.2) }; const bad=tr.filter(wk); bad.forEach(x=>flag(x,L('Over het weekend aangehouden','Held over the weekend'))); add('wknd',L('Geen weekendposities','No weekend positions'),!bad.length,bad.length?L(`${bad.length} over weekend`,`${bad.length} over weekend`):'OK','',3) }
+  const failed=s.pfStatus==='failed'||checks.some(c=>(c.k==='daily'||c.k==='maxdd')&&!c.ok);
+  const allOk=checks.every(c=>c.ok), funded=!(+s.target>0);
+  const status=failed?'failed':(!funded&&allOk)?'passed':funded?'funded':'running';
+  const payout=funded?(allOk&&profit>0):null;
+  return {start,profit,bal,bestDay,worstDay,nDays,maxDD,checks,issues,status,payout,lvl,split:+s.split||80,funded};
+}
+const PFSTAT=st=>{ const L=(nl,en)=>LANG==='en'?en:nl; return {failed:[L('Gezakt','Failed'),'neg'],passed:[L('Gehaald','Passed'),'pos'],funded:[L('Funded','Funded'),'acc'],running:[L('Lopend','Running'),'']}[st] };
+function pageProp(){
+  const L=(nl,en)=>LANG==='en'?en:nl, pf=(profile().prefs||{}).propStrict||'normal', ss=DB.list('sessions').filter(s=>s.type==='propfirm').sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
+  const bar=(v,max,neg)=>`<div class="pbar ${neg?'neg':''}"><i style="width:${Math.max(0,Math.min(100,max?v/max*100:0))}%"></i></div>`;
+  const firmLogo=f=>`<span class="flogo" style="background:${f.col||'#4c74ff'}">${f.logo?`<img src="${f.logo}" alt="">`:esc((f.name||'?').slice(0,2).toUpperCase())}</span>`;
+  return `<div class="phead"><div class="row" style="align-items:flex-end"><div><h1>Prop firms</h1><div class="psub">${L('Oefen een challenge alsof het echt is — met dezelfde regels als de prop firm.','Practise a challenge like it is real — with the same rules as the prop firm.')}</div></div><div class="spacer"></div>
+     <button class="btn btn-g" disabled title="${L('Binnenkort','Coming soon')}">${ic('spark',15)} ${L('AI-assistent','AI assistant')} <span class="soon">${L('binnenkort','soon')}</span></button>
+     <button class="btn btn-g" id="pfNewFirm">${ic('plus',15)} ${L('Eigen prop firm','Custom prop firm')}</button><button class="btn btn-p" id="pfNew">${ic('plus',15)} ${L('Prop firm-sessie','Prop firm session')}</button></div></div>
+   <div class="pbody">
+    <div class="pfhow">${[[ic('trophy',20),L('1. Kies een prop firm','1. Pick a prop firm'),L('Neem een bekende firm of maak je eigen regels.','Use a known firm or create your own rules.')],[ic('play',20),L('2. Trade de challenge','2. Trade the challenge'),L('Dagverlies en drawdown worden live bewaakt; bij overschrijden ben je gezakt.','Daily loss and drawdown are watched live; breach them and you fail.')],[ic('check',20),L('3. Regelcheck & payout','3. Rule check & payout'),L('Elke trade wordt gecontroleerd. Bij een funded fase zie je of je payout zou worden goedgekeurd.','Every trade is checked. In a funded phase you see if your payout would be approved.')]].map(([i,a,b])=>`<div class="box"><span class="ci">${i}</span><b>${a}</b><small>${b}</small></div>`).join('')}</div>
+    <div class="box pfstrict"><div><b>${L('Strengheid van de payout-check','Payout check strictness')}</b><small>${STRICT_HINT(pf)}</small></div>
+      <div class="seg">${[['soft','Soepel','Relaxed'],['normal','Normaal','Normal'],['strict','Streng','Strict']].map(([k,nl,en])=>`<button class="${pf===k?'on':''}" data-pstrict="${k}">${L(nl,en)}</button>`).join('')}</div></div>
+    <h3 class="sech">${L('Jouw challenges','Your challenges')}</h3>
+    ${ss.length?`<div class="pfgrid">${ss.map(s=>{ const e=propEval(s), f=allFirms().find(x=>x.id===s.firm), ph=f&&f.phases[s.phase||0], [stl,stc]=PFSTAT(e.status), nIss=Object.keys(e.issues).length;
+      return `<div class="box pfcard"><div class="pfh">${f?firmLogo(f):`<span class="flogo">${ic('trophy',16)}</span>`}<div style="min-width:0"><b>${esc(s.name)}</b><small>${f?esc(f.name)+(ph?' · '+esc(ph.name):''):L('Eigen regels','Custom rules')}</small></div><span class="stype ${stc}">${stl}</span></div>
+        ${+s.target>0?`<div class="pfm"><span>${L('Winstdoel','Profit target')}</span><b class="${e.profit>=0?'pos':'neg'}">${money(e.profit)}</b><em>/ ${money(e.start*s.target/100)}</em></div>${bar(e.profit,e.start*s.target/100)}`:`<div class="pfm"><span>${L('Winst (funded)','Profit (funded)')}</span><b class="${e.profit>=0?'pos':'neg'}">${money(e.profit)}</b><em>${L('jouw deel','your share')} ${money(Math.max(0,e.profit)*e.split/100)}</em></div>`}
+        ${+s.daily>0?`<div class="pfm"><span>${L('Slechtste dag','Worst day')}</span><b>${money(Math.min(0,e.worstDay))}</b><em>/ −${money(e.start*s.daily/100)}</em></div>${bar(-Math.min(0,e.worstDay),e.start*s.daily/100,1)}`:''}
+        <div class="pfm"><span>${L('Max drawdown','Max drawdown')}</span><b>${money(-e.maxDD)}</b><em>/ −${money(e.start*(s.maxloss||10)/100)}</em></div>${bar(e.maxDD,e.start*(s.maxloss||10)/100,1)}
+        ${+s.mindays>0?`<div class="pfm"><span>${L('Handelsdagen','Trading days')}</span><b>${e.nDays}</b><em>/ ${s.mindays}</em></div>${bar(e.nDays,+s.mindays)}`:''}
+        <div class="pff">${e.funded?`<span class="stype ${e.payout?'pos':'neg'}">${e.payout?L('Payout goedgekeurd','Payout approved'):L('Payout nog niet goedgekeurd','Payout not approved yet')}</span>`:''}${nIss?`<span class="stype neg">${nIss} ${L('trade(s) niet prop-waardig','trade(s) not prop-worthy')}</span>`:`<span class="stype pos">${L('Alle trades prop-waardig','All trades prop-worthy')}</span>`}</div>
+        <div class="pfb"><button class="btn btn-p sm" data-popen="${s.id}">${ic('play',14)} ${t('open')}</button><button class="btn btn-g sm" data-pcheck="${s.id}">${ic('check',14)} ${L('Regelcheck','Rule check')}</button></div></div>` }).join('')}</div>`
+      :`<div class="box empty-pf"><span class="ci">${ic('trophy',22)}</span><b>${L('Nog geen prop firm-sessies','No prop firm sessions yet')}</b><small>${L('Start hieronder een challenge bij een van de prop firms.','Start a challenge below with one of the prop firms.')}</small></div>`}
+    <h3 class="sech">Prop firms <small>${L('Voorbeeldregels — controleer altijd de actuele regels op de site van de prop firm.','Example rules — always check the current rules on the prop firm’s website.')}</small></h3>
+    <div class="pfgrid">${allFirms().map(f=>{ const own=!PROP_FIRMS.some(x=>x.id===f.id);
+      return `<div class="box pffirm"><div class="pfh">${firmLogo(f)}<div style="min-width:0"><b>${esc(f.name)}</b><small>${esc(f.kind||'')}${f.desc?' · '+esc(f.desc):''}</small></div>${own?`<span class="stype">${L('Eigen','Custom')}</span>`:''}</div>
+        <div class="chips">${f.phases.filter(p=>p.target>0).map(p=>`<span>${esc(p.name)} ${p.target}%</span>`).join('')}${f.daily?`<span>${L('Dag','Daily')} ${f.daily}%</span>`:''}<span>Max ${f.maxloss}%${f.ddType&&f.ddType!=='static'?' '+(f.ddType==='eod'?'EOD':'trailing'):''}</span>${f.mindays?`<span>${L('Min','Min')} ${f.mindays} ${L('dagen','days')}</span>`:''}${f.consistency?`<span>${L('Consistentie','Consistency')} ${f.consistency}%</span>`:''}${f.maxLots?`<span>Max ${f.maxLots} lots</span>`:''}<span>Split ${f.split||80}%</span></div>
+        <div class="pfb"><button class="btn btn-p sm" data-pstart="${f.id}">${ic('play',14)} ${L('Start challenge','Start challenge')}</button>${own?`<button class="btn btn-g sm" data-pedit="${f.id}">${ic('edit',14)}</button><button class="btn btn-g sm" data-pdel="${f.id}">${ic('trash',14)}</button>`:''}</div></div>` }).join('')}</div>
+   </div>`;
+}
+function bindProp(m){
+  const q=s=>m.querySelectorAll(s);
+  q('[data-pstrict]').forEach(b=>b.onclick=async()=>{ const p=profile(); await DB.put('profile',{...p,id:'me',prefs:{...(p.prefs||{}),propStrict:b.dataset.pstrict}}); render() });
+  const nw=m.querySelector('#pfNew'); if(nw) nw.onclick=()=>sessionModal('propfirm');
+  const nf=m.querySelector('#pfNewFirm'); if(nf) nf.onclick=()=>firmModal();
+  q('[data-pstart]').forEach(b=>b.onclick=()=>sessionModal('propfirm',null,{firm:b.dataset.pstart,phase:0}));
+  q('[data-pedit]').forEach(b=>b.onclick=()=>firmModal(DB.get('propfirms',b.dataset.pedit)));
+  q('[data-pdel]').forEach(b=>b.onclick=async()=>{ if(await askConfirm(LANG==='en'?'Delete this prop firm?':'Deze prop firm verwijderen?')){ await DB.del('propfirms',b.dataset.pdel); render() } });
+  q('[data-popen]').forEach(b=>b.onclick=()=>openSession(b.dataset.popen));
+  q('[data-pcheck]').forEach(b=>b.onclick=()=>ruleCheckModal(DB.get('sessions',b.dataset.pcheck)));
+}
+function ruleCheckModal(s){
+  if(!s) return; const L=(nl,en)=>LANG==='en'?en:nl, e=propEval(s), [stl,stc]=PFSTAT(e.status), tr=(s.trades||[]).filter(x=>e.issues[x.id]);
+  const ov=modal(`<div class="mh"><h3>${L('Regelcheck','Rule check')} · ${esc(s.name)}</h3><div class="spacer"></div><span class="stype ${stc}">${stl}</span><button class="ib" data-x>${ic('x')}</button></div>
+   <div class="mcont rc">
+    <div class="rcsum">${[[L('Winst','Profit'),money(e.profit)],[L('Beste dag','Best day'),money(e.bestDay)],[L('Max drawdown','Max drawdown'),money(-e.maxDD)],[L('Handelsdagen','Trading days'),e.nDays],[L('Strengheid','Strictness'),[L('Soepel','Relaxed'),L('Normaal','Normal'),L('Streng','Strict')][e.lvl-1]]].map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('')}</div>
+    ${e.funded?`<div class="rcpay ${e.payout?'ok':'bad'}">${e.payout?ic('check',18):ic('x',18)}<div><b>${e.payout?L('Payout zou worden goedgekeurd','Payout would be approved'):L('Payout zou (nog) niet worden goedgekeurd','Payout would not be approved (yet)')}</b><small>${e.payout?L(`Jouw deel bij ${e.split}% split: ${money(Math.max(0,e.profit)*e.split/100)}`,`Your share at ${e.split}% split: ${money(Math.max(0,e.profit)*e.split/100)}`):L('Los de rode punten hieronder op.','Fix the red items below.')}</small></div></div>`:''}
+    <div class="rclist">${e.checks.map(c=>`<div class="rcrow ${c.ok?'ok':'bad'}"><span class="rcic">${c.ok?ic('check',14):ic('x',14)}</span><div class="stx"><b>${c.label}</b>${c.lim?`<small>${L('Limiet','Limit')}: ${c.lim}</small>`:''}</div><span class="rcv">${c.val}</span></div>`).join('')}</div>
+    <h4>${L('Trades die niet prop-waardig zijn','Trades that are not prop-worthy')}</h4>
+    ${tr.length?`<div class="rctr">${tr.map(x=>`<div class="rcrow bad"><span class="rcic">${ic('x',14)}</span><div class="stx"><b>${x.sym} · ${x.side==='buy'?'Long':'Short'} ${x.qty} · ${new Date(x.closeTime*1000).toLocaleString(locale(),{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'})}</b><small>${e.issues[x.id].join(' · ')}</small></div><span class="rcv ${x.pnl>=0?'pos':'neg'}">${money(x.pnl)}</span></div>`).join('')}</div>`:`<div class="mut" style="padding:6px 0">${L('Geen — alle trades voldoen aan de regels.','None — every trade follows the rules.')}</div>`}
+   </div>`,'');
+  ov.querySelector('.modal').classList.add('rcm'); ov.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>ov.remove());
+}
+function firmModal(f){
+  const L=(nl,en)=>LANG==='en'?en:nl, x=f?JSON.parse(JSON.stringify(f)):{id:uid(),name:'',col:'#4c74ff',kind:'CFD',desc:'',phases:[{name:'Phase 1',target:8},{name:'Phase 2',target:5},{name:'Funded',target:0}],daily:5,maxloss:10,ddType:'static',mindays:3,consistency:0,maxLots:0,minHold:0,maxRisk:0,slReq:false,weekend:true,split:80};
+  const ov=modal(`<div class="mh"><h3>${f?L('Prop firm bewerken','Edit prop firm'):L('Eigen prop firm','Custom prop firm')}</h3><div class="spacer"></div><button class="ib" data-x>${ic('x')}</button></div>
+   <div class="mcont">
+    <div class="two"><div class="field"><label>${L('Naam','Name')} *</label><input class="inp" id="fName" value="${esc(x.name)}" placeholder="Bijv. My Funded FX"></div><div class="field"><label>${L('Soort','Type')}</label><select class="inp" id="fKind">${['CFD','Futures','Crypto','Stocks'].map(k=>`<option ${x.kind===k?'selected':''}>${k}</option>`).join('')}</select></div></div>
+    <div class="two"><div class="field"><label>${L('Omschrijving','Description')}</label><input class="inp" id="fDesc" value="${esc(x.desc||'')}" placeholder="2-Step 100K"></div><div class="field"><label>${L('Kleur','Colour')}</label><input class="inp" type="color" id="fCol" value="${x.col||'#4c74ff'}" style="height:42px;padding:4px"></div></div>
+    <div class="field"><label>${L('Fases (winstdoel in %, 0 = funded)','Phases (profit target %, 0 = funded)')}</label><div class="three">${[0,1,2].map(i=>`<div><input class="inp" id="fPn${i}" value="${esc((x.phases[i]||{}).name||'')}" placeholder="${['Phase 1','Phase 2','Funded'][i]}" style="margin-bottom:6px"><input class="inp" type="number" step="0.5" id="fPt${i}" value="${(x.phases[i]||{}).target??''}" placeholder="%"></div>`).join('')}</div></div>
+    <div class="three"><div class="field"><label>${L('Max dagverlies %','Max daily loss %')}</label><input class="inp" type="number" step="0.5" id="fDaily" value="${x.daily}"></div><div class="field"><label>${L('Max verlies %','Max loss %')}</label><input class="inp" type="number" step="0.5" id="fMax" value="${x.maxloss}"></div><div class="field"><label>Drawdown</label><select class="inp" id="fDd">${DDTYPES.map(([v,nl,en])=>`<option value="${v}" ${x.ddType===v?'selected':''}>${L(nl,en)}</option>`).join('')}</select></div></div>
+    <div class="three"><div class="field"><label>${L('Min. handelsdagen','Min. trading days')}</label><input class="inp" type="number" id="fDays" value="${x.mindays}"></div><div class="field"><label>${L('Consistentie %','Consistency %')}</label><input class="inp" type="number" id="fCons" value="${x.consistency}"></div><div class="field"><label>${L('Max lots','Max lots')}</label><input class="inp" type="number" step="0.01" id="fLots" value="${x.maxLots}"></div></div>
+    <div class="three"><div class="field"><label>${L('Min. tradeduur (min)','Min. trade duration (min)')}</label><input class="inp" type="number" id="fHold" value="${x.minHold}"></div><div class="field"><label>${L('Max risico/trade %','Max risk/trade %')}</label><input class="inp" type="number" step="0.1" id="fRisk" value="${x.maxRisk}"></div><div class="field"><label>${L('Winstdeling %','Profit split %')}</label><input class="inp" type="number" id="fSplit" value="${x.split}"></div></div>
+    <div class="two"><div class="field"><div class="tog"><span>${L('Stop loss verplicht','Stop loss required')}</span><span class="sw ${x.slReq?'on':''}" id="fSl"></span></div></div><div class="field"><div class="tog"><span>${L('Weekend aanhouden toegestaan','Weekend holding allowed')}</span><span class="sw ${x.weekend!==false?'on':''}" id="fWk"></span></div></div></div>
+    <div class="err" id="fErr"></div></div>
+   <div class="mf"><button class="btn btn-ghost" data-x>${t('cancel')}</button><button class="btn btn-p" id="fSave">${t('save')}</button></div>`,'');
+  const M=ov.querySelector('.modal'), v=id=>M.querySelector(id);
+  ov.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>ov.remove());
+  v('#fSl').onclick=()=>{x.slReq=!x.slReq;v('#fSl').classList.toggle('on',x.slReq)};
+  v('#fWk').onclick=()=>{x.weekend=x.weekend===false;v('#fWk').classList.toggle('on',x.weekend!==false)};
+  v('#fSave').onclick=async()=>{ x.name=v('#fName').value.trim(); if(!x.name){v('#fErr').textContent=L('Geef de prop firm een naam.','Give the prop firm a name.');return}
+    Object.assign(x,{kind:v('#fKind').value,desc:v('#fDesc').value.trim(),col:v('#fCol').value,daily:+v('#fDaily').value||0,maxloss:+v('#fMax').value||10,ddType:v('#fDd').value,mindays:+v('#fDays').value||0,consistency:+v('#fCons').value||0,maxLots:+v('#fLots').value||0,minHold:+v('#fHold').value||0,maxRisk:+v('#fRisk').value||0,split:+v('#fSplit').value||80});
+    x.phases=[0,1,2].map(i=>({name:v('#fPn'+i).value.trim()||['Phase 1','Phase 2','Funded'][i],target:v('#fPt'+i).value===''?null:+v('#fPt'+i).value})).filter(p=>p.target!=null);
+    if(!x.phases.length) x.phases=[{name:'Funded',target:0}];
+    await DB.put('propfirms',x); ov.remove(); toast(t('toast.saved'),x.name,'ok'); render() };
+}
+
+/* =========================================================
+   v7.8: MARKTEN (gedeeld voor iedereen, alleen admin bewerkt)
+   ========================================================= */
+const BUILTIN_SYMS=ASSETS.map(a=>a.sym);
+const MKCATS=[['Metals','Commodities'],['Forex','Forex'],['Indices','Indices'],['Futures','Futures'],['Crypto','Crypto'],['Stocks','Stocks'],['Energy','Energy'],['Other','Other']];
+let MARKETS={}, IS_ADMIN=false;
+async function checkAdmin(){ if(!DB.sb){ IS_ADMIN=true; return } try{ const {data}=await DB.sb.from('bt_admins').select('user_id').eq('user_id',DB.uid); IS_ADMIN=!!(data&&data.length) }catch(e){ IS_ADMIN=false } }
+function applyMarkets(m){
+  MARKETS=m||{};
+  for(const sym in MARKETS){ const x=MARKETS[sym]; if(!x) continue;
+    if(x.deleted&&!BUILTIN_SYMS.includes(sym)){ const i=ASSETS.findIndex(a=>a.sym===sym); if(i>=0) ASSETS.splice(i,1); continue }
+    const base={sym,name:x.name||sym,nameEn:x.nameEn||x.name||sym,cat:x.cat||'Other',min:x.min||'2015-01-01',col:x.col||'#556'}, a=asset(sym);
+    if(a) Object.assign(a,base); else ASSETS.push(base);
+    SPEC[sym]={...(SPEC[sym]||{cs:1,pip:0.01,spread:0.02,step:0.01,unit:'lot'})}; ['cs','pip','spread','step','unit'].forEach(k=>{ if(x[k]!=null&&x[k]!=='') SPEC[sym][k]=k==='unit'?x[k]:+x[k] });
+    SYMCFG[sym]={...(SYMCFG[sym]||{p0:100,vol:0.0003,dec:2,weekend:true})}; if(x.dec!=null&&x.dec!=='') SYMCFG[sym].dec=+x.dec; if(x.p0) SYMCFG[sym].p0=+x.p0; if(x.weekend!=null) SYMCFG[sym].weekend=!!x.weekend;
+    if(x.type) SYMTYPE[sym]=x.type; if(x.logo) SYMLOGO[sym]=`<img src="${x.logo}" alt="">`;
+  }
+}
+const MK={
+  async load(){ let m=await MD.get('markets'); if(CFG.SUPABASE_ANON_KEY){ try{ const r=await fetch(MD.url('markets.json')+'?v='+Date.now()); if(r.ok){ m=await r.json(); await MD.put('markets',m) } }catch(e){} } if(m) applyMarkets(m) },
+  async save(m){ if(MD.cloud()){ const {error}=await DB.sb.storage.from('market-data').upload('markets.json',new Blob([JSON.stringify(m)],{type:'application/json'}),{upsert:true,contentType:'application/json'}); if(error) throw new Error(error.message) } await MD.put('markets',m); applyMarkets(m) }
+};
+const BUILTIN_INFO={XAUUSD:{exchange:'OTC (spot)',hours:'Zo 23:00 – Vr 22:00 UTC',desc:'Goud genoteerd in Amerikaanse dollars — de bekendste veilige haven en een van de meest verhandelde markten ter wereld.'},
+  NQ1:{exchange:'CME Globex',hours:'Zo 23:00 – Vr 22:00 UTC',desc:'E-mini Nasdaq-100 future: volgt de 100 grootste niet-financiële bedrijven op de Nasdaq.'},
+  MNQ:{exchange:'CME Globex',hours:'Zo 23:00 – Vr 22:00 UTC',desc:'Micro E-mini Nasdaq-100: zelfde koers als NQ, maar 1/10 van de contractgrootte.'},
+  BTCUSD:{exchange:'Crypto (24/7)',hours:'24/7',desc:'Bitcoin tegen de Amerikaanse dollar — dag en nacht verhandelbaar, ook in het weekend.'}};
+function mkInfo(sym){ return {...(BUILTIN_INFO[sym]||{}),...(MARKETS[sym]||{})} }
+function pageMarkets(){
+  const L=(nl,en)=>LANG==='en'?en:nl, cat=S.mkCat||'all', cats=[...new Set(ASSETS.map(a=>a.cat))];
+  const list=ASSETS.filter(a=>cat==='all'||a.cat===cat);
+  return `<div class="phead"><div class="row" style="align-items:flex-end"><div><h1>${L('Markten','Markets')}</h1><div class="psub">${L('Alle markten in TWF Backtest. Wijzigingen zie je meteen overal in de app — voor iedereen.','All markets in TWF Backtest. Changes show up everywhere in the app right away — for everyone.')}</div></div><div class="spacer"></div>
+    ${IS_ADMIN?`<button class="btn btn-p" id="mkNew">${ic('plus',15)} ${L('Nieuwe markt','New market')}</button>`:`<span class="mut" style="font-size:13px">${ic('lock',14)} ${L('Alleen admins kunnen markten wijzigen','Only admins can edit markets')}</span>`}</div>
+    <div class="sschips" style="padding:16px 0 0">${[['all',L('Alles','All')],...cats.map(c=>[c,(MKCATS.find(x=>x[0]===c)||[c,c])[1]])].map(([k,l])=>`<button data-mkc="${k}" class="${cat===k?'on':''}">${l}</button>`).join('')}</div></div>
+   <div class="pbody"><div class="mkgrid">${list.map(a=>{ const x=mkInfo(a.sym), rg=MD.range(a.sym), sp=SPEC[a.sym]||{};
+     return `<button class="mkcard" data-mk="${a.sym}"><div class="mkban" style="${x.photo?`background-image:url(${x.photo})`:`background:linear-gradient(135deg,${a.col}55,${a.col}11 70%),var(--panel2)`}"></div>
+       <div class="mklogo">${symBadge(a.sym)}</div>
+       <div class="mkbody"><div class="mkt"><b>${a.sym}</b><span class="stype">${(SYMTYPE[a.sym]||a.cat)}</span></div><div class="mkn">${esc(LANG==='en'?a.nameEn:a.name)}</div>
+        ${x.desc?`<p>${esc(x.desc)}</p>`:''}
+        <div class="mkst"><div><small>Market cap</small><b>${esc(x.mcap||'—')}</b></div><div><small>${L('Beurs','Exchange')}</small><b>${esc(x.exchange||'—')}</b></div><div><small>${L('Contract','Contract')}</small><b>${sp.cs??'—'} · ${sp.unit||'lot'}</b></div><div><small>Data</small><b class="${rg?'pos':''}">${rg?`${rg.from.slice(0,4)} → ${rg.to.slice(0,4)}`:L('Testdata','Test data')}</b></div></div></div></button>` }).join('')}</div></div>`;
+}
+function bindMarkets(m){
+  m.querySelectorAll('[data-mkc]').forEach(b=>b.onclick=()=>{S.mkCat=b.dataset.mkc;render()});
+  m.querySelectorAll('[data-mk]').forEach(b=>b.onclick=()=>marketModal(b.dataset.mk));
+  const n=m.querySelector('#mkNew'); if(n) n.onclick=()=>marketModal(null);
+}
+function pickImg(size,opt){ opt=opt||{}; return new Promise(res=>{ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=()=>{ const f=i.files[0]; if(!f) return res(null); const im=new Image(); im.onload=()=>{ let w=im.width,h=im.height, sx=0,sy=0,sw=w,sh=h, W,H;
+    if(opt.square){ const mm=Math.min(w,h); sx=(w-mm)/2; sy=(h-mm)/2; sw=sh=mm; W=H=size } else { const r=Math.min(1,size/w); W=Math.round(w*r); H=Math.round(h*r) }
+    const c=document.createElement('canvas'); c.width=W; c.height=H; c.getContext('2d').drawImage(im,sx,sy,sw,sh,0,0,W,H); URL.revokeObjectURL(im.src); res(c.toDataURL(opt.png?'image/png':'image/jpeg',.82)) }; im.onerror=()=>res(null); im.src=URL.createObjectURL(f) }; i.click() }) }
+function marketModal(sym){
+  const L=(nl,en)=>LANG==='en'?en:nl, a=sym?asset(sym):null, x={...(sym?mkInfo(sym):{})}, sp=sym?SPEC[sym]||{}:{}, sc=sym?SYMCFG[sym]||{}:{}, ro=!IS_ADMIN, builtin=sym&&BUILTIN_SYMS.includes(sym);
+  const d={sym:sym||'',name:a?a.name:'',nameEn:a?a.nameEn:'',cat:a?a.cat:'Forex',col:a?a.col:'#4c74ff',type:SYMTYPE[sym]||'',desc:x.desc||'',exchange:x.exchange||'',mcap:x.mcap||'',website:x.website||'',hours:x.hours||'',min:a?a.min:'2015-01-01',
+    cs:sp.cs??100000,pip:sp.pip??0.0001,spread:sp.spread??0.0001,step:sp.step??0.01,unit:sp.unit||'lot',dec:sc.dec??5,p0:sc.p0??1,weekend:sc.weekend!==false,logo:x.logo||'',photo:x.photo||''};
+  const F=(id,label,val,extra)=>`<div class="field"><label>${label}</label><input class="inp" id="${id}" value="${esc(String(val??''))}" ${ro?'disabled':''} ${extra||''}></div>`;
+  const ov=modal(`<div class="mh"><h3>${sym?sym:L('Nieuwe markt','New market')}</h3><div class="spacer"></div><button class="ib" data-x>${ic('x')}</button></div>
+   <div class="mcont mkedit">
+    <div class="mkhero"><div class="mkban big" id="mkPh" style="${d.photo?`background-image:url(${d.photo})`:`background:linear-gradient(135deg,${d.col}55,${d.col}11 70%),var(--panel2)`}">${ro?'':`<button class="btn btn-g sm" id="mkPhB">${ic('camera',14)} ${L('Foto','Photo')}</button>${d.photo?`<button class="btn btn-g sm" id="mkPhD">${ic('trash',14)}</button>`:''}`}</div>
+      <div class="mklogo big" id="mkLg">${d.logo?`<span class="sym slogo"><img src="${d.logo}" alt=""></span>`:sym?symBadge(sym):`<span class="sym" style="background:${d.col}">?</span>`}${ro?'':`<button class="pcam" id="mkLgB" title="Logo">${ic('camera',14)}</button>`}</div></div>
+    <div class="three">${F('mSym',L('Symbool','Symbol')+' *',d.sym,sym?'disabled':'placeholder="EURUSD" style="text-transform:uppercase"')}${F('mName',L('Naam (NL)','Name (NL)'),d.name)}${F('mNameEn',L('Naam (EN)','Name (EN)'),d.nameEn)}</div>
+    <div class="three"><div class="field"><label>${L('Categorie','Category')}</label><select class="inp" id="mCat" ${ro?'disabled':''}>${MKCATS.map(([v,l])=>`<option value="${v}" ${d.cat===v?'selected':''}>${l}</option>`).join('')}</select></div>${F('mType',L('Type-label','Type label'),d.type,'placeholder="forex cfd"')}<div class="field"><label>${L('Kleur','Colour')}</label><input class="inp" type="color" id="mCol" value="${d.col}" ${ro?'disabled':''} style="height:42px;padding:4px"></div></div>
+    <div class="field"><label>${L('Beschrijving','Description')}</label><textarea class="inp" id="mDesc" rows="3" ${ro?'disabled':''}>${esc(d.desc)}</textarea></div>
+    <div class="three">${F('mMcap','Market cap',d.mcap,'placeholder="$2.1T"')}${F('mEx',L('Beurs / bron','Exchange / venue'),d.exchange,'placeholder="CME / OTC"')}${F('mHours',L('Handelstijden','Trading hours'),d.hours,'placeholder="Ma–Vr 23:00–22:00 UTC"')}</div>
+    <h4 class="mksub">${L('Handelsspecificaties','Trading specs')}</h4>
+    <div class="three">${F('mCs',L('Contractgrootte','Contract size'),d.cs,'type="number" step="any"')}${F('mPip',L('Pip / tick','Pip / tick'),d.pip,'type="number" step="any"')}${F('mSpread',L('Standaard spread (prijs)','Default spread (price)'),d.spread,'type="number" step="any"')}</div>
+    <div class="three">${F('mStep',L('Lot-stap','Lot step'),d.step,'type="number" step="any"')}<div class="field"><label>${L('Eenheid','Unit')}</label><select class="inp" id="mUnit" ${ro?'disabled':''}><option value="lot" ${d.unit==='lot'?'selected':''}>Lots</option><option value="contract" ${d.unit==='contract'?'selected':''}>Contracts</option></select></div>${F('mDec',L('Decimalen','Decimals'),d.dec,'type="number" min="0" max="8"')}</div>
+    <div class="three">${F('mP0',L('Prijsniveau (voor testdata)','Price level (for test data)'),d.p0,'type="number" step="any"')}${F('mWeb','Website',d.website,'placeholder="https://…"')}<div class="field"><label>&nbsp;</label><div class="tog"><span>${L('Weekend gesloten','Closed on weekends')}</span><span class="sw ${d.weekend?'on':''}" id="mWk"></span></div></div></div>
+    <div class="err" id="mErr"></div></div>
+   <div class="mf">${!ro&&sym&&!builtin?`<button class="btn btn-danger" id="mDel" style="margin-right:auto">${ic('trash',15)} ${t('delete')}</button>`:'<span style="margin-right:auto"></span>'}<button class="btn btn-ghost" data-x>${ro?t('close')||'Sluiten':t('cancel')}</button>${ro?'':`<button class="btn btn-p" id="mSave">${t('save')}</button>`}</div>`,'');
+  const M=ov.querySelector('.modal'); M.classList.add('mkm'); const v=id=>M.querySelector(id);
+  ov.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>ov.remove());
+  if(ro) return;
+  v('#mWk').onclick=()=>{d.weekend=!d.weekend;v('#mWk').classList.toggle('on',d.weekend)};
+  v('#mkLgB').onclick=async e=>{ e.stopPropagation(); const img=await pickImg(128,{square:true,png:true}); if(img){ d.logo=img; v('#mkLg').querySelector('.sym').outerHTML=`<span class="sym slogo"><img src="${img}" alt=""></span>` } };
+  v('#mkPhB').onclick=async()=>{ const img=await pickImg(900); if(img){ d.photo=img; v('#mkPh').style.backgroundImage=`url(${img})` } };
+  const pd=v('#mkPhD'); if(pd) pd.onclick=()=>{ d.photo=''; v('#mkPh').style.backgroundImage='none'; pd.remove() };
+  const del=v('#mDel'); if(del) del.onclick=async()=>{ if(!(await askConfirm(L(`${sym} verwijderen voor iedereen?`,`Delete ${sym} for everyone?`)))) return; const m={...MARKETS,[sym]:{deleted:true}}; try{ await MK.save(m); ov.remove(); toast(t('toast.saved'),sym,'ok'); render() }catch(e){ v('#mErr').textContent=e.message } };
+  v('#mSave').onclick=async()=>{ const S2=(v('#mSym').value||'').trim().toUpperCase().replace(/[^A-Z0-9._-]/g,''); if(!S2){v('#mErr').textContent=L('Vul een symbool in.','Enter a symbol.');return}
+    if(!sym&&asset(S2)){v('#mErr').textContent=L('Deze markt bestaat al.','This market already exists.');return}
+    const o={...(MARKETS[S2]||{}),name:v('#mName').value.trim()||S2,nameEn:v('#mNameEn').value.trim()||v('#mName').value.trim()||S2,cat:v('#mCat').value,type:v('#mType').value.trim(),col:v('#mCol').value,desc:v('#mDesc').value.trim(),
+      mcap:v('#mMcap').value.trim(),exchange:v('#mEx').value.trim(),hours:v('#mHours').value.trim(),website:v('#mWeb').value.trim(),cs:+v('#mCs').value,pip:+v('#mPip').value,spread:+v('#mSpread').value,step:+v('#mStep').value,unit:v('#mUnit').value,
+      dec:+v('#mDec').value,p0:+v('#mP0').value||(SYMCFG[S2]||{}).p0||1,weekend:d.weekend,logo:d.logo,photo:d.photo,min:d.min};
+    delete o.deleted; const btn=v('#mSave'); btn.disabled=true;
+    try{ await MK.save({...MARKETS,[S2]:o}); ov.remove(); toast(t('toast.saved'),S2,'ok'); render() }catch(e){ btn.disabled=false; v('#mErr').textContent=(LANG==='en'?'Saving failed: ':'Opslaan mislukt: ')+e.message } };
+}
+
+/* =========================================================
+   v7.8: EIGEN KALENDER (vervangt de browser-datumkiezer)
+   ========================================================= */
+const _inDesc=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');
+function enhanceDate(inp){
+  if(inp._enh||inp.type!=='date'||inp.closest('.noenh')) return; inp._enh=true;
+  const b=document.createElement('button'); b.type='button'; b.className=(inp.className||'')+' cdate'; b.style.cssText=inp.style.cssText; if(inp.id) b.dataset.for=inp.id;
+  inp.style.display='none'; inp.after(b);
+  const upd=()=>{ const v=_inDesc.get.call(inp); b.innerHTML=`<svg class="cdi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span class="${v?'':'ph'}">${v?new Date(v+'T00:00:00Z').toLocaleDateString(locale(),{weekday:'short',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):(LANG==='en'?'Pick a date':'Kies een datum')}</span>`; b.disabled=inp.disabled };
+  Object.defineProperty(inp,'value',{configurable:true,get(){return _inDesc.get.call(this)},set(v){_inDesc.set.call(this,v);upd()}});
+  upd(); b.onclick=e=>{ e.preventDefault(); e.stopPropagation(); openCal(inp,b) };
+}
+function openCal(inp,b){
+  const open=document.querySelector('.calm'); if(open){ const same=open._b===b; open._close(); if(same) return }
+  const iso=d=>d.toISOString().slice(0,10), min=inp.min||'1990-01-01', max=inp.max||'2100-12-31', today=iso(new Date());
+  let cur=_inDesc.get.call(inp)||(today>max?max:today<min?min:today), vy=+cur.slice(0,4), vm=+cur.slice(5,7)-1, mode='days';
+  const m=document.createElement('div'); m.className='calm'; m._b=b; document.body.appendChild(m);
+  const MN=[...Array(12)].map((_,i)=>new Date(Date.UTC(2020,i,1)).toLocaleDateString(locale(),{month:'long',timeZone:'UTC'})), MS=[...Array(12)].map((_,i)=>new Date(Date.UTC(2020,i,1)).toLocaleDateString(locale(),{month:'short',timeZone:'UTC'}));
+  const WD=LANG==='en'?['Mo','Tu','We','Th','Fr','Sa','Su']:['Ma','Di','Wo','Do','Vr','Za','Zo'];
+  const ok=s=>s>=min&&s<=max;
+  const draw=()=>{
+    let h=`<div class="calh"><button class="calnav" data-nav="-1"><svg viewBox="0 0 12 12"><path d="M7.5 2.5L4 6l3.5 3.5"/></svg></button><button class="calt" data-mode>${mode==='days'?`${MN[vm]} ${vy}`:mode==='months'?vy:`${Math.floor(vy/12)*12} – ${Math.floor(vy/12)*12+11}`}<svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></button><button class="calnav" data-nav="1"><svg viewBox="0 0 12 12"><path d="M4.5 2.5L8 6l-3.5 3.5"/></svg></button></div>`;
+    if(mode==='days'){ const first=new Date(Date.UTC(vy,vm,1)), off=(first.getUTCDay()+6)%7, dim=new Date(Date.UTC(vy,vm+1,0)).getUTCDate();
+      h+=`<div class="calg wd">${WD.map(w=>`<span>${w}</span>`).join('')}</div><div class="calg">`;
+      for(let i=0;i<off;i++) h+='<span></span>';
+      for(let d=1;d<=dim;d++){ const s=`${vy}-${String(vm+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; h+=`<button data-d="${s}" class="${s===_inDesc.get.call(inp)?'on':''} ${s===today?'td':''}" ${ok(s)?'':'disabled'}>${d}</button>` }
+      h+='</div>' }
+    else if(mode==='months'){ h+=`<div class="calg mo">${MS.map((n,i)=>{ const a=`${vy}-${String(i+1).padStart(2,'0')}`; return `<button data-m="${i}" class="${i===vm?'on':''}" ${a+'-31'>=min&&a+'-01'<=max?'':'disabled'}>${n}</button>` }).join('')}</div>` }
+    else { const y0=Math.floor(vy/12)*12; h+=`<div class="calg mo">${[...Array(12)].map((_,i)=>{ const y=y0+i; return `<button data-y="${y}" class="${y===vy?'on':''}" ${y>=+min.slice(0,4)&&y<=+max.slice(0,4)?'':'disabled'}>${y}</button>` }).join('')}</div>` }
+    const L=(nl,en)=>LANG==='en'?en:nl;
+    h+=`<div class="calf">${min>'1990-01-01'?`<button data-q="${min}">${L('Begin data','Data start')}</button>`:''}${ok(today)?`<button data-q="${today}">${L('Vandaag','Today')}</button>`:''}${max<'2100-12-31'?`<button data-q="${max}">${L('Laatste','Latest')}</button>`:''}</div>`;
+    m.innerHTML=h; place();
+    m.querySelectorAll('[data-nav]').forEach(x=>x.onclick=e=>{ e.stopPropagation(); const s=+x.dataset.nav; if(mode==='days'){ vm+=s; if(vm<0){vm=11;vy--} if(vm>11){vm=0;vy++} } else if(mode==='months') vy+=s; else vy+=12*s; draw() });
+    m.querySelector('[data-mode]').onclick=e=>{ e.stopPropagation(); mode=mode==='days'?'months':mode==='months'?'years':'days'; draw() };
+    m.querySelectorAll('[data-m]').forEach(x=>x.onclick=e=>{ e.stopPropagation(); vm=+x.dataset.m; mode='days'; draw() });
+    m.querySelectorAll('[data-y]').forEach(x=>x.onclick=e=>{ e.stopPropagation(); vy=+x.dataset.y; mode='months'; draw() });
+    m.querySelectorAll('[data-d],[data-q]').forEach(x=>x.onclick=e=>{ e.stopPropagation(); pick(x.dataset.d||x.dataset.q) });
+  };
+  const place=()=>{ const r=b.getBoundingClientRect(), mh=m.offsetHeight, mw=m.offsetWidth; m.style.left=Math.max(8,Math.min(r.left,innerWidth-mw-8))+'px'; m.style.top=(r.bottom+6+mh>innerHeight&&r.top>mh+6?r.top-mh-6:r.bottom+6)+'px' };
+  const pick=s=>{ const ch=s!==_inDesc.get.call(inp); inp.value=s; close(); if(ch){ inp.dispatchEvent(new Event('input',{bubbles:true})); inp.dispatchEvent(new Event('change',{bubbles:true})) } };
+  const key=e=>{ if(e.key==='Escape'){ e.stopImmediatePropagation(); e.preventDefault(); close() } };
+  const out=e=>{ if(!m.contains(e.target)&&e.target!==b&&!b.contains(e.target)) close() };
+  function close(){ m.remove(); b.classList.remove('open'); window.removeEventListener('keydown',key,true); document.removeEventListener('mousedown',out,true) }
+  m._close=close; m.onmousedown=e=>e.stopPropagation(); b.classList.add('open');
+  window.addEventListener('keydown',key,true); document.addEventListener('mousedown',out,true); draw();
+}
+new MutationObserver(ms=>{ for(const mu of ms) for(const n of mu.addedNodes){ if(n.nodeType!==1) continue; if(n.tagName==='INPUT') enhanceDate(n); else if(n.querySelectorAll) n.querySelectorAll('input[type=date]').forEach(enhanceDate) } }).observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('input[type=date]').forEach(enhanceDate));
 
 /* ----- Settings ----- */
 const SETTABS=[['profile','user','Profiel','Profile'],['account','lock','Account','Account'],['look','sun','Weergave','Appearance'],['chart','chart','Chart','Chart'],['replay','play','Replay & handelen','Replay & trading'],['data','db','Data & opslag','Data & storage'],['links','link','Koppelingen','Connections'],['about','info','Over TWF Backtest','About TWF Backtest']];
@@ -1674,6 +2008,7 @@ function pageSettings(){
      ${SELR('defMode',L('Beweging','Movement'),L('Vloeiend bouwt candles tick voor tick op.','Smooth builds candles tick by tick.'),[['smooth','Smooth (tick)'],['step','Candle by candle']],pf.defMode||'smooth')}
      ${TOG('ts.pauseOnHit',ts.pauseOnHit,L('Pauzeren bij TP / SL / fill','Pause on TP / SL / fill'),L('Replay stopt zodra een order raakt.','Replay stops when an order hits.'))}</div>
      <div class="box"><h3>${L('Handelen','Trading')}</h3>
+     ${SELR('propStrict',L('Strengheid prop firm-check','Prop firm check strictness'),L('Hoe streng een payout wordt beoordeeld (per sessie aan te passen).','How strict payouts are judged (adjustable per session).'),[['soft',L('Soepel','Relaxed')],['normal',L('Normaal','Normal')],['strict',L('Streng','Strict')]],pf.propStrict||'normal')}
      ${TOG('ts.oneClick',ts.oneClick,L('Handelen met één klik','One-click trading'),L('Kopen/Verkopen plaatst direct een marktorder.','Buy/Sell places a market order right away.'))}
      ${TOG('ts.sound',ts.sound!==false,L('Uitvoeringsgeluid','Execution sound'),L('Geluidje bij fill of sluiten van een positie.','Sound on fill or when a position closes.'))}
      <div class="srow"><div class="stx"><b>${L('Geluid','Sound')}</b><small>${L('Kies je favoriete geluidje — je hoort het meteen.','Pick your favourite sound — you hear it right away.')}</small></div><select class="inp ssel" id="pSnd">${SOUNDS.map(([v,l])=>`<option value="${v}" ${(ts.soundType||'chime')===v?'selected':''}>${l}</option>`).join('')}</select><button class="btn btn-g sm" id="pSndP" title="Preview">▶</button></div>
@@ -1747,7 +2082,7 @@ function bindPage(){
   q('[data-delstr]').forEach(b=>b.onclick=async()=>{if(await askConfirm(t('confirm.del'))){await DB.del('strategies',b.dataset.delstr);toast(t('toast.deleted'),'','ok');render()}});
   q('[data-tf]').forEach(sl=>sl.onchange=()=>{S.tf[sl.dataset.tf]=sl.value;render()});
   q('[data-otr]').forEach(r=>r.onclick=()=>{const [sid,tid]=r.dataset.otr.split('|');tradeModal(sid,tid,()=>render())});
-  if(S.page==='testing'&&S.tab==='analytics') bindAnalytics(m); if(S.page==='data') bindData(m);
+  if(S.page==='testing'&&S.tab==='analytics') bindAnalytics(m); if(S.page==='data') bindData(m); if(S.page==='markets') bindMarkets(m); if(S.page==='prop') bindProp(m);
   q('[data-gs]').forEach(b=>b.onclick=()=>{const g=b.dataset.gs;if(g==='newsess')sessionModal('backtest');else go(g)});
   const qi=m.querySelector('#q'); if(qi) qi.oninput=()=>{S.q=qi.value;const pos=qi.selectionStart;render();const n=$('#q');n.focus();n.setSelectionRange(pos,pos)};
   // settings
@@ -2189,7 +2524,7 @@ function popMenu(anchor,html,onPick,cls=''){
   else { const top=r.bottom+6+m.offsetHeight>innerHeight?r.top-m.offsetHeight-6:r.bottom+6;
   m.style.left=Math.max(8,Math.min(r.left,innerWidth-m.offsetWidth-8))+'px'; m.style.top=Math.max(8,top)+'px'; }
   m.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{onPick(b.dataset.v,b);if(!b.dataset.keep)m.remove()});
-  setTimeout(()=>{const off=e=>{if(!m.contains(e.target)){m.remove();document.removeEventListener('mousedown',off)}};document.addEventListener('mousedown',off)},0);
+  setTimeout(()=>{const off=e=>{if(!document.body.contains(m)){document.removeEventListener('mousedown',off);return} if(!m.contains(e.target)&&!(e.target.closest&&e.target.closest('.calm,.cselm'))){m.remove();document.removeEventListener('mousedown',off)}};document.addEventListener('mousedown',off)},0);
   return m;
 }
 function typeMenu(){
@@ -2415,7 +2750,9 @@ function checkProp(live){
   const start=s.startBalance??SX.acc.balance, eq=equity();
   const ns=nowSec(), day=new Date((ns-nyOff(ns)*3600+7*3600)*1000).toISOString().slice(0,10);
   if(s.dayKey!==day){s.dayKey=day;s.dayStart=s.balance??start}
-  const fail=eq<=start*(1-(+s.maxloss||10)/100)?'max':eq<=s.dayStart*(1-(+s.daily||5)/100)?'daily':null;
+  if(s.ddType==='trailing') s.peak=Math.max(s.peak??start,eq); else if(s.ddType==='eod'&&s.dayKey===day) s.peak=Math.max(s.peak??start,s.dayStart);
+  const floor=(s.ddType==='trailing'||s.ddType==='eod')?((s.peak??start)-start*(+s.maxloss||10)/100):start*(1-(+s.maxloss||10)/100);
+  const fail=eq<=floor?'max':(+s.daily>0&&eq<=s.dayStart*(1-(+s.daily)/100))?'daily':null;
   if(fail){ s.pfStatus='failed'; [...SX.pos].forEach(p=>{if(p.sym===SX.sym)closePos(p,closeQuote(p),'rule')}); stopPlay();
     toast(t('pf.failed'),fail==='max'?t('pf.maxhit'):t('pf.dailyhit'),'bad',8000); SX.dirty=true; return }
   if(!live&&(s.balance??start)>=start*(1+(+s.target||10)/100)){ s.pfStatus='passed'; stopPlay(); toast(t('pf.passed'),t('pf.passed2'),'ok',8000) }
@@ -4343,7 +4680,7 @@ document.addEventListener('DOMContentLoaded',()=>enhanceAll());
 /* ----- v7.4: symbool zoeken zoals TradingView ----- */
 function symSearch(first){
   if(!SX) return; document.querySelectorAll('.symdlg').forEach(x=>x.closest('.ov').remove());
-  const cats=[['all','All'],['Metals','Commodities'],['Futures','Futures'],['Crypto','Crypto']];
+  const cats=[['all','All'],...[...new Set(ASSETS.map(a=>a.cat))].map(c=>[c,(MKCATS.find(x=>x[0]===c)||[c,c])[1]])];
   let cat='all', sel=0, items=[];
   const ov=modal(`<div class="ssh"><svg class="i ti" viewBox="0 0 28 28" style="width:26px;height:26px"><circle cx="12" cy="12" r="7.5"/><path d="M17.5 17.5l6 6"/></svg><input id="ssQ" value="${esc(first||'')}" placeholder="Symbol, ISIN or name" autocomplete="off" spellcheck="false"><button class="ssclr" data-clr title="Clear">×</button></div>
     <div class="sschips">${cats.map(([k,l])=>`<button data-cat="${k}">${l}</button>`).join('')}</div><div class="sslist" id="ssL"></div>`,'');
