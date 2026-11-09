@@ -831,7 +831,7 @@ button{-webkit-appearance:none;appearance:none}
     <div class="bottom nav">
       <button data-go="data"><span data-ic="layers"></span><span class="lbl" data-t="nav.data">Marktdata</span></button>
       <button data-go="settings"><span data-ic="gear"></span><span class="lbl" data-t="nav.settings">Accountinstellingen</span></button>
-      <div class="ver" id="sideVer">Versie: v7.6 · TWF Backtest</div>
+      <div class="ver" id="sideVer">Versie: v7.7 · TWF Backtest</div>
     </div>
   </aside>
   <main id="main"></main>
@@ -850,7 +850,7 @@ button{-webkit-appearance:none;appearance:none}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v7.6', BUILD: '2026-11-08'
+  VERSION: 'v7.7', BUILD: '2026-11-09'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1353,7 +1353,7 @@ function render(){
   m.innerHTML=(pages[S.page]||pageTesting)(); m.scrollTop=0;
   bindPage();
 }
-const JOURNAL_URL='https://twfjournal.netlify.app';
+const JOURNAL_URL='https://twfapp.github.io/twfjournal/';
 function go(p){ if(p==='journal'){ window.open(JOURNAL_URL,'_blank','noopener'); return } S.page=p;render(); }
 
 /* ----- stats ----- */
@@ -1692,7 +1692,7 @@ function pageSettings(){
      <div class="box"><h3>${L('Systeemstatus','System status')}</h3><div id="aChecks"><div class="mut">…</div></div></div>
      <div class="box"><h3>${L('Technisch','Technical')}</h3>
        ${ROW(L('Versie in je browser','Version in your browser'),'',`<code>${CFG.VERSION}</code>`)}
-       ${ROW(L('Versie op de server (Netlify)','Version on the server (Netlify)'),L('Moet gelijk zijn aan de versie hierboven.','Should match the version above.'),`<code id="aSrv">…</code>`)}
+       ${ROW(L('Versie op de server (GitHub Pages)','Version on the server (GitHub Pages)'),L('Moet gelijk zijn aan de versie hierboven.','Should match the version above.'),`<code id="aSrv">…</code>`)}
        ${ROW('Chart engine','',`<code>Lightweight Charts ${(window.LightweightCharts&&LightweightCharts.version&&LightweightCharts.version())||'4.2.3'}</code>`)}
        ${ROW('Database','',`<code>${DB.name==='local'?'Local (browser)':'Supabase · '+esc((CFG.SUPABASE_URL||'').replace('https://','').split('.')[0])}</code>`)}
        ${ROW(L('Browser','Browser'),'',`<code>${esc((navigator.userAgent.match(/(Chrome|Safari|Firefox|Edg)\/[\d.]+/)||[''])[0])}</code>`)}</div>`;
