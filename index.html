@@ -822,6 +822,23 @@ body.theme-light .calm{background:#fff;box-shadow:0 22px 60px rgba(20,30,60,.2)}
   .topbar{gap:4px;padding:0 10px}.topbar .logo .sub{display:none}
   .notif{right:12px;left:12px;width:auto}
 }
+
+/* v7.9: chart-UI neutraal zwart (geen blauw), gelijke balken */
+body:not(.theme-light) #session{--bg:#000;--bg2:#0a0a0a;--panel:#141414;--panel2:#1f1f1f;--line:#222;--line2:#2c2c2c}
+body:not(.theme-light) .favbar,body:not(.theme-light) .dtb{background:#141414!important;border:1px solid #2c2c2c!important;box-shadow:0 6px 22px rgba(0,0,0,.6)!important}
+body:not(.theme-light) .favbar button:hover,body:not(.theme-light) .dtb button:hover{background:#262626!important}
+body:not(.theme-light) .sxmenu,body:not(.theme-light) .cpop{background:#141414;border-color:#2c2c2c}
+body:not(.theme-light) .sxmenu button:hover{background:#262626}
+.favbar,.dtb{border-radius:6px!important;padding:2px 4px!important}
+.favbar{z-index:12!important}.dtb{z-index:13!important}
+.favbar *,.dtb *{pointer-events:auto}
+/* v7.9: tekst typen zonder stippelkader */
+.dtedit{border:0!important;background:transparent!important;caret-color:currentColor}
+/* templates-menu */
+.sxmenu .tplrow{display:flex;align-items:center;gap:8px}
+.sxmenu .tplrow .tplx{opacity:.5;width:22px;height:22px;display:grid;place-items:center;border-radius:4px;margin-right:-4px;flex:none}
+.sxmenu .tplrow .tplx:hover{opacity:1;background:rgba(229,83,75,.18);color:#e5534b}
+.sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 </style>
 </head>
 <body class="">
@@ -912,7 +929,7 @@ body.theme-light .calm{background:#fff;box-shadow:0 22px 60px rgba(20,30,60,.2)}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v7.8', BUILD: '2026-11-09b'
+  VERSION: 'v7.9', BUILD:'2026-11-10a'
 };
 
 /* ---------------- Icons ---------------- */
@@ -2144,7 +2161,7 @@ const SPEEDS=[1,2,5,10,20,60,120,300,600];
 const CHART_TPL={
   'tv-dark':{bg:'#0f0f0f',grid:'#1c1c1c',text:'#b2b5be',up:'#089981',down:'#F23645',border:'#2a2e39'},
   'tv-light':{bg:'#ffffff',grid:'#f0f3fa',text:'#131722',up:'#089981',down:'#F23645',border:'#e0e3eb'},
-  'twf-dark':{bg:'#06080c',grid:'#121824',text:'#8691a3',up:'#2fbf71',down:'#e5534b',border:'#1d2431'},
+  'twf-dark':{bg:'#000000',grid:'#141414',text:'#8a8a8a',up:'#2fbf71',down:'#e5534b',border:'#262626'},
   'twf-navy':{bg:'#0a1322',grid:'#14213a',text:'#9aa9c2',up:'#4c8dff',down:'#e5534b',border:'#1c2c4a'},
   'light':{bg:'#ffffff',grid:'#eef1f5',text:'#5f6b7d',up:'#1f9d55',down:'#d64545',border:'#e3e7ef'},
   'classic':{bg:'#131722',grid:'#1e222d',text:'#b2b5be',up:'#26a69a',down:'#ef5350',border:'#2a2e39'}
@@ -2351,6 +2368,22 @@ function buildSessionDom(){
 }
 function setSpeedUI(){ let i=SPEEDS.indexOf(SX.speed); if(i<0){i=3;SX.speed=SPEEDS[i]} const r=$('#sxSpeedR'); if(!r) return; r.value=i;
   r.style.setProperty('--fill',(i/(SPEEDS.length-1)*100)+'%'); $('#sxSpeedL').textContent=SX.speed+'×'; }
+
+/* ----- v7.9: prijsas zoomen met scrollwiel / trackpad (zoals TradingView) ----- */
+function onPriceAxis(e){ const cv=$('#sxDraw'); if(!cv||!SX||!SX.chart) return false; const {x,y}=relXY(e); const pw=SX.chart.priceScale('right').width(); return x>=cv._w&&x<=cv._w+pw+2&&y>=0&&y<=cv._h }
+function setPriceRange(top,bot){ const ps=SX.chart.priceScale('right'), m=ps.options().scaleMargins||{top:0,bottom:0}, V=top-bot; if(!(V>0)) return;
+  SX.pr={max:top-V*m.top,min:bot+V*m.bottom}; SX.prV={top,bot}; ps.applyOptions({autoScale:true});
+  clearTimeout(SX._prT); SX._prT=setTimeout(()=>{ requestAnimationFrame(()=>requestAnimationFrame(()=>{ if(!SX||!SX.pr) return; ps.applyOptions({autoScale:false}); SX.pr=null; SX.prV=null; SX.auto=false; document.querySelectorAll('[data-scale="auto"]').forEach(b=>b.classList.remove('on')); drawOverlay&&drawOverlay() })) },180);
+}
+function priceWheel(e){
+  if(!SX||!onPriceAxis(e)) return; e.preventDefault(); e.stopPropagation();
+  const cv=$('#sxDraw'), cur=SX.prV||{top:SX.series.coordinateToPrice(0),bot:SX.series.coordinateToPrice(cv._h)}; if(cur.top==null||cur.bot==null) return;
+  let dy=e.deltaY*(e.deltaMode===1?18:e.deltaMode===2?400:1); if(e.ctrlKey) dy*=3; dy=Math.max(-120,Math.min(120,dy));
+  const f=Math.exp(dy*0.0022), c=(cur.top+cur.bot)/2, half=(cur.top-cur.bot)/2*f; if(half<=0) return;
+  setPriceRange(c+half,c-half);
+}
+function priceDbl(e){ if(!SX||!onPriceAxis(e)) return; SX.pr=null; SX.prV=null; clearTimeout(SX._prT); SX.auto=true; SX.pr=null; SX.prV=null; SX.chart.priceScale('right').applyOptions({autoScale:true}); document.querySelectorAll('[data-scale="auto"]').forEach(b=>b.classList.add('on')) }
+const _prProv=(orig)=>SX&&SX.pr?{priceRange:{minValue:SX.pr.min,maxValue:SX.pr.max}}:orig();
 function setupChart(){
   const box=$('#sxChart'); const c=tplColors();
   SX.chart=LightweightCharts.createChart(box,{autoSize:true,
@@ -2360,16 +2393,19 @@ function setupChart(){
     timeScale:{borderColor:c.border,timeVisible:true,secondsVisible:false,rightOffset:12,barSpacing:9},
     crosshair:{mode:0},localization:{locale:'en-US',priceFormatter:x=>fmtPx(x),timeFormatter:crossTimeFmt}
   });
+  { const C=SX.chart; ['addCandlestickSeries','addBarSeries','addLineSeries','addAreaSeries','addHistogramSeries','addBaselineSeries'].forEach(fn=>{ const o=C[fn].bind(C); C[fn]=(opt={})=>{ const sid=opt.priceScaleId; if(sid===undefined||sid==='right'){ const main=fn==='addCandlestickSeries'||fn==='addBarSeries'||SX._mk; opt={...opt,autoscaleInfoProvider:orig=>SX&&SX.pr?(main?{priceRange:{minValue:SX.pr.min,maxValue:SX.pr.max}}:null):orig()} } return o(opt) } }) }
   makeSeries();
   SX.chart.subscribeCrosshairMove(prm=>{ const d=prm&&prm.seriesData&&prm.seriesData.get(SX.series); legend(d&&d.open!==undefined?d:null) });
 }
 function makeSeries(){
+  SX._mk=true;
   const c=tplColors(); if(SX.series) SX.chart.removeSeries(SX.series); if(SX.volS){SX.chart.removeSeries(SX.volS);SX.volS=null}
   const ty=SX.type, pd=pDec(), pf={type:'custom',minMove:1/Math.pow(10,pd),formatter:x=>fmtPx(x,pd)}, lv={lastValueVisible:c.lastLabel!==false,priceLineVisible:c.priceLine!==false};
   if(ty==='line') SX.series=SX.chart.addLineSeries({color:c.bodyUp||c.up,lineWidth:2,priceFormat:pf,...lv});
   else if(ty==='area') SX.series=SX.chart.addAreaSeries({lineColor:c.bodyUp||c.up,topColor:(c.bodyUp||c.up)+'55',bottomColor:(c.bodyUp||c.up)+'05',lineWidth:2,priceFormat:pf,...lv});
   else if(ty==='bars') SX.series=SX.chart.addBarSeries({upColor:c.bodyUp||c.up,downColor:c.bodyDown||c.down,thinBars:false,priceFormat:pf,...lv});
   else { const T='rgba(0,0,0,0)'; SX.series=SX.chart.addCandlestickSeries({upColor:ty==='hollow'||c.bodyOn===false?T:c.bodyUp,downColor:c.bodyOn===false?T:c.bodyDown,borderVisible:c.borderOn!==false||ty==='hollow',borderUpColor:c.borderOn===false&&ty==='hollow'?c.bodyUp:c.borderUp,borderDownColor:c.borderDown,wickVisible:c.wickOn!==false,wickUpColor:c.wickUp,wickDownColor:c.wickDown,priceFormat:pf,...lv}); }
+  SX._mk=false;
   if(SX.pos&&SX.ovItems) setTimeout(drawOverlay,0);
   if(SX.vol){ SX.volS=SX.chart.addHistogramSeries({priceFormat:{type:'volume'},priceScaleId:'vol',lastValueVisible:false,priceLineVisible:false}); SX.chart.priceScale('vol').applyOptions({scaleMargins:{top:0.82,bottom:0}}); }
 }
@@ -2484,7 +2520,7 @@ function setRange(r){
 }
 function setScale(k){
   document.querySelectorAll('[data-scale]').forEach(b=>b.classList.remove('on'));
-  if(k==='auto'){SX.auto=!SX.auto; SX.chart.priceScale('right').applyOptions({autoScale:SX.auto}); }
+  if(k==='auto'){SX.auto=!SX.auto; SX.pr=null; SX.prV=null; clearTimeout(SX._prT); SX.chart.priceScale('right').applyOptions({autoScale:SX.auto}); }
   else { SX.scale=SX.scale===k?'normal':k; SX.chart.priceScale('right').applyOptions({mode:SX.scale==='pct'?2:SX.scale==='log'?1:0}); }
   if(SX.scale!=='normal') $(`[data-scale="${SX.scale}"]`).classList.add('on'); if(SX.auto) $('[data-scale="auto"]').classList.add('on');
 }
@@ -3181,6 +3217,7 @@ const DEF_STYLE=k=>{
   if(g==='pat') return {...base,color:'#18b5c9',fill:0.1};
   if(g==='text'||k==='emoji') return {...base,color:'',font:k==='emoji'?26:14};
   if(k==='long'||k==='short') return {...base,width:1};
+  if(k==='path') return {...base,color:'#2962FF',width:3};
   if(k==='avwap') return {...base,color:'#e0a33a'};
   if(['prange','drange','dprange','forecast'].includes(k)) return {...base,color:'#4c74ff',width:1,fill:0.14};
   return base;
@@ -3244,6 +3281,8 @@ function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w
 const fmtP=p=>(+p).toFixed(SYMCFG[SX.sym].dec);
 function dur(sec){sec=Math.abs(sec);const d=Math.floor(sec/86400),h=Math.floor(sec%86400/3600),m=Math.floor(sec%3600/60);return (d?d+'d ':'')+(h?h+'h ':'')+(!d&&m?m+'m':'')||'0m'}
 function arrowHead(ctx,a,b,size=11,fill){const ang=Math.atan2(b.y-a.y,b.x-a.x);ctx.setLineDash([]);ctx.beginPath();ctx.moveTo(b.x,b.y);ctx.lineTo(b.x-size*Math.cos(ang-0.45),b.y-size*Math.sin(ang-0.45));ctx.lineTo(b.x-size*Math.cos(ang+0.45),b.y-size*Math.sin(ang+0.45));ctx.closePath();ctx.fillStyle=fill;ctx.fill()}
+function openArrow(ctx,a,b,w){ const ang=Math.atan2(b.y-a.y,b.x-a.x), L=Math.hypot(b.x-a.x,b.y-a.y); if(L<1) return; const s=Math.min(L*0.9,9+w*3.2), sp=0.48;
+  ctx.save(); ctx.setLineDash([]); ctx.lineWidth=w; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.beginPath(); ctx.moveTo(b.x-s*Math.cos(ang-sp),b.y-s*Math.sin(ang-sp)); ctx.lineTo(b.x,b.y); ctx.lineTo(b.x-s*Math.cos(ang+sp),b.y-s*Math.sin(ang+sp)); ctx.stroke(); ctx.restore() }
 function barsBetween(t1,t2){const a=Math.min(t1,t2),b=Math.max(t1,t2);return bl().filter(x=>x.time>=a&&x.time<=b)}
 
 function drawOne(ctx,d,W,H){
@@ -3307,8 +3346,9 @@ function drawOne(ctx,d,W,H){
     if(['xabcd','tripat','hs'].includes(ty)&&P.length>=3){ctx.fillStyle=fillCol;ctx.beginPath();P.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.closePath();ctx.fill()}
     if(ty==='ghost'){ // spookcandles tussen de punten
       for(let i=1;i<P.length;i++){const a=P[i-1],b=P[i],up=b.y<a.y;ctx.fillStyle=hexA(up?'#2fbf71':'#e5534b',.45);ctx.strokeStyle=hexA(up?'#2fbf71':'#e5534b',.8);ctx.lineWidth=1;const w=Math.max(4,Math.abs(b.x-a.x)*0.6);ctx.fillRect(b.x-w/2,Math.min(a.y,b.y),w,Math.max(2,Math.abs(b.y-a.y)));} break; }
+    if(ty==='path'){ ctx.lineJoin='round'; ctx.lineCap='round'; }
     ctx.beginPath();P.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)); if(closed)ctx.closePath(); ctx.stroke();
-    if(ty==='path'&&P.length>1) arrowHead(ctx,P[P.length-2],P[P.length-1],11,col);
+    if(ty==='path'&&P.length>1){ let k=P.length-2; while(k>0&&Math.hypot(P[k].x-P[P.length-1].x,P[k].y-P[P.length-1].y)<2) k--; openArrow(ctx,P[k],P[P.length-1],st.width||2) }
     const labs=TOOLS[ty].lab; if(labs) P.forEach((q,i)=>{ if(labs[i]) label(ctx,labs[i],q.x,q.y+(i%2?8:-24),{align:'center',bg:hexA(col,.9),color:'#fff',size:11,bold:1,pad:4}) });
     if(ty==='xabcd'&&P.length===5){const p=d.pts;const r1=Math.abs((p[2].p-p[1].p)/(p[1].p-p[0].p)),r2=Math.abs((p[4].p-p[3].p)/(p[2].p-p[1].p||1));label(ctx,r1.toFixed(3),(P[0].x+P[2].x)/2,(P[0].y+P[2].y)/2,{align:'center',color:col,size:10});label(ctx,r2.toFixed(3),(P[1].x+P[3].x)/2,(P[1].y+P[3].y)/2,{align:'center',color:col,size:10})}
     break; }
@@ -3321,7 +3361,7 @@ function drawOne(ctx,d,W,H){
     ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(s*0.55,s*0.6);ctx.lineTo(s*0.2,s*0.6);ctx.lineTo(s*0.2,s*1.2);ctx.lineTo(-s*0.2,s*1.2);ctx.lineTo(-s*0.2,s*0.6);ctx.lineTo(-s*0.55,s*0.6);ctx.closePath();ctx.fill();ctx.restore();
     if(d.text) label(ctx,d.text,a.x,a.y+(ty==='adown'?-48:30),{align:'center',color:col}); break; }
   case 'rect': case 'prange': case 'drange': case 'dprange': case 'frvp': case 'barspat': { if(P.length<2) break; const x=Math.min(P[0].x,P[1].x),y=Math.min(P[0].y,P[1].y),w=Math.abs(P[1].x-P[0].x),h=Math.abs(P[1].y-P[0].y);
-    if(ty==='frvp'){ drawVP(ctx,d.pts[0].t,d.pts[1].t,x,w,col); ctx.strokeStyle=hexA(col,.4);ctx.lineWidth=1;ctx.strokeRect(x,0,w,H); break; }
+    if(ty==='frvp'){ d._vpbox=drawVP(ctx,d.pts[0].t,d.pts[1].t,x,w,col,{box:1,sel:SX.sel===d.id}); break; }
     if(ty==='barspat'){ drawBarsPattern(ctx,d,P); break; }
     const up=d.pts[1].p>=d.pts[0].p, mc=ty==='rect'?st.color:(st.mcol||'#2962FF');
     ctx.fillStyle=hexA(mc,ty==='rect'?st.fill:(st.mfill??0.2));ctx.fillRect(x,y,w,h); ctx.strokeStyle=mc; if(ty==='rect') ctx.strokeRect(x,y,w,h);
@@ -3364,18 +3404,40 @@ function drawOne(ctx,d,W,H){
   case 'long': case 'short': drawPosTool(ctx,d,P); break;
   case 'avwap': { const B=bl().filter(b=>b.time>=d.pts[0].t); if(!B.length) break; let pv=0,vv=0; ctx.beginPath(); B.forEach((b,i)=>{const tp=(b.high+b.low+b.close)/3;pv+=tp*b.volume;vv+=b.volume;const x=X(b.time),y=Y(pv/vv);i?ctx.lineTo(x,y):ctx.moveTo(x,y)}); ctx.stroke();
     label(ctx,'VWAP '+fmtP(pv/vv),X(B[B.length-1].time)+8,Y(pv/vv),{valign:'middle',bg:hexA(col,.9),color:'#fff',size:11}); break; }
-  case 'avp': { const tnow=bl().length?bl()[bl().length-1].time:d.pts[0].t; const x1=P[0].x, x2=X(tnow); drawVP(ctx,d.pts[0].t,tnow,x1,Math.max(10,x2-x1),col); ctx.strokeStyle=hexA(col,.5);ctx.lineWidth=1;line(ctx,{x:x1,y:0},{x:x1,y:H}); break; }
+  case 'avp': { const tnow=bl().length?bl()[bl().length-1].time:d.pts[0].t; const x1=P[0].x, x2=X(tnow); d._vpbox=drawVP(ctx,d.pts[0].t,tnow,x1,Math.max(10,x2-x1),col,{box:1,sel:SX.sel===d.id}); break; }
   }
   ctx.restore();
   try{ drawLineExtras(ctx,d,P,W,H); drawItemText(ctx,d,P,W,H) }catch(e){}
 }
-function drawVP(ctx,t1,t2,x,w,col){
-  const B=barsBetween(t1,t2); if(!B.length) return; const hi=Math.max(...B.map(b=>b.high)),lo=Math.min(...B.map(b=>b.low)), N=24, bins=new Array(N).fill(0), bu=new Array(N).fill(0);
-  B.forEach(b=>{const tp=(b.high+b.low+b.close)/3, i=Math.min(N-1,Math.floor((tp-lo)/((hi-lo)||1)*N)); bins[i]+=b.volume; if(b.close>=b.open) bu[i]+=b.volume});
-  const mx=Math.max(...bins), poc=bins.indexOf(mx), bw=w*0.7;
-  bins.forEach((v,i)=>{const y1=Y(lo+(hi-lo)*i/N),y2=Y(lo+(hi-lo)*(i+1)/N),hh=Math.max(1,Math.abs(y1-y2)-1),len=v/mx*bw, upl=bu[i]/mx*bw;
-    ctx.fillStyle=hexA('#2fbf71',i===poc?.75:.45);ctx.fillRect(x,Math.min(y1,y2),upl,hh);ctx.fillStyle=hexA('#e5534b',i===poc?.75:.45);ctx.fillRect(x+upl,Math.min(y1,y2),len-upl,hh)});
-  const py=Y(lo+(hi-lo)*(poc+.5)/N); ctx.strokeStyle='#e0a33a';ctx.setLineDash([]);ctx.lineWidth=1.5;line(ctx,{x,y:py},{x:x+w,y:py}); label(ctx,'POC',x+w+4,py,{valign:'middle',color:'#e0a33a',size:10,pad:1});
+function vpCalc(B,N){
+  let hi=-Infinity,lo=Infinity; for(const b of B){ if(b.high>hi)hi=b.high; if(b.low<lo)lo=b.low }
+  if(!(hi>lo)){ hi=hi+1e-6; lo=lo-1e-6 }
+  const step=(hi-lo)/N, up=new Float64Array(N), dn=new Float64Array(N), anyVol=B.some(b=>b.volume>0);
+  for(const b of B){ const v=anyVol?(b.volume||0):1, isUp=b.close>=b.open; let i0=Math.floor((b.low-lo)/step), i1=Math.floor((b.high-lo)/step); i0=Math.max(0,Math.min(N-1,i0)); i1=Math.max(0,Math.min(N-1,i1));
+    const span=Math.max(b.high-b.low,1e-12);
+    for(let i=i0;i<=i1;i++){ const a=Math.max(b.low,lo+i*step), c=Math.min(b.high,lo+(i+1)*step); const part=i0===i1?1:Math.max(0,c-a)/span; (isUp?up:dn)[i]+=v*part } }
+  const tot=new Float64Array(N); let poc=0, sum=0; for(let i=0;i<N;i++){ tot[i]=up[i]+dn[i]; sum+=tot[i]; if(tot[i]>tot[poc]) poc=i }
+  let a=poc,b=poc,acc=tot[poc]; const target=sum*0.70;
+  while(acc<target&&(a>0||b<N-1)){ const lo2=a>0?tot[a-1]:-1, hi2=b<N-1?tot[b+1]:-1; if(hi2>=lo2){b++;acc+=tot[b]} else {a--;acc+=tot[a]} }
+  return {hi,lo,step,up,dn,tot,poc,vaL:a,vaH:b,max:tot[poc]||1};
+}
+function drawVP(ctx,t1,t2,x,w,col,o={}){
+  const B=barsBetween(t1,t2); if(!B.length) return null; const N=Math.max(6,Math.min(200,(SX.frvpRows||24)));
+  const V=vpCalc(B,N), yHi=Y(V.hi), yLo=Y(V.lo), top=Math.min(yHi,yLo), bot=Math.max(yHi,yLo);
+  const yVA1=Y(V.lo+(V.vaH+1)*V.step), yVA0=Y(V.lo+V.vaL*V.step);
+  ctx.save(); ctx.setLineDash([]);
+  if(o.box){ // achtergrond: grijs buiten value area, blauw binnen value area
+    ctx.fillStyle='rgba(120,123,134,0.13)'; ctx.fillRect(x,top,w,bot-top);
+    ctx.fillStyle='rgba(41,98,255,0.16)'; ctx.fillRect(x,Math.min(yVA1,yVA0),w,Math.abs(yVA0-yVA1)); }
+  const bw=w*0.3;
+  for(let i=0;i<N;i++){ if(!V.tot[i]) continue; const y1=Y(V.lo+(i+1)*V.step), y2=Y(V.lo+i*V.step), yy=Math.min(y1,y2), hh=Math.max(1,Math.abs(y2-y1)-(Math.abs(y2-y1)>3?1:0));
+    const inVA=i>=V.vaL&&i<=V.vaH, lu=V.up[i]/V.max*bw, ld=V.dn[i]/V.max*bw;
+    ctx.fillStyle=inVA?'rgba(41,98,255,0.72)':'rgba(41,98,255,0.32)'; ctx.fillRect(x,yy,lu,hh);
+    ctx.fillStyle=inVA?'rgba(233,30,99,0.68)':'rgba(233,30,99,0.30)'; ctx.fillRect(x+lu,yy,ld,hh); }
+  const py=Y(V.lo+(V.poc+0.5)*V.step); ctx.strokeStyle='#F23645'; ctx.lineWidth=1.5; line(ctx,{x,y:py},{x:x+w,y:py});
+  if(o.sel){ ctx.strokeStyle='rgba(41,98,255,0.55)'; ctx.lineWidth=1; ctx.setLineDash([4,3]); ctx.strokeRect(x+.5,top+.5,w-1,bot-top-1) }
+  ctx.restore();
+  return {x1:x,x2:x+w,y1:top,y2:bot};
 }
 function drawBarsPattern(ctx,d,P){
   // kopieert de candles tussen punt 1 en 2 en toont ze als patroon rechts van punt 2
@@ -3414,6 +3476,7 @@ function hitTest(x,y){
     else if(ty==='crossline') hit=Math.abs(y-P[0].y)<tol||Math.abs(x-P[0].x)<tol;
     else if(ty==='ray') hit=segDist(p,P[0],extendPt(P[0],P[1]))<tol;
     else if(ty==='ext') hit=segDist(p,extendPt(P[1],P[0]),extendPt(P[0],P[1]))<tol;
+    else if((ty==='frvp'||ty==='avp')&&d._vpbox){ const b=d._vpbox; hit=x>=b.x1-tol&&x<=b.x2+tol&&y>=b.y1-tol&&y<=b.y2+tol }
     else if(['rect','prange','drange','dprange','fib','gannbox','gannsqf','gannsq','ellipse','frvp','barspat','fibtime'].includes(ty)&&P.length>1){ const x1=Math.min(P[0].x,P[1].x)-tol,x2=Math.max(P[0].x,P[1].x)+tol,y1=Math.min(P[0].y,P[1].y)-tol,y2=Math.max(P[0].y,P[1].y)+tol; hit=x>=x1&&x<=x2&&y>=y1&&y<=y2 }
     else if(ty==='long'||ty==='short'){ const hs2=handlesOf(d); const x1=hs2[0].x,x2=hs2[3].x,ys=[hs2[0].y,hs2[1].y,hs2[2].y]; hit=x>=x1&&x<=x2&&y>=Math.min(...ys)&&y<=Math.max(...ys) }
     else if(ty==='circle'||ty==='fibcirc'){ const R=Math.hypot(P[1].x-P[0].x,P[1].y-P[0].y); hit=Math.hypot(x-P[0].x,y-P[0].y)<=R+tol }
@@ -3465,7 +3528,8 @@ function startCreate(k,pt,x,y){
   d.pts.push({...pt}); SX.creating={d,idx:1,need:n,down:{x,y}};
 }
 function onDown(e){
-  if(!SX||e.button>0) return; if(e.target.closest&&e.target.closest('.olab,.dtb,.dtedit,.sxlegend')) return; const {x,y}=relXY(e); if(!inPane(x,y)) return;
+  if(!SX||e.button>0) return; if(e.target.closest&&(e.target.closest('.olab,.dtb,.dtedit,.sxlegend,.favbar,.sxmenu,.cpop')||!e.target.closest('#sxChart,#sxDraw'))) return; const {x,y}=relXY(e); if(!inPane(x,y)) return;
+  if(!SX.drag&&SX._hsOff){ SX._hsOff=false; SX.chart.applyOptions({handleScroll:true,handleScale:true}) }
   const tool=SX.tool||'cross', g=TOOLS[tool]?TOOLS[tool].g:'cursor';
   const block=()=>{e.preventDefault();e.stopPropagation()};
   if(tool==='zoom'){ block(); SX.zoomFrom=x; return }
@@ -3477,7 +3541,7 @@ function onDown(e){
   const h=hitTest(x,y);
   if(tool==='eraser'){ if(h){ block(); snap(); const L=drawings(); L.splice(L.indexOf(h.d),1); SX.sel=null; saveDrawLater() } return }
   if(h){ block(); const wasSel0=SX.sel===h.d.id; SX.sel=h.d.id; if(h.d.locked||SX.lockAll){renderPanelIfTree();return}
-    const wasSel=wasSel0; snap(); SX.drag={d:h.d,h:h.h,sx:x,sy:y,orig:JSON.parse(JSON.stringify(h.d)),moved:false,wasSel}; SX.chart.applyOptions({handleScroll:false,handleScale:false}); stopPlay(); renderPanelIfTree(); return }
+    const wasSel=wasSel0; snap(); SX.drag={d:h.d,h:h.h,sx:x,sy:y,orig:JSON.parse(JSON.stringify(h.d)),moved:false,wasSel}; SX._hsOff=true; SX.chart.applyOptions({handleScroll:false,handleScale:false}); stopPlay(); renderPanelIfTree(); return }
   if(SX.sel){SX.sel=null;renderPanelIfTree()}
 }
 function renderPanelIfTree(){ if(SX.panel==='tree') renderPanel() }
@@ -3514,10 +3578,10 @@ function onUp(e){
     if(c.free){ finishCreate(); return }
     if(c.down&&c.idx===1&&c.need===2){ const {x,y}=relXY(e); if(Math.hypot(x-c.down.x,y-c.down.y)>8){ const pt=(e.shiftKey&&constrainPt(c.d.type,c.d.pts[0],x,y))||toPt(x,y,true); if(pt) c.d.pts[1]=pt; c.idx=2; finishCreate() } }
     return }
-  if(SX.drag){ const g=SX.drag; SX.drag=null; SX.chart.applyOptions({handleScroll:true,handleScale:true}); if(!g.moved){SX.hist.pop(); if(g.wasSel&&canInline(g.d)&&!g.d.locked) inlineEdit(g.d)} else saveDrawLater() }
+  if(SX.drag){ const g=SX.drag; SX.drag=null; SX._hsOff=false; SX.chart.applyOptions({handleScroll:true,handleScale:true}); if(!g.moved){SX.hist.pop(); if(g.wasSel&&canInline(g.d)&&!g.d.locked) inlineEdit(g.d)} else saveDrawLater() }
 }
 function onDbl(e){
-  if(!SX) return; if(SX.creating&&TOOLS[SX.creating.d.type].n===-1){ e.preventDefault(); e.stopPropagation(); const d=SX.creating.d; d.pts.pop(); if(d.pts.length>2&&d.type==='polyline'){} finishCreate(); return }
+  if(!SX) return; if(SX.creating&&TOOLS[SX.creating.d.type].n===-1){ e.preventDefault(); e.stopPropagation(); const d=SX.creating.d; d.pts.pop(); { const q=[]; d.pts.forEach(p=>{ const l=q[q.length-1]; if(!l||Math.hypot(X(p.t)-X(l.t),Y(p.p)-Y(l.p))>3) q.push(p) }); d.pts=q } if(d.pts.length<2){ drawings().splice(drawings().indexOf(d),1); SX.creating=null; drawOverlay(); return } finishCreate(); return }
   const {x,y}=relXY(e); const h=hitTest(x,y); if(h){ e.preventDefault(); e.stopPropagation(); SX.sel=h.d.id; if(TEXTTYPES.includes(h.d.type)&&h.d.type!=='table') inlineEdit(h.d); else drawSettings(h.d) }
 }
 
@@ -3633,6 +3697,10 @@ function bindDrawing(){
   wrap.addEventListener('contextmenu',onCtxMenu,true);
   window.addEventListener('pointermove',onMove);
   window.addEventListener('pointerup',onUp);
+  window.addEventListener('pointercancel',onUp);
+  window.addEventListener('blur',()=>{ if(SX&&SX.drag){ onUp({clientX:0,clientY:0}) } });
+  wrap.addEventListener('wheel',priceWheel,{capture:true,passive:false});
+  wrap.addEventListener('dblclick',priceDbl,true);
   buildToolbar();
 }
 function treeHtml(){
@@ -4442,7 +4510,6 @@ function drawItemText(ctx,d,P,W,H){
     let a=P[0],b=P[1]; if(b.x<a.x){const t0=a;a=b;b=t0} const ang=Math.atan2(b.y-a.y,b.x-a.x), f=al==='left'?0:al==='right'?1:0.5; put(a.x+(b.x-a.x)*f,a.y+(b.y-a.y)*f,ang,A) }
   else { const xs=P.map(p=>p.x), ys=P.map(p=>p.y), x1=Math.min(...xs), x2=Math.max(...xs), y1=Math.min(...ys), y2=Math.max(...ys);
     let x=al==='left'?x1+6:al==='right'?x2-6:(x1+x2)/2, yy=va==='top'?y1+6:va==='bottom'?y2-6-n*lh:(y1+y2)/2-n*lh/2+2; if(d.type==='circle'){x=P[0].x;yy=P[0].y-n*lh/2+2}
-    if(ph){ const w=ctx.measureText('Add text').width; ctx.save(); ctx.strokeStyle=col; ctx.lineWidth=1; ctx.setLineDash([3,3]); ctx.strokeRect(x-w/2-8,yy-5,w+16,lh+6); ctx.restore() }
     ctx.textBaseline='top'; ctx.textAlign=A; lines.forEach((l,i)=>ctx.fillText(l,x,yy+i*lh)) }
   ctx.restore();
 }
@@ -4710,7 +4777,8 @@ function chartTplMenu(anchor){
   const p=profile(), u=p.chartTpls||[];
   const m=popMenu(anchor,`<button data-v="__save">${ic('copy',15)} Save chart template as…</button><div class="msep"></div>`+TEMPLATES.map(x=>`<button data-v="${x.id}" class="${SX.tplId===x.id?'on':''}">${x.nameEn||x.name}</button>`).join('')+(p.chartCustom?`<button data-v="custom" class="${SX.tplId==='custom'?'on':''}">My template</button>`:'')+(u.length?'<div class="msep"></div>'+u.map((x,i)=>`<button data-v="u:${esc(x.name)}" class="${SX.tplId==='u:'+x.name?'on':''}"><span style="flex:1">${esc(x.name)}</span><span class="tplx" data-ux="${i}">✕</span></button>`).join(''):''),
     v=>{ if(v==='__save') return saveChartTpl(); SX.tplId=v; applyChartLook(); saveSession() },'small side');
-  m.querySelectorAll('[data-ux]').forEach(x=>x.onclick=async ev=>{ ev.stopPropagation(); const p=profile(); await DB.put('profile',{...p,id:'me',chartTpls:(p.chartTpls||[]).filter((_,i)=>i!==+x.dataset.ux)}); m.remove() });
+  m.querySelectorAll('[data-ux]').forEach(x=>{ x.innerHTML=ic('trash',14); x.title='Delete'; x.closest('button').classList.add('tplrow'); x.onpointerdown=ev=>ev.stopPropagation(); x.onmousedown=ev=>ev.stopPropagation();
+    x.onclick=async ev=>{ ev.stopPropagation(); const p=profile(), i=+x.dataset.ux, nm=(p.chartTpls||[])[i]?.name; await DB.put('profile',{...p,id:'me',chartTpls:(p.chartTpls||[]).filter((_,j)=>j!==i)}); if(SX.tplId==='u:'+nm){SX.tplId='tv-dark'; applyChartLook(); saveSession()} chartTplMenu(anchor) } });
 }
 /* ----- v7.3: instellingenvenster zoals TradingView ----- */
 const TZS=[['UTC','UTC'],['Europe/Amsterdam','(UTC+1) Amsterdam'],['Europe/London','(UTC) London'],['America/New_York','(UTC-5) New York'],['America/Chicago','(UTC-6) Chicago'],['Asia/Tokyo','(UTC+9) Tokyo'],['Australia/Sydney','(UTC+10) Sydney']];
@@ -4751,19 +4819,26 @@ function chartSettings(startTab){
     const vl=body.querySelector('[data-vol]'); if(vl) vl.onchange=()=>{ ts.volume=+vl.value; playSound(ts.soundType||'chime',ts.volume) };
   };
   ov.querySelectorAll('[data-ct]').forEach(b=>b.onclick=()=>{tab=b.dataset.ct;draw()});
-  const esc=e=>{ if(e.key==='Escape'&&document.body.contains(ov)&&!document.querySelector('.cpop')){ e.stopImmediatePropagation(); cancel() } }; window.addEventListener('keydown',esc,true);
-  const cancel=()=>{ window.removeEventListener('keydown',esc,true); SX.ccLive=null; SX.tzLive=null; SX.tplId=orig.tplId; SX.vol=orig.vol; applyChartLook(); legend(); hud(); ov.remove() };
+  const escK=e=>{ if(e.key==='Escape'&&document.body.contains(ov)&&!document.querySelector('.cpop,.sxmenu')&&document.querySelectorAll('.ov').length<2){ e.stopImmediatePropagation(); cancel() } }; window.addEventListener('keydown',escK,true);
+  const cancel=()=>{ window.removeEventListener('keydown',escK,true); SX.ccLive=null; SX.tzLive=null; SX.tplId=orig.tplId; SX.vol=orig.vol; applyChartLook(); legend(); hud(); ov.remove() };
   ov.querySelectorAll('[data-cx]').forEach(b=>b.onclick=cancel);
   ov.addEventListener('mousedown',e=>{ if(e.target===ov){ e.stopImmediatePropagation(); cancel() } },true);
-  ov.querySelector('#csTplB').onclick=e=>{ const p=profile(), u=p.chartTpls||[];
-    const m=popMenu(e.currentTarget,`<button data-v="__save">Save as…</button><button data-v="__def">Apply defaults</button><div class="msep"></div>`+TEMPLATES.map(x=>`<button data-v="b:${x.id}">${x.nameEn||x.name}</button>`).join('')+(u.length?'<div class="msep"></div>'+u.map((x,i)=>`<button data-v="u:${i}"><span style="flex:1">${esc(x.name)}</span><span class="tplx" data-ux="${i}">✕</span></button>`).join(''):''),
-      async v=>{ if(v==='__save'){ const nm=await askText('Save chart template','Name','My template'); if(!nm) return; const p=profile(); const list=[...(p.chartTpls||[]).filter(x=>x.name!==nm),{name:nm,cfg:{...C}}]; await DB.put('profile',{...p,id:'me',chartTpls:list}); toast('Saved',nm,'ok') }
-        else if(v==='__def'){ C=CC_DEF(CHART_TPL['tv-dark']); live(); draw() }
-        else if(v.startsWith('b:')){ C=CC_DEF(CHART_TPL[v.slice(2)]); live(); draw() }
-        else if(v.startsWith('u:')){ const x=u[+v.slice(2)]; C={...CC_DEF({...CHART_TPL['tv-dark'],...x.cfg}),...x.cfg}; live(); draw() } },'small');
-    m.querySelectorAll('[data-ux]').forEach(x=>x.onclick=async ev=>{ ev.stopPropagation(); const p=profile(); await DB.put('profile',{...p,id:'me',chartTpls:(p.chartTpls||[]).filter((_,i)=>i!==+x.dataset.ux)}); m.remove() }) };
-  ov.querySelector('#csOk').onclick=async()=>{ const p=profile(); SX.ccLive=null; SX.tzLive=null; SX.tplId='custom'; SX.s.grid=true;
-    await DB.put('profile',{...p,id:'me',chartCustom:{...C},chartTz:tz,trading:ts}); syncQty(ts.qty); applyChartLook(); legend(); hud(); saveSession(); window.removeEventListener('keydown',esc,true); ov.remove() };
+  let pickedTpl=null, pickedCfg=null;
+  const tplMenu=anchor=>{ const u=profile().chartTpls||[];
+    const m=popMenu(anchor,`<button data-v="__save">${ic('copy',15)} Save as…</button><button data-v="__def">Apply defaults</button><div class="msep"></div>`+TEMPLATES.map(x=>`<button data-v="b:${x.id}" class="tplrow"><span class="tplck">${pickedTpl===x.id?'✓':''}</span><span style="flex:1">${esc(x.nameEn||x.name)}</span></button>`).join('')
+      +(u.length?'<div class="msep"></div><div class="mh2">My templates</div>'+u.map((x,i)=>`<button data-v="u:${i}" class="tplrow"><span class="tplck">${pickedTpl==='u:'+x.name?'✓':''}</span><span style="flex:1">${esc(x.name)}</span><span class="tplx" data-ux="${i}" title="Delete">${ic('trash',14)}</span></button>`).join(''):''),
+      async v=>{
+        if(v==='__save'){ const nm=((await askText('Save chart template','Template name','My template'))||'').trim(); if(!nm) return; const p=profile(); const list=[...(p.chartTpls||[]).filter(x=>x.name!==nm),{name:nm,cfg:{...C}}];
+          await DB.put('profile',{...p,id:'me',chartTpls:list}); pickedTpl='u:'+nm; pickedCfg=JSON.stringify(C); toast('Template saved',nm,'ok') }
+        else if(v==='__def'){ C=CC_DEF(CHART_TPL['tv-dark']); pickedTpl='tv-dark'; pickedCfg=JSON.stringify(C); live(); draw() }
+        else if(v.startsWith('b:')){ const id=v.slice(2); C=CC_DEF(CHART_TPL[id]); pickedTpl=id; pickedCfg=JSON.stringify(C); live(); draw() }
+        else if(v.startsWith('u:')){ const x=(profile().chartTpls||[])[+v.slice(2)]; if(!x) return; C={...CC_DEF({...CHART_TPL['tv-dark'],...x.cfg}),...x.cfg}; pickedTpl='u:'+x.name; pickedCfg=JSON.stringify(C); live(); draw() } },'small');
+    m.querySelectorAll('[data-ux]').forEach(x=>{ const del=async ev=>{ ev.stopPropagation(); ev.preventDefault(); const p=profile(), i=+x.dataset.ux, nm=(p.chartTpls||[])[i]?.name;
+        await DB.put('profile',{...p,id:'me',chartTpls:(p.chartTpls||[]).filter((_,j)=>j!==i)}); if(pickedTpl==='u:'+nm){pickedTpl=null} if(SX.tplId==='u:'+nm){SX.tplId='custom'; saveSession()} toast('Template deleted',nm||'','ok'); tplMenu(anchor) };
+      x.onclick=del; x.onpointerdown=ev=>ev.stopPropagation(); x.onmousedown=ev=>ev.stopPropagation() }) };
+  ov.querySelector('#csTplB').onclick=e=>tplMenu(e.currentTarget);
+  ov.querySelector('#csOk').onclick=async()=>{ const p=profile(); SX.ccLive=null; SX.tzLive=null; SX.tplId=(pickedTpl&&JSON.stringify(C)===pickedCfg)?pickedTpl:'custom'; SX.s.grid=true;
+    await DB.put('profile',{...p,id:'me',...(SX.tplId==='custom'?{chartCustom:{...C}}:{}),chartTz:tz,trading:ts}); syncQty(ts.qty); applyChartLook(); legend(); hud(); saveSession(); window.removeEventListener('keydown',escK,true); ov.remove() };
   draw();
 }
 /* ----- v7.3: uitvoeringsgeluid ----- */
@@ -4782,7 +4857,7 @@ function execSound(){ const s=trSet(); if(s.sound===false) return; playSound(s.s
 
 /* ----- rechtsklikmenu, kopiëren/plakken, chart resetten ----- */
 function ctxAt(x,y){ const a=document.createElement('div'); a.style.cssText=`position:fixed;left:${x}px;top:${y}px;width:1px;height:1px`; document.body.appendChild(a); setTimeout(()=>a.remove(),50); return a }
-function resetChartView(){ const n=bl().length; SX.chart.timeScale().setVisibleLogicalRange({from:Math.max(0,n-140),to:n+12}); SX.auto=true; SX.chart.priceScale('right').applyOptions({autoScale:true}); document.querySelectorAll('[data-scale="auto"]').forEach(b=>b.classList.add('on')) }
+function resetChartView(){ const n=bl().length; SX.chart.timeScale().setVisibleLogicalRange({from:Math.max(0,n-140),to:n+12}); SX.auto=true; SX.pr=null; SX.prV=null; SX.chart.priceScale('right').applyOptions({autoScale:true}); document.querySelectorAll('[data-scale="auto"]').forEach(b=>b.classList.add('on')) }
 function copySel(){ const d=drawings().find(x=>x.id===SX.sel); if(!d) return; SX.clip=JSON.stringify(d); toast(t('dr.copied'),toolName(d.type),'ok',1800) }
 function pasteClip(){ if(!SX.clip) return; snap(); const c=JSON.parse(SX.clip); c.id=uid(); c.pts=c.pts.map(q=>({t:logicalToTime(timeToLogical(q.t)+5),p:q.p})); drawings().push(c); SX.sel=c.id; SX.clip=JSON.stringify(c); saveDrawLater() }
 function onCtxMenu(e){
