@@ -839,6 +839,23 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplx{opacity:.5;width:22px;height:22px;display:grid;place-items:center;border-radius:4px;margin-right:-4px;flex:none}
 .sxmenu .tplrow .tplx:hover{opacity:1;background:rgba(229,83,75,.18);color:#e5534b}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
+
+/* v8.0: update, passkey, rekeningen */
+.pkbtn{display:flex!important;align-items:center;justify-content:center;gap:9px;margin-top:10px}
+.pkbtn small{color:var(--ink3);font-weight:500}
+.pkor{display:flex;align-items:center;gap:10px;color:var(--ink3);font-size:12px;margin:14px 0 0}.pkor::before,.pkor::after{content:'';flex:1;height:1px;background:var(--line)}
+[data-go="settings"].upd{position:relative}
+[data-go="settings"].upd::after{content:'';position:absolute;top:9px;left:28px;width:8px;height:8px;border-radius:50%;background:#e0a33a;box-shadow:0 0 0 2px var(--bg2)}
+.updbox{display:flex;align-items:center;gap:14px;border:1px solid rgba(224,163,58,.45)!important;background:rgba(224,163,58,.08)!important}
+.updbox .ui{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(224,163,58,.18);color:#e0a33a;flex:none}
+.updbox .ui svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+.updbox div.tx{flex:1}.updbox small{display:block;color:var(--ink3);margin-top:2px}
+.updbox.ok{border-color:var(--line)!important;background:none!important}.updbox.ok .ui{background:rgba(47,191,113,.15);color:#2fbf71}
+.ccard .bal{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.ccard .bals{color:var(--ink3);font-size:13px;margin-top:4px}
+.ccard .meta{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.ccard .meta b.pos{color:#2fbf71}.ccard .meta b.neg{color:#e5534b}
+@media(max-width:600px){.ccard .meta{grid-template-columns:1fr 1fr!important}}
 </style>
 </head>
 <body class="">
@@ -863,6 +880,8 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
         <div class="field"><label data-t="f.password">Wachtwoord</label><input class="inp" id="lgPass" type="password" autocomplete="current-password"></div>
         <div class="err" id="lgErr"></div>
         <button class="btn btn-p btn-block" id="lgBtn" data-t="login.btn">Inloggen</button>
+        <div class="pkor hide" id="lgPkOr"><span>of</span></div>
+        <button class="btn btn-g btn-block pkbtn hide" id="lgPk"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M16 7l3 3M14 9l2 2"/></svg><span id="lgPkT">Inloggen met passkey</span></button>
         <div class="switch-line"><span data-t="login.noacc">Nog geen account?</span> <button id="toReg" data-t="login.make">Account maken</button></div>
       </div>
       <div id="lgReg" class="hide">
@@ -929,7 +948,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v7.9', BUILD:'2026-11-10a'
+  VERSION: 'v8.0', BUILD: '2026-11-10b'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1310,6 +1329,8 @@ const LocalBackend={
     this.uid=rec.id; await this.load(); return {id:rec.id};
   },
   async signOut(){this.uid=null;this.cache=null},
+  async secret(){ return this.uid },
+  async resume(id){ if(!id) throw new Error('expired'); this.uid=id; await this.load(); return {id} },
   async load(){try{this.cache=JSON.parse(lsGet('twfbt_data_'+this.uid)||'{}')}catch(e){this.cache={}}},
   persist(){lsSet('twfbt_data_'+this.uid,JSON.stringify(this.cache))},
   list(kind){return Object.values(this.cache[kind]||{})},
@@ -1324,7 +1345,10 @@ const SupaBackend={
     if(this.sb) return;
     await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';s.onload=res;s.onerror=()=>rej(new Error('Supabase kon niet laden'));document.head.appendChild(s)});
     this.sb=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY,{auth:{persistSession:false}});
+    try{ this.sb.auth.onAuthStateChange((ev,sess)=>{ if(sess&&sess.refresh_token&&sess.user) PK.update(sess.user.id,sess.refresh_token) }) }catch(e){}
   },
+  async secret(){ try{ const {data}=await this.sb.auth.getSession(); return data&&data.session?data.session.refresh_token:null }catch(e){ return null } },
+  async resume(rt){ await this.init(); const {data,error}=await this.sb.auth.refreshSession({refresh_token:rt}); if(error||!data||!data.session) throw new Error('expired'); this.uid=data.session.user.id; await this.load(); return {id:this.uid} },
   async signUp(login,pass){await this.init();const {data,error}=await this.sb.auth.signUp({email:loginNameToEmail(login),password:pass});if(error) throw new Error(/registered/i.test(error.message)?t('err.exists'):error.message);if(!data.session){const r=await this.sb.auth.signInWithPassword({email:loginNameToEmail(login),password:pass});if(r.error) throw r.error;} this.uid=(await this.sb.auth.getUser()).data.user.id;await this.load();return {id:this.uid}},
   async signIn(login,pass){await this.init();const {data,error}=await this.sb.auth.signInWithPassword({email:loginNameToEmail(login),password:pass});if(error) throw new Error(t('err.login'));this.uid=data.user.id;await this.load();return {id:this.uid}},
   async journalName(){ try{ const {data}=await this.sb.from('settings').select('name').eq('user_id',this.uid).maybeSingle(); return data&&data.name||null }catch(e){ return null } },
@@ -1337,6 +1361,88 @@ const SupaBackend={
   async wipe(){await this.sb.from('bt_items').delete().eq('user_id',this.uid).neq('kind','profile');const p=this.cache.profile;this.cache={profile:p}}
 };
 const DB = CFG.SUPABASE_ANON_KEY ? SupaBackend : LocalBackend;
+
+
+/* =========================================================
+   v8.0: UPDATES
+   ========================================================= */
+const UPD={latest:null,toasted:false,timer:null};
+const verNum=v=>String(v||'').replace(/^v/i,'').split('.').map(x=>parseInt(x,10)||0);
+function verCmp(a,b){ const A=verNum(a),B=verNum(b); for(let i=0;i<Math.max(A.length,B.length);i++){ const d=(A[i]||0)-(B[i]||0); if(d) return d } return 0 }
+async function fetchServerVersion(){ try{ const r=await fetch(location.pathname+'?nocache='+Date.now(),{cache:'no-store'}); if(!r.ok) return null; const tx=await r.text(); return (tx.match(/VERSION:\s*'([^']+)'/)||[])[1]||null }catch(e){ return null } }
+function updAvailable(){ return !!(UPD.latest&&verCmp(UPD.latest,CFG.VERSION)>0) }
+function markUpdate(){ document.querySelectorAll('#app [data-go="settings"]').forEach(b=>b.classList.toggle('upd',updAvailable())) }
+async function checkUpdate(silent){
+  if(location.protocol==='file:') return; const v=await fetchServerVersion(); if(!v) return; UPD.latest=v; markUpdate();
+  if(S.page==='settings'&&S.setTab==='about'&&!SX) { const el=document.querySelector('#updBox'); if(el) el.outerHTML=updBoxHtml() , bindUpdBox() }
+  if(updAvailable()&&!UPD.toasted&&!silent){ UPD.toasted=true; const L=(nl,en)=>LANG==='en'?en:nl;
+    toast(L('Update beschikbaar','Update available'),L(`Versie ${v} staat klaar. Herlaad hem via Instellingen.`,`Version ${v} is ready. Reload it in Settings.`),'info',20000,{label:L('Naar instellingen','Open settings'),fn:openUpdate}) }
+}
+function openUpdate(){ if(SX){ try{saveSession()}catch(e){} try{closeSession()}catch(e){} } S.setTab='about'; go('settings') }
+function updBoxHtml(){ const L=(nl,en)=>LANG==='en'?en:nl, up=updAvailable();
+  return `<div class="box updbox ${up?'':'ok'}" id="updBox"><div class="ui"><svg viewBox="0 0 24 24">${up?'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>':'<path d="M5 12.5l4.5 4.5L19 7.5"/>'}</svg></div>
+    <div class="tx"><b>${up?L(`Update beschikbaar: ${esc(UPD.latest)}`,`Update available: ${esc(UPD.latest)}`):L('Je hebt de nieuwste versie','You are on the latest version')}</b><small>${up?L(`Je gebruikt nu ${CFG.VERSION}. Herladen duurt een paar seconden, je blijft ingelogd.`,`You are on ${CFG.VERSION}. Reloading takes a few seconds, you stay signed in.`):L(`Versie ${CFG.VERSION} · build ${CFG.BUILD}`,`Version ${CFG.VERSION} · build ${CFG.BUILD}`)}</small></div>
+    ${up?`<button class="btn btn-p" id="updGo">${L('Nu updaten','Update now')}</button>`:`<button class="btn btn-g" id="updChk">${L('Controleren','Check')}</button>`}</div>` }
+function bindUpdBox(){ const g=document.querySelector('#updGo'); if(g) g.onclick=reloadForUpdate; const c=document.querySelector('#updChk'); if(c) c.onclick=async()=>{ c.disabled=true; await checkUpdate(true); const L=(nl,en)=>LANG==='en'?en:nl; if(!updAvailable()) toast(L('Je hebt de nieuwste versie','You are up to date'),CFG.VERSION,'ok',2000); const el=document.querySelector('#updBox'); if(el){ el.outerHTML=updBoxHtml(); bindUpdBox() } } }
+async function reloadForUpdate(){
+  const g=document.querySelector('#updGo'); if(g){ g.disabled=true; g.textContent=LANG==='en'?'Updating…':'Updaten…' }
+  try{ if(SX) saveSession() }catch(e){}
+  try{ const sec=DB.secret?await DB.secret():null; if(sec) sessionStorage.setItem('twfbt_resume',JSON.stringify({sec,page:S.page,tab:S.setTab||'about',at:Date.now()})) }catch(e){}
+  location.replace(location.pathname+'?v='+Date.now());
+}
+function updatedToast(){ const last=lsGet('twfbt_lastver'); if(last&&verCmp(CFG.VERSION,last)>0){ const L=(nl,en)=>LANG==='en'?en:nl; setTimeout(()=>toast(L(`Geüpdatet naar ${CFG.VERSION}`,`Updated to ${CFG.VERSION}`),L(`Van ${last} naar ${CFG.VERSION}.`,`From ${last} to ${CFG.VERSION}.`),'ok',6000),400) } lsSet('twfbt_lastver',CFG.VERSION) }
+function startUpdateWatch(){ if(UPD.timer) return; setTimeout(()=>checkUpdate(),2500); UPD.timer=setInterval(()=>checkUpdate(),5*60*1000);
+  document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') checkUpdate() }) }
+async function tryResume(){
+  let r=null; try{ r=JSON.parse(sessionStorage.getItem('twfbt_resume')||'null') }catch(e){} sessionStorage.removeItem('twfbt_resume');
+  if(location.search.includes('v=')) try{ history.replaceState(null,'',location.pathname) }catch(e){}
+  if(!r||!r.sec||Date.now()-r.at>5*60*1000) return false;
+  try{ await DB.resume(r.sec); enterApp(true); if(r.page==='settings'){ S.setTab=r.tab||'about'; go('settings') } return true }catch(e){ return false }
+}
+
+/* =========================================================
+   v8.0: PASSKEYS (Face ID / Touch ID / Windows Hello)
+   Werkt per apparaat: de passkey ontgrendelt je opgeslagen, versleutelde
+   sessie op dit apparaat. Uitloggen laat de passkey staan.
+   ========================================================= */
+const b64u={ enc:b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''),
+  dec:s=>{ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; return Uint8Array.from(atob(s),c=>c.charCodeAt(0)) } };
+const PK={
+  supported(){ return !!(window.PublicKeyCredential&&navigator.credentials&&window.isSecureContext&&window.crypto&&crypto.subtle&&window.indexedDB) },
+  rec(){ try{ return JSON.parse(lsGet('twfbt_pk')||'null') }catch(e){ return null } },
+  save(r){ lsSet('twfbt_pk',JSON.stringify(r)) },
+  idb(){ return new Promise((res,rej)=>{ const q=indexedDB.open('twfbt_sec',1); q.onupgradeneeded=()=>q.result.createObjectStore('k'); q.onsuccess=()=>res(q.result); q.onerror=()=>rej(q.error) }) },
+  async key(create){ const db=await this.idb(); const get=()=>new Promise((res,rej)=>{ const r=db.transaction('k').objectStore('k').get('pk'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error) });
+    let k=await get(); if(!k&&create){ k=await crypto.subtle.generateKey({name:'AES-GCM',length:256},false,['encrypt','decrypt']); await new Promise((res,rej)=>{ const tx=db.transaction('k','readwrite'); tx.objectStore('k').put(k,'pk'); tx.oncomplete=res; tx.onerror=()=>rej(tx.error) }) } return k },
+  async seal(secret){ const k=await this.key(true), iv=crypto.getRandomValues(new Uint8Array(12)); const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,new TextEncoder().encode(secret)); return {iv:b64u.enc(iv),ct:b64u.enc(ct)} },
+  async open(r){ const k=await this.key(false); if(!k) throw new Error('nokey'); const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64u.dec(r.iv)},k,b64u.dec(r.ct)); return new TextDecoder().decode(pt) },
+  async update(uidv,secret){ const r=this.rec(); if(!r||r.uid!==uidv||!secret) return; try{ const sl=await this.seal(secret); this.save({...r,...sl,upd:Date.now()}) }catch(e){} },
+  async enroll(){ const L=(nl,en)=>LANG==='en'?en:nl;
+    if(!this.supported()) throw new Error(L('Deze browser ondersteunt geen passkeys.','This browser does not support passkeys.'));
+    const p=profile(), login=(lsGet('twfbt_lastlogin')||p.name||'TWF').slice(0,60);
+    const cred=await navigator.credentials.create({publicKey:{ challenge:crypto.getRandomValues(new Uint8Array(32)), rp:{name:'TWF Backtest',id:location.hostname},
+      user:{id:new TextEncoder().encode(String(DB.uid||'local')).slice(0,64),name:login,displayName:p.name||login},
+      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}], authenticatorSelection:{residentKey:'preferred',userVerification:'required'}, timeout:60000, attestation:'none' }});
+    if(!cred) throw new Error('cancel');
+    const sec=await DB.secret(); if(!sec) throw new Error(L('Geen actieve sessie, log opnieuw in.','No active session, sign in again.'));
+    const sl=await this.seal(sec); this.save({id:b64u.enc(cred.rawId),uid:DB.uid,name:p.name||login,login,be:DB.name,created:Date.now(),...sl}); return true },
+  async login(){ const r=this.rec(); if(!r) throw new Error('none');
+    const as=await navigator.credentials.get({publicKey:{ challenge:crypto.getRandomValues(new Uint8Array(32)), rpId:location.hostname, allowCredentials:[{type:'public-key',id:b64u.dec(r.id)}], userVerification:'required', timeout:60000 }});
+    if(!as) throw new Error('cancel'); const sec=await this.open(r); await DB.resume(sec); return true },
+  remove(){ try{localStorage.removeItem('twfbt_pk')}catch(e){} }
+};
+function pkLoginUI(){ const b=$('#lgPk'), o=$('#lgPkOr'); if(!b) return; const on=PK.supported(); b.classList.toggle('hide',!on); o.classList.toggle('hide',!on);
+  const r=PK.rec(), L=(nl,en)=>LANG==='en'?en:nl; $('#lgPkT').innerHTML=r?`${L('Inloggen met passkey','Sign in with passkey')} <small>· ${esc(r.name||'')}</small>`:L('Inloggen met passkey','Sign in with passkey') }
+async function doPkLogin(){ const L=(nl,en)=>LANG==='en'?en:nl, er=$('#lgErr'); er.textContent='';
+  if(!PK.rec()){ er.textContent=L('Nog geen passkey op dit apparaat. Log één keer in met je wachtwoord en zet hem aan via Instellingen → Account.','No passkey on this device yet. Sign in once with your password and turn it on in Settings → Account.'); return }
+  const b=$('#lgPk'); b.disabled=true;
+  try{ await PK.login(); enterApp() }
+  catch(e){ if(e&&(e.name==='NotAllowedError'||e.message==='cancel')) er.textContent=L('Passkey geannuleerd.','Passkey cancelled.');
+    else if(e&&e.message==='expired'){ er.textContent=L('Je passkey-sessie is verlopen. Log één keer in met je wachtwoord; de passkey werkt daarna weer.','Your passkey session expired. Sign in once with your password; the passkey works again after that.'); PK.remove(); pkLoginUI() }
+    else er.textContent=(e&&e.message)||'Passkey error' }
+  finally{ b.disabled=false } }
+function pkOffer(){ if(!PK.supported()||PK.rec()||lsGet('twfbt_pkno')) return; const L=(nl,en)=>LANG==='en'?en:nl;
+  setTimeout(()=>toast(L('Sneller inloggen?','Sign in faster?'),L('Zet een passkey aan en log voortaan in met Touch ID of Face ID.','Turn on a passkey and sign in with Touch ID or Face ID.'),'info',12000,{label:L('Passkey instellen','Set up passkey'),fn:()=>{ lsSet('twfbt_pkno','1'); S.setTab='account'; go('settings') }}),1800) }
 
 /* ---------------- State ---------------- */
 const S={page:'testing',tab:'dash',slide:0,notifs:[],q:''};
@@ -1387,7 +1493,7 @@ async function doLogin(){
   const n=$('#lgName').value.trim(),p=$('#lgPass').value; $('#lgErr').textContent='';
   if(!n||!p){$('#lgErr').textContent=t('err.fill');return}
   $('#lgBtn').disabled=true;
-  try{await DB.signIn(n,p);
+  try{await DB.signIn(n,p); lsSet('twfbt_lastlogin',n);
     if(!profile().name){ const jn=DB.journalName?await DB.journalName():null; const nm=n.includes('@')?n.split('@')[0]:n; const disp=jn||nm.split(/[\s._-]+/).filter(Boolean).map(w=>w[0].toUpperCase()+w.slice(1)).join(' ');
       await DB.put('profile',{id:'me',name:disp,tier:'institute',created:new Date().toISOString()}); }
     if(!DB.list('accounts').length) await DB.put('accounts',{id:uid(),name:'Demo 100K',balance:100000,currency:'USD',leverage:100,mc:100,so:50,created:new Date().toISOString()});
@@ -1402,15 +1508,16 @@ async function doRegister(){
       await DB.put('accounts',{id:uid(),name:'Demo 100K',balance:100000,currency:'USD',leverage:100,mc:100,so:50,created:new Date().toISOString()});
       enterApp()}catch(e){$('#rgErr').textContent=e.message}finally{$('#rgBtn').disabled=false}
 }
-function enterApp(){
+function enterApp(resumed){
   { const p=profile(); if(!p.mig76&&p.drawStyles){ const ds={...p.drawStyles}; ['trend','ray','ext','info','angle','hline','hray','vline','crossline','arrow','path','polyline','rect','channel'].forEach(k=>{ if(ds[k]&&ds[k].width<2) ds[k]={...ds[k],width:2} }); DB.put('profile',{...p,id:'me',drawStyles:ds,mig76:1}) } }
   { const sv=$('#sideVer'); if(sv) sv.textContent=`${LANG==='en'?'Version':'Versie'}: ${CFG.VERSION} · TWF Backtest` }
   $('#login').classList.add('hide');$('#app').classList.remove('hide');$('#fab').classList.remove('hide');
   $('#lgPass').value='';$('#rgPass').value='';
   S.page='testing';S.tab='dash';render(); Promise.all([MD.loadManifest(),MK.load(),checkAdmin()]).then(()=>{ if(!SX) render() });
-  toast(t('toast.welcome')+', '+(profile().name||''),'', 'ok',2500);
+  if(!resumed) toast(t('toast.welcome')+', '+(profile().name||''),'', 'ok',2500);
+  updatedToast(); startUpdateWatch(); markUpdate(); if(!resumed) pkOffer();
 }
-async function logout(){await DB.signOut();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
+async function logout(){await DB.signOut(); pkLoginUI();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
 
 /* =========================================================
    RENDER
@@ -1534,13 +1641,15 @@ function pageStart(){
 }
 
 /* ----- Accounts ----- */
+function accRealized(id){ let r=0; DB.list('sessions').filter(s=>s.account===id).forEach(s=>(s.trades||[]).forEach(x=>{ const v=+x.pnl; if(isFinite(v)) r+=v })); return +r.toFixed(2) }
 function pageAccounts(){
   const ac=DB.list('accounts').sort((a,b)=>a.created.localeCompare(b.created)), ss=DB.list('sessions');
   return `<div class="phead"><h1>${t('acc.title')}</h1><div style="color:var(--ink2);margin:-12px 0 24px">${t('acc.sub')}</div></div>
   <div class="pbody"><div class="toolbar"><div style="flex:1"></div><button class="btn btn-p" data-act="newacc">${ic('plus',16)} ${t('acc.new')}</button></div>
   ${ac.length?`<div class="grid-cards">${ac.map(a=>`<div class="ccard"><div class="top"><div><div class="ttl">${esc(a.name)}</div><div style="color:var(--ink3);font-size:13px;margin-top:4px">${t('acc.used')} ${ss.filter(s=>s.account===a.id).length} ${t('acc.sessions')}</div></div><span class="pill acc">1:${a.leverage}</span></div>
-   <div style="font-size:30px;font-weight:800;letter-spacing:-.02em">${fmtMoney(a.balance,a.currency)}</div>
-   <div class="meta"><div><small>${t('acc.currency')}</small><b>${esc(a.currency)}</b></div><div><small>${t('acc.leverage')}</small><b>1:${a.leverage}</b></div><div><small>${t('acc.mc')}</small><b>${a.mc}%</b></div><div><small>${t('acc.so')}</small><b>${a.so}%</b></div></div>
+   ${(()=>{ const L=(nl,en)=>LANG==='en'?en:nl, r=accRealized(a.id), pc=a.balance?r/a.balance*100:0, cls=r>0?'pos':r<0?'neg':'', sg=r>0?'+':r<0?'−':'';
+     return `<div><div class="bal">${fmtMoney(a.balance+r,a.currency)}</div><div class="bals">${fmtMoney(a.balance,a.currency)} ${L('startkapitaal','starting capital')}</div></div>
+   <div class="meta"><div><small>${L('Gerealiseerd','Realized')}</small><b class="${cls}">${sg}${fmtMoney(Math.abs(r),a.currency)}</b></div><div><small>${L('Gerealiseerd %','Realized %')}</small><b class="${cls}">${sg}${Math.abs(pc).toFixed(2)}%</b></div><div><small>${t('acc.currency')}</small><b>${esc(a.currency)}</b></div><div><small>${t('acc.leverage')}</small><b>1:${a.leverage}</b></div><div><small>${t('acc.mc')}</small><b>${a.mc}%</b></div><div><small>${t('acc.so')}</small><b>${a.so}%</b></div></div>` })()}
    <div class="acts"><button class="btn btn-g" data-editacc="${a.id}">${ic('edit',14)} ${t('edit')}</button><button class="btn btn-g" data-delacc="${a.id}">${ic('trash',14)}</button></div></div>`).join('')}</div>`
    :`<div class="box empty"><div class="ei">${ic('wallet',24)}</div><h4>${t('acc.empty')}</h4><div>${t('acc.emptysub')}</div><button class="btn btn-p" data-act="newacc" style="margin-top:8px">${ic('plus',16)} ${t('acc.new')}</button></div>`}</div>`;
 }
@@ -1999,6 +2108,9 @@ function pageSettings(){
        ${ROW(L('Lid sinds','Member since'),'',`<span class="mut">${p.created?new Date(p.created).toLocaleDateString(locale(),{day:'numeric',month:'long',year:'numeric'}):'—'}</span>`)}
        ${ROW(L('Rol','Role'),L('Admins mogen marktdata uploaden.','Admins can upload market data.'),`<span class="pill" id="aRole">…</span>`)}
        ${ROW(L('Gebruikers-ID','User ID'),'',`<code class="mut" id="aUid">${esc((DB.uid||'local').slice(0,8))}…</code><button class="btn btn-g sm" id="aCopy">${ic('copy',14)}</button>`)}</div>
+     <div class="box"><h3>Passkey</h3>${(()=>{ const r=PK.rec(), mine=r&&r.uid===DB.uid;
+        return ROW(L('Inloggen met passkey','Sign in with passkey'),!PK.supported()?L('Deze browser ondersteunt geen passkeys.','This browser does not support passkeys.'):mine?L(`Aan op dit apparaat sinds ${new Date(r.created).toLocaleDateString(locale(),{day:'numeric',month:'long',year:'numeric'})}. Inloggen met Touch ID / Face ID.`,`On for this device since ${new Date(r.created).toLocaleDateString(locale(),{day:'numeric',month:'long',year:'numeric'})}. Sign in with Touch ID / Face ID.`):L('Log in met Touch ID, Face ID of Windows Hello in plaats van je wachtwoord. Werkt op dit apparaat.','Sign in with Touch ID, Face ID or Windows Hello instead of your password. Works on this device.'),
+          !PK.supported()?'':mine?`<span style="color:#2fbf71;font-weight:700;margin-right:10px;white-space:nowrap">✓ ${L('Aan','On')}</span><button class="btn btn-g" id="pkDel">${ic('trash',14)} ${L('Verwijderen','Remove')}</button>`:`<button class="btn btn-p" id="pkAdd"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M16 7l3 3M14 9l2 2"/></svg> ${L('Passkey instellen','Set up passkey')}</button>`) })()}</div>
      <div class="box"><h3>${L('Wachtwoord wijzigen','Change password')}</h3><div class="two"><div class="field"><label>${L('Nieuw wachtwoord','New password')}</label><input class="inp" type="password" id="aPw1" autocomplete="new-password"></div><div class="field"><label>${L('Herhaal','Repeat')}</label><input class="inp" type="password" id="aPw2" autocomplete="new-password"></div></div><button class="btn btn-p" id="aPwB">${L('Wachtwoord opslaan','Save password')}</button><div class="err" id="aPwE"></div></div>
      <div class="box"><h3>${L('Back-up','Backup')}</h3>
        ${ROW(L('Exporteer al je data','Export all your data'),L('Sessies, trades, rekeningen, strategieën en instellingen als JSON-bestand.','Sessions, trades, accounts, strategies and settings as a JSON file.'),`<button class="btn btn-g" id="aExp">${ic('download',15)} ${L('Exporteren','Export')}</button>`)}
@@ -2039,6 +2151,7 @@ function pageSettings(){
   else if(tab==='links') body=`<h2>${L('Koppelingen','Connections')}</h2><div class="box" id="lnk"><div class="mut">…</div></div>
      <div class="box"><h3>TWF Journal</h3>${ROW(L('Open TWF Journal','Open TWF Journal'),L('Zelfde account; je backtest-trades worden daar straks zichtbaar onder "Backtest".','Same account; your backtest trades will show up there under "Backtest".'),`<button class="btn btn-g" data-gs="journal">${ic('book',15)} TWF Journal ↗</button>`)}</div>`;
   else body=`<h2>${L('Over TWF Backtest','About TWF Backtest')}</h2>
+     ${updBoxHtml()}
      <div class="box sabout"><div class="logo big"><div class="mark"><b>TWF</b><i></i></div><span>BACKTEST</span></div>
        <div><div class="abv">Versie <b>${CFG.VERSION}</b> · build ${CFG.BUILD}</div><div class="mut">Learn. Master. Trade.</div></div><div id="aHealth" class="ahealth"><span class="dot"></span> ${L('Controleren…','Checking…')}</div></div>
      <div class="box"><h3>${L('Systeemstatus','System status')}</h3><div id="aChecks"><div class="mut">…</div></div></div>
@@ -2078,7 +2191,7 @@ async function settingsLive(m){
     const html=checks.map(c=>`<div class="srow"><div class="stx"><b>${c.name}</b><small>${esc(c.sub)}</small></div>${ok(c.state,c.state===true?L('Werkt','Working'):c.state===null?L('Niet actief','Not active'):L('Probleem','Problem'))}</div>`).join('');
     const box=m.querySelector(tab==='links'?'#lnk':'#aChecks'); if(box) box.innerHTML=html;
     if(tab==='about'){ const bad=checks.some(c=>c.state===false); const h=m.querySelector('#aHealth'); if(h){ h.className='ahealth '+(bad?'bad':'ok'); h.innerHTML=`<span class="dot"></span> ${bad?L('Er is een probleem','There is a problem'):L('Alles werkt goed','Everything is working')}` }
-      try{ const r=await fetch(location.pathname+'?nocache='+Date.now(),{cache:'no-store'}); const tx=await r.text(); const v=(tx.match(/VERSION:\s*'([^']+)'/)||[])[1]||'?'; const el=m.querySelector('#aSrv'); if(el){ el.textContent=v; if(v!==CFG.VERSION){ el.classList.add('warn'); el.insertAdjacentHTML('afterend',` <button class="btn btn-p sm" onclick="location.reload()">${L('Herladen','Reload')}</button>`) } } }catch(e){} } }
+      try{ const r=await fetch(location.pathname+'?nocache='+Date.now(),{cache:'no-store'}); const tx=await r.text(); const v=(tx.match(/VERSION:\s*'([^']+)'/)||[])[1]||'?'; const el=m.querySelector('#aSrv'); if(el){ el.textContent=v; if(v!==CFG.VERSION){ el.classList.add('warn'); if(verCmp(v,CFG.VERSION)>0){ UPD.latest=v; markUpdate() } } } }catch(e){} } }
 }
 
 /* ----- Event binding per page ----- */
@@ -2124,6 +2237,12 @@ function bindPage(){
   if(S.page==='settings'){
     q('[data-stab]').forEach(b=>b.onclick=()=>{ S.setTab=b.dataset.stab; render() });
     const pb=m.querySelector('#pBio'); if(pb) pb.onchange=async()=>{ await DB.put('profile',{...profile(),id:'me',bio:pb.value.trim()}) };
+    bindUpdBox(); if(S.setTab==='about') checkUpdate(true).then(()=>{ const el=document.querySelector('#updBox'); if(el&&S.page==='settings'){ el.outerHTML=updBoxHtml(); bindUpdBox() } });
+    const pka=m.querySelector('#pkAdd'); if(pka) pka.onclick=async()=>{ const L=(nl,en)=>LANG==='en'?en:nl; pka.disabled=true;
+      try{ await PK.enroll(); toast(L('Passkey ingesteld','Passkey set up'),L('Log voortaan in met de passkey-knop.','Use the passkey button to sign in from now on.'),'ok'); render() }
+      catch(e){ toast('Passkey',e&&e.name==='NotAllowedError'?L('Geannuleerd.','Cancelled.'):e&&e.name==='InvalidStateError'?L('Er staat al een passkey voor dit account op dit apparaat.','A passkey for this account already exists on this device.'):((e&&e.message)||'Error'),'bad') }
+      finally{ pka.disabled=false } };
+    const pkd=m.querySelector('#pkDel'); if(pkd) pkd.onclick=async()=>{ const L=(nl,en)=>LANG==='en'?en:nl; if(await askConfirm(L('Passkey verwijderen van dit apparaat? Je logt dan weer in met je wachtwoord.','Remove passkey from this device? You will sign in with your password again.'),L('Verwijderen','Remove'),true)){ PK.remove(); toast(L('Passkey verwijderd','Passkey removed'),'','ok'); render() } };
     const ac=m.querySelector('#aCopy'); if(ac) ac.onclick=()=>{ try{navigator.clipboard.writeText(DB.uid||'')}catch(e){} toast('Copied','','ok',1200) };
     const pw=m.querySelector('#aPwB'); if(pw) pw.onclick=async()=>{ const a=m.querySelector('#aPw1').value, b=m.querySelector('#aPw2').value, er=m.querySelector('#aPwE'); er.textContent='';
       if(a.length<6){er.textContent=t('err.short');return} if(a!==b){er.textContent=LANG==='en'?'Passwords do not match':'Wachtwoorden zijn niet gelijk';return}
@@ -4915,7 +5034,7 @@ function init(){
   setTheme(lsGet('twfbt_theme')||'dark'); setLang(LANG); drawLoginCandles();
   if(lsGet('twfbt_side')==='1') document.body.classList.add('side-collapsed');
   $('#toReg').onclick=()=>showReg(true);$('#toLog').onclick=()=>showReg(false);
-  $('#lgBtn').onclick=doLogin;$('#rgBtn').onclick=doRegister;
+  $('#lgBtn').onclick=doLogin;$('#rgBtn').onclick=doRegister; $('#lgPk').onclick=doPkLogin; pkLoginUI();
   ['#lgName','#lgPass'].forEach(s=>$(s).onkeydown=e=>{if(e.key==='Enter')doLogin()});
   ['#rgUser','#rgLogin','#rgPass'].forEach(s=>$(s).onkeydown=e=>{if(e.key==='Enter')doRegister()});
   $('#lgLang').onchange=e=>setLang(e.target.value);$('#appLang').onchange=e=>setLang(e.target.value);
@@ -4928,6 +5047,7 @@ function init(){
   $('#fab').onclick=()=>toast('TWF AI',t('soon.ai'));
   document.querySelectorAll('#app [data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
   setTimeout(()=>$('#lgName').focus(),50);
+  if(sessionStorage.getItem('twfbt_resume')) tryResume(); else if(location.search.includes('v=')) try{ history.replaceState(null,'',location.pathname) }catch(e){}
 }
 init();
 </script>
