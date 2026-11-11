@@ -235,7 +235,8 @@ body.in-sx #toasts{bottom:112px;left:66px}
 .toast.ok .ti{background:rgba(47,191,113,.15);color:var(--pos)}
 .toast.bad .ti{background:rgba(229,83,75,.15);color:var(--neg)}
 .toast b{display:block;margin-bottom:3px}
-.toast span{color:var(--ink2);font-size:13px;line-height:1.45}
+.toast span{display:block;color:var(--ink2);font-size:13px;line-height:1.45}
+.toast>div:nth-child(2){flex:1;min-width:0}
 .toast .x{margin-left:auto;color:var(--ink3)}
 .notif{position:absolute;right:120px;top:58px;width:340px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;box-shadow:var(--shadow);z-index:60;padding:8px}
 .notif .nh{padding:10px 12px;font-weight:800;display:flex;justify-content:space-between}
@@ -655,6 +656,9 @@ body.theme-light .favbar{background:#fff;border-color:#e0e3eb}
 .srow:first-of-type{border-top:0}
 .stx{flex:1;min-width:0}.stx b{display:block;font-weight:600}.stx small{display:block;color:var(--ink3);font-size:12.5px;margin-top:2px}
 .ssel{max-width:220px;height:38px}
+input[type=range]{accent-color:var(--accent)}
+#main{padding-bottom:96px}
+@media(max-width:640px){.srow{flex-wrap:wrap;row-gap:10px}.srow>.stx{flex:1 1 150px}#toasts{left:12px;right:12px;bottom:12px;max-width:none}}
 .accs{display:flex;gap:8px}.acc{width:26px;height:26px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px rgba(128,128,128,.3)}.acc.on{border-color:var(--ink)}
 @media(max-width:820px){.setgrid{grid-template-columns:1fr}.sprof{flex-direction:column;align-items:flex-start}.csw{grid-template-columns:1fr}.csnav{flex-direction:row;overflow:auto}.csnav button span{display:none}.csbody .tvrow{grid-template-columns:1fr}}
 
@@ -714,6 +718,7 @@ body.theme-light .cselm{background:#fff;box-shadow:0 18px 50px rgba(20,30,60,.18
 .chk{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:20px;background:rgba(128,128,128,.12);white-space:nowrap}
 .chk i{width:8px;height:8px;border-radius:50%;background:#787b86}.chk.ok{color:#2fbf71;background:rgba(47,191,113,.12)}.chk.ok i{background:#2fbf71;box-shadow:0 0 0 3px rgba(47,191,113,.2)}
 .chk.bad{color:#e5534b;background:rgba(229,83,75,.12)}.chk.bad i{background:#e5534b}.chk.na{color:var(--ink3)}
+body.theme-light .chk.ok,body.theme-light .ahealth.ok{color:#137a43}body.theme-light .chk.bad,body.theme-light .ahealth.bad{color:#b42318}
 .sabout{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.sabout .logo.big{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.sabout .logo.big b{font-size:30px}.sabout .logo.big span{font-size:11px;letter-spacing:.3em;color:var(--ink3)}
 .abv{font-size:16px;margin-bottom:2px}.ahealth{margin-left:auto;display:flex;align-items:center;gap:9px;font-weight:600;padding:9px 14px;border-radius:12px;background:rgba(128,128,128,.1)}
 .ahealth .dot{width:10px;height:10px;border-radius:50%;background:#787b86}.ahealth.ok{color:#2fbf71;background:rgba(47,191,113,.1)}.ahealth.ok .dot{background:#2fbf71;box-shadow:0 0 0 4px rgba(47,191,113,.2)}.ahealth.bad{color:#e5534b}.ahealth.bad .dot{background:#e5534b}
@@ -841,6 +846,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v8.1: iconen hersteld (info/grid dubbel, db/upload ontbraken), geen emoji-tekens op iOS, leesbaardere toasts en statuskleuren, mobiele instellingenrijen, reserve-CDN voor de chart */
 .pkbtn{display:flex!important;align-items:center;justify-content:center;gap:9px;margin-top:10px}
 .pkbtn small{color:var(--ink3);font-weight:500}
 .pkor{display:flex;align-items:center;gap:10px;color:var(--ink3);font-size:12px;margin:14px 0 0}.pkor::before,.pkor::after{content:'';flex:1;height:1px;background:var(--line)}
@@ -923,7 +929,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
       <button data-go="strategies"><span data-ic="compass"></span><span class="lbl" data-t="nav.strategies">Strategieën</span></button>
       <button data-go="prop"><span data-ic="trophy"></span><span class="lbl" data-t="nav.prop">Prop firms</span></button>
       <div class="sep"></div>
-      <button data-go="journal"><span data-ic="book"></span><span class="lbl">TWF Journal</span><span class="tag ext">↗</span></button>
+      <button data-go="journal"><span data-ic="book"></span><span class="lbl">TWF Journal</span><span class="tag ext"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M7 17L17 7M8 7h9v9"/></svg></span></button>
     </nav>
     <div class="bottom nav">
       <button data-go="markets"><span data-ic="globe"></span><span class="lbl" data-t="nav.markets">Markten</span></button>
@@ -948,12 +954,14 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.0', BUILD: '2026-11-10b'
+  VERSION: 'v8.1', BUILD: '2026-11-11'
 };
 
 /* ---------------- Icons ---------------- */
 const IC = {
   menu:'<path d="M4 6h16M4 12h10M4 18h16"/>',
+  db:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/>',
+  upload:'<path d="M12 16V4M7 9l5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>',
   rocket:'<path d="M5 15c-1 1-1.5 4-1.5 4s3-.5 4-1.5M9 15l-3-3 6-7c2-2 5-2.5 7-2.5 0 2-.5 5-2.5 7l-7 6z"/><circle cx="15" cy="9" r="1.5"/>',
   chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/>',
   wallet:'<rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h18M16 15h2"/>',
@@ -994,7 +1002,7 @@ const IC = {
   dotc:'<circle cx="12" cy="12" r="3"/>',
   pointer:'<path d="M5 3l14 8-6 2-2 6z"/>',
   ray:'<path d="M4 18L20 6"/><circle cx="4" cy="18" r="1.6"/>',
-  info:'<path d="M4 19L18 7"/><rect x="13" y="13" width="8" height="6" rx="1"/>',
+  infoline:'<path d="M4 19L18 7"/><rect x="13" y="13" width="8" height="6" rx="1"/>',
   ext:'<path d="M2 20L22 4"/><circle cx="8" cy="15" r="1.5"/><circle cx="16" cy="9" r="1.5"/>',
   angle:'<path d="M4 19h16M4 19L17 7"/><path d="M10 19a6 6 0 0 0-1.5-4"/>',
   hline:'<path d="M3 12h18"/><circle cx="12" cy="12" r="1.6"/>',
@@ -1009,7 +1017,7 @@ const IC = {
   arc:'<path d="M3 18a9 9 0 0 1 18 0"/>',
   spiral:'<path d="M12 12a2 2 0 0 1 2 2 4 4 0 0 1-4 4 6 6 0 0 1-6-6 8 8 0 0 1 8-8 10 10 0 0 1 10 10"/>',
   wedge:'<path d="M3 20L21 6M3 20h18M9 20a7 7 0 0 0-1-4M15 20a12 12 0 0 0-2-7"/>',
-  grid:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
+  gridtool:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
   pattern:'<path d="M2 17l5-10 5 7 4-9 6 12"/>',
   triangle:'<path d="M12 4l9 16H3z"/>',
   hilite:'<path d="M15 4l5 5-9 9H6v-5z"/><path d="M4 21h16"/>',
@@ -1442,7 +1450,8 @@ async function doPkLogin(){ const L=(nl,en)=>LANG==='en'?en:nl, er=$('#lgErr'); 
     else er.textContent=(e&&e.message)||'Passkey error' }
   finally{ b.disabled=false } }
 function pkOffer(){ if(!PK.supported()||PK.rec()||lsGet('twfbt_pkno')) return; const L=(nl,en)=>LANG==='en'?en:nl;
-  setTimeout(()=>toast(L('Sneller inloggen?','Sign in faster?'),L('Zet een passkey aan en log voortaan in met Touch ID of Face ID.','Turn on a passkey and sign in with Touch ID or Face ID.'),'info',12000,{label:L('Passkey instellen','Set up passkey'),fn:()=>{ lsSet('twfbt_pkno','1'); S.setTab='account'; go('settings') }}),1800) }
+  if(sessionStorage.getItem('twfbt_pkasked')) return;
+  setTimeout(()=>{ if(SX||document.querySelector('.ov')) return; try{sessionStorage.setItem('twfbt_pkasked','1')}catch(e){} toast(L('Sneller inloggen?','Sign in faster?'),L('Zet een passkey aan en log voortaan in met Touch ID of Face ID.','Turn on a passkey and sign in with Touch ID or Face ID.'),'info',12000,{label:L('Passkey instellen','Set up passkey'),fn:()=>{ lsSet('twfbt_pkno','1'); S.setTab='account'; go('settings') }}) },1800) }
 
 /* ---------------- State ---------------- */
 const S={page:'testing',tab:'dash',slide:0,notifs:[],q:''};
@@ -1522,6 +1531,7 @@ async function logout(){await DB.signOut(); pkLoginUI();$('#app').classList.add(
 /* =========================================================
    RENDER
    ========================================================= */
+function inkOn(hex){ const m=String(hex).replace('#','').match(/^([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i); if(!m) return '#fff'; const [r,g,b]=m.slice(1).map(x=>parseInt(x,16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)); const L=.2126*r+.7152*g+.0722*b; return (L+.05)/.055>1.05/(L+.05)?'#0b0e14':'#fff' }
 const ACCENTS=[['#4c74ff','TWF Blue'],['#2962FF','TradingView'],['#22ab94','Green'],['#9c6bff','Purple'],['#f0b429','Gold'],['#ef5350','Red']];
 function applyAccent(){ const a=(profile().prefs||{}).accent; const b=document.body; if(!a){ ['--accent','--accent2','--accentSoft'].forEach(k=>b.style.removeProperty(k)); return }
   const r=parseInt(a.slice(1,3),16),g=parseInt(a.slice(3,5),16),bl=parseInt(a.slice(5,7),16); b.style.setProperty('--accent',a); b.style.setProperty('--accent2',`rgb(${Math.round(r*.8)},${Math.round(g*.8)},${Math.round(bl*.8)})`); b.style.setProperty('--accentSoft',`rgba(${r},${g},${bl},.14)`) }
@@ -1882,7 +1892,7 @@ const PFSTAT=st=>{ const L=(nl,en)=>LANG==='en'?en:nl; return {failed:[L('Gezakt
 function pageProp(){
   const L=(nl,en)=>LANG==='en'?en:nl, pf=(profile().prefs||{}).propStrict||'normal', ss=DB.list('sessions').filter(s=>s.type==='propfirm').sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
   const bar=(v,max,neg)=>`<div class="pbar ${neg?'neg':''}"><i style="width:${Math.max(0,Math.min(100,max?v/max*100:0))}%"></i></div>`;
-  const firmLogo=f=>`<span class="flogo" style="background:${f.col||'#4c74ff'}">${f.logo?`<img src="${f.logo}" alt="">`:esc((f.name||'?').slice(0,2).toUpperCase())}</span>`;
+  const firmLogo=f=>`<span class="flogo" style="background:${f.col||'#4c74ff'};color:${inkOn(f.col||'#4c74ff')}">${f.logo?`<img src="${f.logo}" alt="">`:esc((f.name||'?').slice(0,2).toUpperCase())}</span>`;
   return `<div class="phead"><div class="row" style="align-items:flex-end"><div><h1>Prop firms</h1><div class="psub">${L('Oefen een challenge alsof het echt is — met dezelfde regels als de prop firm.','Practise a challenge like it is real — with the same rules as the prop firm.')}</div></div><div class="spacer"></div>
      <button class="btn btn-g" disabled title="${L('Binnenkort','Coming soon')}">${ic('spark',15)} ${L('AI-assistent','AI assistant')} <span class="soon">${L('binnenkort','soon')}</span></button>
      <button class="btn btn-g" id="pfNewFirm">${ic('plus',15)} ${L('Eigen prop firm','Custom prop firm')}</button><button class="btn btn-p" id="pfNew">${ic('plus',15)} ${L('Prop firm-sessie','Prop firm session')}</button></div></div>
@@ -2140,7 +2150,7 @@ function pageSettings(){
      ${SELR('propStrict',L('Strengheid prop firm-check','Prop firm check strictness'),L('Hoe streng een payout wordt beoordeeld (per sessie aan te passen).','How strict payouts are judged (adjustable per session).'),[['soft',L('Soepel','Relaxed')],['normal',L('Normaal','Normal')],['strict',L('Streng','Strict')]],pf.propStrict||'normal')}
      ${TOG('ts.oneClick',ts.oneClick,L('Handelen met één klik','One-click trading'),L('Kopen/Verkopen plaatst direct een marktorder.','Buy/Sell places a market order right away.'))}
      ${TOG('ts.sound',ts.sound!==false,L('Uitvoeringsgeluid','Execution sound'),L('Geluidje bij fill of sluiten van een positie.','Sound on fill or when a position closes.'))}
-     <div class="srow"><div class="stx"><b>${L('Geluid','Sound')}</b><small>${L('Kies je favoriete geluidje — je hoort het meteen.','Pick your favourite sound — you hear it right away.')}</small></div><select class="inp ssel" id="pSnd">${SOUNDS.map(([v,l])=>`<option value="${v}" ${(ts.soundType||'chime')===v?'selected':''}>${l}</option>`).join('')}</select><button class="btn btn-g sm" id="pSndP" title="Preview">▶</button></div>
+     <div class="srow"><div class="stx"><b>${L('Geluid','Sound')}</b><small>${L('Kies je favoriete geluidje — je hoort het meteen.','Pick your favourite sound — you hear it right away.')}</small></div><select class="inp ssel" id="pSnd">${SOUNDS.map(([v,l])=>`<option value="${v}" ${(ts.soundType||'chime')===v?'selected':''}>${l}</option>`).join('')}</select><button class="btn btn-g sm" id="pSndP" title="Preview">${ic('play',14)}</button></div>
      <div class="srow"><div class="stx"><b>${L('Volume','Volume')}</b></div><input type="range" id="pVol" min="10" max="100" step="5" value="${ts.volume??70}" style="width:200px"></div>
      ${ROW(t('tr.defqty'),'',`<input class="inp ssel" id="pQty" type="number" step="0.01" min="0.01" value="${ts.qty}" style="max-width:120px">`)}</div>`;
   else if(tab==='data') body=`<h2>${L('Data & opslag','Data & storage')}</h2><div class="box">
@@ -2149,7 +2159,7 @@ function pageSettings(){
      ${ROW(L('Marktdata beheren','Manage market data'),L('Importeren, bijwerken en verwijderen.','Import, update and delete.'),`<button class="btn btn-g" data-gs="data">${ic('db',15)} ${L('Naar Marktdata','Open Market data')}</button>`)}</div>
      <div class="box"><h3>${L('Marktdata per markt','Market data per market')}</h3><div id="dMk"></div></div>`;
   else if(tab==='links') body=`<h2>${L('Koppelingen','Connections')}</h2><div class="box" id="lnk"><div class="mut">…</div></div>
-     <div class="box"><h3>TWF Journal</h3>${ROW(L('Open TWF Journal','Open TWF Journal'),L('Zelfde account; je backtest-trades worden daar straks zichtbaar onder "Backtest".','Same account; your backtest trades will show up there under "Backtest".'),`<button class="btn btn-g" data-gs="journal">${ic('book',15)} TWF Journal ↗</button>`)}</div>`;
+     <div class="box"><h3>TWF Journal</h3>${ROW(L('Open TWF Journal','Open TWF Journal'),L('Zelfde account; je backtest-trades worden daar straks zichtbaar onder "Backtest".','Same account; your backtest trades will show up there under "Backtest".'),`<button class="btn btn-g" data-gs="journal">${ic('book',15)} TWF Journal ${ic('ext',14)}</button>`)}</div>`;
   else body=`<h2>${L('Over TWF Backtest','About TWF Backtest')}</h2>
      ${updBoxHtml()}
      <div class="box sabout"><div class="logo big"><div class="mark"><b>TWF</b><i></i></div><span>BACKTEST</span></div>
@@ -2262,7 +2272,10 @@ function slide(){const s=$('#slides');if(s)s.style.transform=`translateX(-${S.sl
    Alle timeframes worden uit M1 opgebouwd.
    ========================================================= */
 const LWC_URL='https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js';
-function loadLWC(){ if(window.LightweightCharts) return Promise.resolve(); return new Promise((res,rej)=>{const s=document.createElement('script');s.src=LWC_URL;s.onload=res;s.onerror=()=>rej(new Error('Chart-bibliotheek kon niet laden'));document.head.appendChild(s)}); }
+const LWC_URLS=[LWC_URL,'https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js'];
+function loadLWC(){ if(window.LightweightCharts) return Promise.resolve();
+  const one=u=>new Promise((res,rej)=>{const s=document.createElement('script');s.src=u;s.onload=res;s.onerror=()=>{s.remove();rej()};document.head.appendChild(s)});
+  return LWC_URLS.reduce((pr,u)=>pr.catch(()=>window.LightweightCharts?null:one(u)),Promise.reject()).catch(()=>{ throw new Error(LANG==='en'?'Chart library could not load. Check your internet connection.':'Chart-bibliotheek kon niet laden. Controleer je internetverbinding.') }); }
 
 const SYMCFG={
   XAUUSD:{p0:2030,vol:0.00016,dec:2,weekend:true},
@@ -2444,7 +2457,7 @@ function buildSessionDom(){
     <span class="hide-m" style="color:var(--ink3);font-size:13px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(SX.s.name)}</span>
     <button class="ib hide-m" id="sxUndo" title="${t('sx.undo')}">${ic('undo')}</button>
     <button class="ib hide-m" id="sxRedo" title="${t('sx.redo')}">${ic('redo')}</button>
- <button class="ib hide-m" id="sxTplB" title="Chart templates">${ic('grid')}</button>
+ <button class="ib hide-m" id="sxTplB" title="Chart templates">${ic('gridtool')}</button>
     <button class="ib hide-m" id="sxKeys" title="${t('sx.keys')}">${ic('keyboard')}</button>
     <button class="ib" id="sxThemeC" title="${t('sx.charttheme')}">${ic('moon')}</button>
     <button class="ib hide-m" id="sxShot" title="Screenshot">${ic('camera')}</button>
@@ -3138,7 +3151,7 @@ const TOOLS={
   eraser:{g:'cursor',n:0,i:'eraser',nl:'Gum',en:'Eraser'},
   trend:{g:'lines',s:'lines',n:2,i:'trend',nl:'Trendlijn',en:'Trendline',k:'⌥T'},
   ray:{g:'lines',s:'lines',n:2,i:'ray',nl:'Straal',en:'Ray'},
-  info:{g:'lines',s:'lines',n:2,i:'info',nl:'Infolijn',en:'Info line'},
+  info:{g:'lines',s:'lines',n:2,i:'infoline',nl:'Infolijn',en:'Info line'},
   ext:{g:'lines',s:'lines',n:2,i:'ext',nl:'Verlengde lijn',en:'Extended line'},
   angle:{g:'lines',s:'lines',n:2,i:'angle',nl:'Trendhoek',en:'Trend angle'},
   hline:{g:'lines',s:'lines',n:1,i:'hline',nl:'Horizontale lijn',en:'Horizontal line',k:'⌥H'},
@@ -3162,9 +3175,9 @@ const TOOLS={
   fibspiral:{g:'fib',s:'fibonacci',n:2,i:'spiral',nl:'Fib-spiraal',en:'Fib spiral'},
   fibwedge:{g:'fib',s:'fibonacci',n:3,i:'wedge',nl:'Fib-wig',en:'Fib wedge'},
   pitchfan:{g:'fib',s:'fibonacci',n:3,i:'fan',nl:'Pitchfan',en:'Pitchfan'},
-  gannbox:{g:'fib',s:'gann',n:2,i:'grid',nl:'Gann box',en:'Gann box'},
-  gannsqf:{g:'fib',s:'gann',n:2,i:'grid',nl:'Gann square fixed',en:'Gann square fixed'},
-  gannsq:{g:'fib',s:'gann',n:2,i:'grid',nl:'Gann square',en:'Gann square'},
+  gannbox:{g:'fib',s:'gann',n:2,i:'gridtool',nl:'Gann box',en:'Gann box'},
+  gannsqf:{g:'fib',s:'gann',n:2,i:'gridtool',nl:'Gann square fixed',en:'Gann square fixed'},
+  gannsq:{g:'fib',s:'gann',n:2,i:'gridtool',nl:'Gann square',en:'Gann square'},
   gannfan:{g:'fib',s:'gann',n:2,i:'fan',nl:'Gann fan',en:'Gann fan'},
   xabcd:{g:'pat',s:'patterns',n:5,i:'pattern',nl:'XABCD-patroon',en:'XABCD pattern',lab:['X','A','B','C','D']},
   abcd:{g:'pat',s:'patterns',n:4,i:'pattern',nl:'ABCD-patroon',en:'ABCD pattern',lab:['A','B','C','D']},
@@ -3195,7 +3208,7 @@ const TOOLS={
   note:{g:'text',s:'text',n:1,i:'note',nl:'Notitie',en:'Note'},
   pnote:{g:'text',s:'text',n:2,i:'note',nl:'Prijsnotitie',en:'Price note'},
   pin:{g:'text',s:'text',n:1,i:'pin',nl:'Pin',en:'Pin'},
-  table:{g:'text',s:'text',n:1,i:'grid',nl:'Tabel',en:'Table'},
+  table:{g:'text',s:'text',n:1,i:'gridtool',nl:'Tabel',en:'Table'},
   callout:{g:'text',s:'text',n:2,i:'callout',nl:'Callout',en:'Callout'},
   comment:{g:'text',s:'text',n:1,i:'comment',nl:'Opmerking',en:'Comment'},
   plabel:{g:'text',s:'text',n:1,i:'tag',nl:'Prijslabel',en:'Price label'},
@@ -4926,7 +4939,7 @@ function chartSettings(startTab){
       +R2('Crosshair',swb('cross')+SEL('crossStyle',C.crossStyle||'dashed',[['solid','Solid'],['dashed','Dashed'],['dotted','Dotted']]))
       +HDR('Scales')+R2('Text',swb('text')+SEL('fontSize',C.fontSize||12,[[10,10],[11,11],[12,12],[13,13],[14,14],[16,16]]))+R2('Lines',swb('border')) }
     else { h+=HDR('General')+R2('One-click trading','','ts.oneClick')+HINT('Instantly place, edit, cancel orders, or close positions without confirmation')
-      +R2('Execution sound',`<select class="sel" data-snd>${SOUNDS.map(([v,l])=>`<option value="${v}" ${(ts.soundType||'chime')===v?'selected':''}>${l}</option>`).join('')}</select><button class="ib sndp" data-sndp title="Preview">▶</button>`,'ts.sound')+R2('Volume',`<input type="range" min="10" max="100" step="5" value="${ts.volume??70}" data-vol style="width:160px">`)+HINT('Plays when an order fills or a position closes')
+      +R2('Execution sound',`<select class="sel" data-snd>${SOUNDS.map(([v,l])=>`<option value="${v}" ${(ts.soundType||'chime')===v?'selected':''}>${l}</option>`).join('')}</select><button class="ib sndp" data-sndp title="Preview">${ic('play',14)}</button>`,'ts.sound')+R2('Volume',`<input type="range" min="10" max="100" step="5" value="${ts.volume??70}" data-vol style="width:160px">`)+HINT('Plays when an order fills or a position closes')
       +R2('Pause replay on TP / SL / fill','','ts.pauseOnHit')+HDR('Defaults')+R2('Default lots',`<input class="inp sm" type="number" step="0.01" min="0.01" data-qty value="${ts.qty}" style="max-width:110px">`) }
     body.innerHTML=h;
     body.querySelectorAll('[data-ck]').forEach(c=>c.onchange=()=>{ const k=c.dataset.ck; if(k==='vol') vol=c.checked; else if(k.startsWith('ts.')) ts[k.slice(3)]=c.checked; else C[k]=c.checked; live() });
@@ -5000,7 +5013,7 @@ function onCtxMenu(e){
       <button data-v="buy"><span class="cxi" style="color:#2962FF">⌃</span> Buy ${q} ${SX.sym} @ ${P} ${buyT}</button>
       <button data-v="sell"><span class="cxi" style="color:#F23645">⌄</span> Sell ${q} ${SX.sym} @ ${P} ${sellT}</button>
       <button data-v="order">${ic('plus',15)} Add order on ${SX.sym} at ${P}…</button><div class="msep"></div>
-      <button data-v="tree">${ic('layers',15)} Object tree</button><button data-v="ctpl" data-keep="1">${ic('grid',15)} Chart template<span style="margin-left:auto">›</span></button><div class="msep"></div>
+      <button data-v="tree">${ic('layers',15)} Object tree</button><button data-v="ctpl" data-keep="1">${ic('gridtool',15)} Chart template<span style="margin-left:auto">›</span></button><div class="msep"></div>
       ${nD?`<button data-v="delall">${ic('trash',15)} Remove ${nD} drawing${nD>1?'s':''}</button>`:''}${nI?`<button data-v="delind">${ic('trash',15)} Remove ${nI} indicator${nI>1?'s':''}</button>`:''}
       <button data-v="lockall">${ic('lock',15)} ${SX.lockAll?'Unlock all drawings':'Lock all drawings'}</button><button data-v="hideall">${ic('eye',15)} ${SX.hideAll?'Show all drawings':'Hide all drawings'}</button>
       <div class="msep"></div><button data-v="set">${ic('gear',15)} Settings…</button>`,
