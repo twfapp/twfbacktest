@@ -2,7 +2,14 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TWF Backtest">
+<meta name="theme-color" content="#06080c">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%234c74ff'/%3E%3Crect x='4.6' y='8.5' width='3.8' height='5' rx='1' fill='white'/%3E%3Crect x='10.1' y='5.5' width='3.8' height='5.5' rx='1' fill='white'/%3E%3Crect x='15.6' y='8' width='3.8' height='4.5' rx='1' fill='white'/%3E%3Cpath d='M4.5 19.2h15' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
 <title>TWF Backtest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -345,6 +352,7 @@ body.in-sx #toasts{bottom:112px;left:66px}
 .olab{position:absolute;right:10px;display:flex;align-items:stretch;height:24px;border-radius:6px;overflow:hidden;pointer-events:auto;cursor:ns-resize;font-size:12px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.35);user-select:none;touch-action:none}
 .olab>*{display:flex;align-items:center;padding:0 8px;background:var(--panel);border:1px solid var(--line2);margin-left:-1px}
 .olab b{color:var(--ink)}
+.olab.shift{box-shadow:0 2px 10px rgba(0,0,0,.35),-3px 0 0 0 var(--accent)}
 .olab i{font-style:normal;font-size:10.5px;color:#fff}
 .olab button{color:var(--ink3);cursor:pointer}.olab button:hover{color:var(--ink)}
 .olab .mk{font-size:10.5px;color:var(--pos)}.olab .mk.sl{color:var(--amber)}
@@ -445,9 +453,20 @@ body.in-sx #toasts{bottom:112px;left:66px}
 .vb span{font-size:10.5px;color:var(--ink3);font-weight:600}
 .tbl.mini td,.tbl.mini th{padding:9px 12px;font-size:13px}
 .acal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.acal .wd{text-align:center;font-size:11.5px;color:var(--ink3);font-weight:700}
+.m2{display:inline-flex;flex-direction:column;line-height:1.15;vertical-align:top}.m2>span,.m2>small{white-space:nowrap}.m2 small{display:block;font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:0;margin-top:2px}
+.big .m2 small{font-size:14px;margin-top:4px}td .m2,.row .m2,div[style*="text-align:right"] .m2{align-items:flex-end}
+.m2.inl{flex-direction:row;align-items:baseline;gap:6px}.m2.inl small{margin:0;font-size:.85em}.m2.inl small::before{content:'· ';opacity:.7}
+.npill{white-space:nowrap}.pill.pos{color:var(--pos);background:rgba(47,191,113,.12)}.pill.neg{color:var(--neg);background:rgba(229,83,75,.12)}
 .acd{min-height:58px;border-radius:9px;background:var(--panel2);padding:6px 8px;display:flex;flex-direction:column;justify-content:space-between;font-size:12px}
 .acd span{color:var(--ink3)}.acd b{font-size:12px;text-align:right}.acd.p{background:rgba(47,191,113,.15)}.acd.p b{color:var(--pos)}.acd.n{background:rgba(229,83,75,.13)}.acd.n b{color:var(--neg)}
 .dash.an>.box{min-width:0}
+.tscroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r);overscroll-behavior-x:contain}
+.tscroll>table.tbl td,.tscroll>table.tbl th{white-space:nowrap}
+.tscroll:not(.mini)>table.tbl{min-width:100%}
+#main,.pbody,.dash,.dash>*{min-width:0}
+#main{overflow-x:hidden}
+.kpis>*{min-width:0}
+@media (max-width:640px){.dash.an .kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media (max-width:1200px){.dash.an>.box{grid-column:1/-1!important}.dash.an .kpis{grid-template-columns:repeat(3,1fr)!important}}
 
 
@@ -660,7 +679,7 @@ body.theme-light .favbar{background:#fff;border-color:#e0e3eb}
 input[type=range]{accent-color:var(--accent)}
 #main{padding-bottom:96px}
 @media(max-width:640px){.srow{flex-wrap:wrap;row-gap:10px}.srow>.stx{flex:1 1 150px}#toasts{left:12px;right:12px;bottom:12px;max-width:none}}
-.accs{display:flex;gap:8px}.acc{width:26px;height:26px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px rgba(128,128,128,.3)}.acc.on{border-color:var(--ink)}
+.accs{display:flex;gap:8px}.accsw{width:26px;height:26px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px rgba(128,128,128,.3)}.accsw.on{border-color:var(--ink)}
 @media(max-width:820px){.setgrid{grid-template-columns:1fr}.sprof{flex-direction:column;align-items:flex-start}.csw{grid-template-columns:1fr}.csnav{flex-direction:row;overflow:auto}.csnav button span{display:none}.csbody .tvrow{grid-template-columns:1fr}}
 
 /* v7.4 */
@@ -729,9 +748,9 @@ code.warn{color:#e5534b}.setbody .sslogo .sym{width:30px;height:30px}
 
 /* v7.6: ronde elementen en iconen netjes (Safari) */
 button{-webkit-appearance:none;appearance:none}
-.ib,.pcam,.ssclr,.acc,.sndp{padding:0!important;flex-shrink:0;display:inline-grid;place-items:center;line-height:1}
+.ib,.pcam,.ssclr,.accsw,.sndp{padding:0!important;flex-shrink:0;display:inline-grid;place-items:center;line-height:1}
 .ib svg,.pcam svg{display:block;margin:auto}
-.acc{width:26px!important;height:26px!important;min-width:26px;aspect-ratio:1/1;border-radius:50%!important}
+.accsw{width:26px!important;height:26px!important;min-width:26px;aspect-ratio:1/1;border-radius:50%!important}
 .avatar,.pav,.sxav{flex-shrink:0;aspect-ratio:1/1;overflow:visible;line-height:1;text-align:center}
 .avatar .badge{top:auto;right:auto;bottom:-9px;left:50%;transform:translateX(-50%);white-space:nowrap;box-shadow:0 0 0 3px var(--side,#0b0e14)}
 .prof .nm{margin-top:14px}
@@ -829,6 +848,72 @@ body.theme-light .calm{background:#fff;box-shadow:0 22px 60px rgba(20,30,60,.2)}
   .notif{right:12px;left:12px;width:auto}
 }
 
+
+/* ---------- v8.3: mobiel — tabbalk onderin, Meer-paneel, geen auto-zoom op iOS ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,a,.btn,.ib{touch-action:manipulation}
+.tabbar,.msheet{display:none}
+@media (max-width:900px){
+  body.in-app:not(.in-sx) .tabbar{display:grid}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);border-top:1px solid var(--line)}
+  .tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:54px;border-radius:12px;color:var(--ink3);font-size:11px;font-weight:600;letter-spacing:.01em}
+  .tabbar button svg.i{width:24px;height:24px;stroke-width:1.7}
+  .tabbar button.on{color:var(--accent)}.tabbar button.on svg.i{stroke-width:2.1}
+  .tabbar button:active{background:var(--panel2)}
+  .msheet{display:block;position:fixed;inset:0;z-index:90}
+  .msheet.hide{display:none}
+  .msh-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .2s}
+  .msh{position:absolute;left:0;right:0;bottom:0;background:var(--panel);border-radius:22px 22px 0 0;border-top:1px solid var(--line2);padding:8px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .22s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 40px rgba(0,0,0,.4)}
+  .msheet.open .msh{transform:none}.msheet.open .msh-bg{opacity:1}
+  .msh-grip{width:40px;height:5px;border-radius:3px;background:var(--line2);margin:4px auto 14px}
+  .msh-prof{display:flex;align-items:center;gap:12px;padding:4px 4px 14px;border-bottom:1px solid var(--line)}
+  .msh-prof b{display:block;font-size:16px}.msh-prof small{color:var(--ink3);font-size:13px}
+  .msh-prof .avatar{width:44px;height:44px;font-size:18px;flex:none}.msh-prof .avatar .badge{display:none}
+  .msh-list{display:flex;flex-direction:column;padding:8px 0}
+  .msh-list button{display:flex;align-items:center;gap:14px;min-height:52px;padding:0 8px;border-radius:12px;font-size:16px;font-weight:600;color:var(--ink);text-align:left}
+  .msh-list button svg.i{width:22px;height:22px;color:var(--ink2)}.msh-list button svg.i:last-child:not(:first-child){margin-left:auto;width:16px;height:16px;color:var(--ink3)}
+  .msh-list button.on{background:var(--accentSoft);color:var(--accent)}.msh-list button.on svg.i{color:var(--accent)}
+  .msh-list button:active{background:var(--panel2)}
+  .msh-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:10px;border-top:1px solid var(--line)}
+  .msh-row button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:68px;border-radius:14px;background:var(--panel2);font-size:12.5px;font-weight:600;color:var(--ink2)}
+  .msh-row button b{font-size:17px;color:var(--ink)}.msh-row button svg.i{width:22px;height:22px;color:var(--ink)}
+  /* app-indeling: geen menustrook bovenin, ruimte voor de tabbalk */
+  #app{grid-template-rows:calc(56px + env(safe-area-inset-top)) minmax(0,1fr)!important}
+  #app .side{display:none!important}
+  .topbar{padding:env(safe-area-inset-top) max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left))!important}
+  .topbar #appLang,.topbar [data-for="appLang"]{display:none!important}
+  #main{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
+  .fab{bottom:calc(84px + env(safe-area-inset-bottom));right:16px;width:50px;height:50px}
+  body.in-app:not(.in-sx) #toasts{bottom:calc(84px + env(safe-area-inset-bottom))}
+  .topbar .ib{width:42px;height:42px}
+}
+@media (max-width:640px){
+  .tscroll:has(.trtbl){overflow:visible}
+  table.trtbl{background:none;border:0;border-radius:0}
+  table.trtbl thead{display:none}
+  table.trtbl tbody{display:flex;flex-direction:column;gap:10px}
+  table.trtbl tr{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+  table.trtbl td{padding:0!important;border:0!important;white-space:normal!important}
+  table.trtbl .c-sym{order:1;font-size:16px}
+  table.trtbl .c-side{order:2}
+  table.trtbl .c-pnl{order:3;margin-left:auto;font-size:16px;align-self:flex-start}
+  table.trtbl .c-date{order:4;flex-basis:100%;color:var(--ink3);font-size:13px;margin-top:-2px}
+  table.trtbl .c-sess{order:5;flex-basis:100%;color:var(--ink2);font-size:13px}
+  table.trtbl td[data-l]{order:6;flex:1 1 0;min-width:56px;display:flex;flex-direction:column;font-size:14px;font-weight:600;margin-top:10px;padding-top:10px!important;border-top:1px solid var(--line)!important}
+  table.trtbl td[data-l]::before{content:attr(data-l);font-size:10.5px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+}
+@media (max-width:900px){
+  #session{padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
+  #session .sbar{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}#session .sbar::-webkit-scrollbar{display:none}
+  #session .sbar>*{flex:none}
+  #session .tfbar{max-width:none!important}
+  #session .favbar{display:none!important}
+  .sxbottom{padding-bottom:calc(8px + env(safe-area-inset-bottom))!important}
+}
+/* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
+@media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
+
 /* v7.9: chart-UI neutraal zwart (geen blauw), gelijke balken */
 body:not(.theme-light) #session{--bg:#000;--bg2:#0a0a0a;--panel:#141414;--panel2:#1f1f1f;--line:#222;--line2:#2c2c2c}
 body:not(.theme-light) .favbar,body:not(.theme-light) .dtb{background:#141414!important;border:1px solid #2c2c2c!important;box-shadow:0 6px 22px rgba(0,0,0,.6)!important}
@@ -847,6 +932,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v8.3: valuta (rekening + USD), posities samenvoegen/labels stapelen, vloeiendere chart, mobiele tabbalk, geen iOS-zoom, pil-fix */
 /* v8.2: eigen TWF-icoon in meldingen */
 /* v8.1: iconen hersteld (info/grid dubbel, db/upload ontbraken), geen emoji-tekens op iOS, leesbaardere toasts en statuskleuren, mobiele instellingenrijen, reserve-CDN voor de chart */
 .pkbtn{display:flex!important;align-items:center;justify-content:center;gap:9px;margin-top:10px}
@@ -943,6 +1029,25 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
   <main id="main"></main>
 </div>
 
+<nav class="tabbar" id="tabbar" aria-label="Menu">
+  <button data-go="testing"><span data-ic="chart"></span><span data-t="nav.testing">Backtesten</span></button>
+  <button data-go="accounts"><span data-ic="wallet"></span><span data-t="m.accounts">Rekeningen</span></button>
+  <button data-go="strategies"><span data-ic="compass"></span><span data-t="m.strategies">Strategie</span></button>
+  <button data-go="prop"><span data-ic="trophy"></span><span>Prop firms</span></button>
+  <button id="tbMore"><span data-ic="menu"></span><span data-t="m.more">Meer</span></button>
+</nav>
+<div class="msheet hide" id="msheet"><div class="msh-bg" data-msx></div><div class="msh">
+  <div class="msh-grip"></div>
+  <div class="msh-prof" id="mshProf"></div>
+  <div class="msh-list">
+    <button data-go="start"><span data-ic="rocket"></span><span data-t="nav.start">Aan de slag</span></button>
+    <button data-go="markets"><span data-ic="globe"></span><span data-t="nav.markets">Markten</span></button>
+    <button data-go="data"><span data-ic="layers"></span><span data-t="nav.data">Marktdata</span></button>
+    <button data-go="settings"><span data-ic="gear"></span><span data-t="nav.settings">Accountinstellingen</span></button>
+    <button data-go="journal"><span data-ic="book"></span><span>TWF Journal</span><span data-ic="extlink"></span></button>
+  </div>
+  <div class="msh-row"><button id="mshTheme"></button><button id="mshLang"></button><button id="mshBell"></button></div>
+</div></div>
 <div id="session" class="hide"></div>
 <div id="toasts"></div>
 <button class="fab hide" id="fab" title="TWF AI"></button>
@@ -956,7 +1061,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.2', BUILD: '2026-11-11b'
+  VERSION: 'v8.3', BUILD: '2026-11-12'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1127,7 +1232,7 @@ const T = {
   'set.data':'Gegevens','set.storage':'Opslag','set.local':'Lokaal in deze browser (testmodus)','set.cloud':'Supabase (cloud)','set.logout':'Uitloggen','set.reset':'Alles wissen','set.resethint':'Wist sessies, rekeningen en strategieën. Je account blijft bestaan.',
   'gs.title':'Aan de slag','gs.sub':'Vier stappen naar je eerste backtest.','gs.go':'Ga',
   'soon':'Binnenkort','soon.journal':'De koppeling met TWF Journal komt later.','soon.ai':'TWF AI komt later.','soon.chart':'De chart en replay komen in v2. Je sessie is opgeslagen.',
-  'toast.saved':'Opgeslagen','toast.deleted':'Verwijderd','toast.sesscreated':'Sessie aangemaakt','toast.preset':'Preset opgeslagen','toast.welcome':'Welkom','toast.loggedout':'Uitgelogd',
+  'm.accounts':'Rekeningen','m.strategies':'Strategie','m.more':'Meer','toast.saved':'Opgeslagen','toast.deleted':'Verwijderd','toast.sesscreated':'Sessie aangemaakt','toast.preset':'Preset opgeslagen','toast.welcome':'Welkom','toast.loggedout':'Uitgelogd',
   'notif.title':'Meldingen','notif.empty':'Nog geen meldingen','confirm.del':'Weet je zeker dat je dit wilt verwijderen?','confirm.reset':'Alles wissen? Typ WISSEN om te bevestigen.',
   'err.fill':'Vul alle velden in.','err.login':'Inlognaam of wachtwoord klopt niet.','err.exists':'Deze inlognaam bestaat al.','err.short':'Wachtwoord moet minstens 6 tekens zijn.',
   'balance':'Saldo','trades':'trades','created':'Aangemaakt','markets':'Markten','account':'Rekening','strategy':'Strategie','period':'Periode','progress':'Voortgang','status':'Status','active':'Actief','name':'Naam','type':'Type','date':'Datum',
@@ -1223,7 +1328,7 @@ const T = {
   'set.data':'Data','set.storage':'Storage','set.local':'Locally in this browser (test mode)','set.cloud':'Supabase (cloud)','set.logout':'Log out','set.reset':'Erase everything','set.resethint':'Erases sessions, accounts and strategies. Your login stays.',
   'gs.title':'Get started','gs.sub':'Four steps to your first backtest.','gs.go':'Go',
   'soon':'Coming soon','soon.journal':'The TWF Journal link comes later.','soon.ai':'TWF AI comes later.','soon.chart':'The chart and replay arrive in v2. Your session is saved.',
-  'toast.saved':'Saved','toast.deleted':'Deleted','toast.sesscreated':'Session created','toast.preset':'Preset saved','toast.welcome':'Welcome','toast.loggedout':'Logged out',
+  'm.accounts':'Accounts','m.strategies':'Strategies','m.more':'More','toast.saved':'Saved','toast.deleted':'Deleted','toast.sesscreated':'Session created','toast.preset':'Preset saved','toast.welcome':'Welcome','toast.loggedout':'Logged out',
   'notif.title':'Notifications','notif.empty':'No notifications yet','confirm.del':'Are you sure you want to delete this?','confirm.reset':'Erase everything? Type ERASE to confirm.',
   'err.fill':'Please fill in all fields.','err.login':'Login name or password is incorrect.','err.exists':'This login name already exists.','err.short':'Password must be at least 6 characters.',
   'balance':'Balance','trades':'trades','created':'Created','markets':'Assets','account':'Account','strategy':'Strategy','period':'Period','progress':'Progress','status':'Status','active':'Active','name':'Name','type':'Type','date':'Date',
@@ -1522,19 +1627,49 @@ async function doRegister(){
 function enterApp(resumed){
   { const p=profile(); if(!p.mig76&&p.drawStyles){ const ds={...p.drawStyles}; ['trend','ray','ext','info','angle','hline','hray','vline','crossline','arrow','path','polyline','rect','channel'].forEach(k=>{ if(ds[k]&&ds[k].width<2) ds[k]={...ds[k],width:2} }); DB.put('profile',{...p,id:'me',drawStyles:ds,mig76:1}) } }
   { const sv=$('#sideVer'); if(sv) sv.textContent=`${LANG==='en'?'Version':'Versie'}: ${CFG.VERSION} · TWF Backtest` }
-  $('#login').classList.add('hide');$('#app').classList.remove('hide');$('#fab').classList.remove('hide');
+  $('#login').classList.add('hide');$('#app').classList.remove('hide');document.body.classList.add('in-app');$('#fab').classList.remove('hide');
   $('#lgPass').value='';$('#rgPass').value='';
   S.page='testing';S.tab='dash';render(); Promise.all([MD.loadManifest(),MK.load(),checkAdmin()]).then(()=>{ if(!SX) render() });
   if(!resumed) toast(t('toast.welcome')+', '+(profile().name||''),'', 'ok',2500);
   updatedToast(); startUpdateWatch(); markUpdate(); if(!resumed) pkOffer();
 }
-async function logout(){await DB.signOut(); pkLoginUI();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
+async function logout(){await DB.signOut();document.body.classList.remove('in-app');closeSheet(); pkLoginUI();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
 
 /* =========================================================
    RENDER
    ========================================================= */
 function inkOn(hex){ const m=String(hex).replace('#','').match(/^([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i); if(!m) return '#fff'; const [r,g,b]=m.slice(1).map(x=>parseInt(x,16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)); const L=.2126*r+.7152*g+.0722*b; return (L+.05)/.055>1.05/(L+.05)?'#0b0e14':'#fff' }
 const TWF_MARK='<svg viewBox="0 0 24 24" fill="none" stroke-linecap="round"><path d="M6.5 5.5v10M12 3.5v9.5M17.5 6.5v8" stroke="#fff" stroke-opacity=".55" stroke-width="1.4"/><rect x="4.6" y="8.5" width="3.8" height="5" rx="1" fill="#fff"/><rect x="10.1" y="5.5" width="3.8" height="5.5" rx="1" fill="#fff"/><rect x="15.6" y="8" width="3.8" height="4.5" rx="1" fill="#fff" fill-opacity=".85"/><path d="M4.5 19.2h15" stroke="#fff" stroke-width="2.2"/></svg>';
+
+/* =========================================================
+   v8.3: VALUTA — wisselkoersen (ECB via Frankfurter), 1x per 6 uur ververst
+   Koersen worden in USD genoteerd (XAUUSD, NQ, BTCUSD); P&L wordt omgerekend
+   naar de valuta van de handelsrekening.
+   ========================================================= */
+const CCYS=['EUR','USD','GBP','CHF','JPY','AUD','CAD'];
+const FX={ r:{USD:1,EUR:0.92,GBP:0.79,CHF:0.88,JPY:150,AUD:1.52,CAD:1.37}, at:0, date:null, busy:false,
+  init(){ try{ const c=JSON.parse(lsGet('twfbt_fx')||'null'); if(c&&c.r){ Object.assign(this.r,c.r); this.at=c.at||0; this.date=c.date||null } }catch(e){} if(Date.now()-this.at>6*3600e3) this.refresh() },
+  async refresh(){ if(this.busy) return false; this.busy=true;
+    try{ for(const u of ['https://api.frankfurter.dev/v1/latest?base=USD','https://api.frankfurter.app/latest?from=USD']){
+      try{ const r=await fetch(u,{cache:'no-store'}); if(!r.ok) continue; const j=await r.json(); if(!j||!j.rates) continue;
+        this.r={...this.r,...j.rates,USD:1}; this.at=Date.now(); this.date=j.date||null; lsSet('twfbt_fx',JSON.stringify({r:this.r,at:this.at,date:this.date}));
+        try{ if(!SX&&!$('#app').classList.contains('hide')&&!document.querySelector('.ov')) render() }catch(e){}
+        return true }catch(e){} } return false } finally{ this.busy=false } },
+  rate(from,to){ from=from||'USD'; to=to||'USD'; if(from===to) return 1; const a=this.r[from], b=this.r[to]; return a&&b?b/a:1 },
+  conv(v,from,to){ return (+v||0)*this.rate(from,to) }
+};
+const qccy=sym=>(typeof MARKETS!=='undefined'&&MARKETS&&MARKETS[sym]&&MARKETS[sym].ccy)||'USD';
+const ccs=sym=>SPEC[sym].cs*(SX&&SX.acc?FX.rate(qccy(sym),SX.acc.currency||'USD'):1);
+/* waarde van een trade in USD / in een gekozen valuta (oude trades zonder ccy staan in USD) */
+function trUsd(x){ if(x.pnlUsd!=null) return x.pnlUsd; return x.ccy&&x.ccy!=='USD'?FX.conv(x.pnl,x.ccy,'USD'):(+x.pnl||0) }
+function trIn(x,c){ return x.ccy&&x.ccy===c?(+x.pnl||0):FX.conv(trUsd(x),'USD',c) }
+function primCcy(){ const pf=(profile().prefs)||{}; if(pf.ccy) return pf.ccy; const c={}; DB.list('sessions').forEach(s=>{const a=DB.get('accounts',s.account); if(!a) return; const k=a.currency||'USD'; c[k]=(c[k]||0)+1+(s.trades||[]).length*2}); if(!Object.keys(c).length) DB.list('accounts').forEach(a=>{const k=a.currency||'USD';c[k]=(c[k]||0)+(k==='USD'?0.5:1)}); return Object.keys(c).sort((a,b)=>c[b]-c[a])[0]||'EUR' }
+function showCcys(){ const pf=(profile().prefs)||{}, p=primCcy(); return [...new Set([p,p==='USD'?'EUR':'USD',...(pf.ccyExtra||[])])] }
+const fmtCcy=(v,c,dp=2)=>(v<0?'−':'')+new Intl.NumberFormat(locale(),{style:'currency',currency:c,currencyDisplay:'narrowSymbol',minimumFractionDigits:dp,maximumFractionDigits:dp}).format(Math.abs(v));
+/* bedrag (in valuta 'from', standaard hoofdvaluta) + dezelfde waarde in de andere valuta's eronder */
+function money2(v,dp=2,from,sign){ const f=from||primCcy(), list=showCcys(), main=list.includes(f)?f:list[0], sg=n=>sign&&n>0?'+':'';
+  const mv=FX.conv(v,f,main); return `<span class="m2"><span>${sg(mv)}${fmtCcy(mv,main,dp)}</span>${list.filter(c=>c!==main).map(c=>{const n=FX.conv(v,f,c);return `<small>${sg(n)}${fmtCcy(n,c,dp)}</small>`}).join('')}</span>` }
+
 const ACCENTS=[['#4c74ff','TWF Blue'],['#2962FF','TradingView'],['#22ab94','Green'],['#9c6bff','Purple'],['#f0b429','Gold'],['#ef5350','Red']];
 function applyAccent(){ const a=(profile().prefs||{}).accent; const b=document.body; if(!a){ ['--accent','--accent2','--accentSoft'].forEach(k=>b.style.removeProperty(k)); return }
   const r=parseInt(a.slice(1,3),16),g=parseInt(a.slice(3,5),16),bl=parseInt(a.slice(5,7),16); b.style.setProperty('--accent',a); b.style.setProperty('--accent2',`rgb(${Math.round(r*.8)},${Math.round(g*.8)},${Math.round(bl*.8)})`); b.style.setProperty('--accentSoft',`rgba(${r},${g},${bl},.14)`) }
@@ -1545,17 +1680,27 @@ function renderSide(){
   const p=profile(); $('#profName').textContent=p.name||'—';
   $('#avatar').firstChild.nodeValue=p.photo?'':(p.name||'?').trim().charAt(0).toUpperCase(); $('#avatar').style.backgroundImage=p.photo?`url(${p.photo})`:''; $('#avatar').classList.toggle('ph',!!p.photo); applyAccent();
   const b=$('#tierBadge'); b.textContent=p.tier==='elite'?'Elite':'Institute'; b.classList.toggle('elite',p.tier==='elite');
-  document.querySelectorAll('#app [data-go]').forEach(x=>x.classList.toggle('on',x.dataset.go===S.page));
+  document.querySelectorAll('#app [data-go],#tabbar [data-go]').forEach(x=>x.classList.toggle('on',x.dataset.go===S.page));
+  const more=$('#tbMore'); if(more) more.classList.toggle('on',['start','markets','data','settings'].includes(S.page));
 }
+function wrapTables(root){ (root||document).querySelectorAll('table.tbl').forEach(t=>{ if(t.parentElement&&t.parentElement.classList.contains('tscroll')) return; const w=document.createElement('div'); w.className='tscroll'+(t.classList.contains('mini')?' mini':''); t.replaceWith(w); w.appendChild(t) }) }
 function render(){
   applyStatic(); renderSide();
   const m=$('#main');
   const pages={start:pageStart,testing:pageTesting,accounts:pageAccounts,strategies:pageStrategies,settings:pageSettings,data:pageData,markets:pageMarkets,prop:pageProp};
   m.innerHTML=(pages[S.page]||pageTesting)(); m.scrollTop=0;
-  bindPage();
+  wrapTables(m); bindPage();
 }
 const JOURNAL_URL='https://twfapp.github.io/twfjournal/';
-function go(p){ if(p==='journal'){ window.open(JOURNAL_URL,'_blank','noopener'); return } S.page=p;render(); }
+function go(p){ closeSheet(); if(p==='journal'){ window.open(JOURNAL_URL,'_blank','noopener'); return } S.page=p;render(); }
+function openSheet(){ const sh=$('#msheet'), p=profile(); const L=(nl,en)=>LANG==='en'?en:nl;
+  $('#mshProf').innerHTML=`${avatarHtml('avatar')}<div><b>${esc(p.name||'—')}</b><small>${p.tier==='elite'?'Elite':'Institute'} · ${CFG.VERSION}</small></div>`;
+  $('#mshTheme').innerHTML=ic(curTheme()==='dark'?'sun':'moon')+`<span>${curTheme()==='dark'?L('Licht','Light'):L('Donker','Dark')}</span>`;
+  $('#mshLang').innerHTML=`<b>${LANG==='en'?'NL':'EN'}</b><span>${LANG==='en'?'Nederlands':'English'}</span>`;
+  $('#mshBell').innerHTML=ic('bell')+`<span>${L('Meldingen','Notifications')}</span>`;
+  sh.querySelectorAll('[data-go]').forEach(x=>x.classList.toggle('on',x.dataset.go===S.page));
+  sh.classList.remove('hide'); requestAnimationFrame(()=>sh.classList.add('open')) }
+function closeSheet(){ const sh=$('#msheet'); if(!sh||sh.classList.contains('hide')) return; sh.classList.remove('open'); setTimeout(()=>sh.classList.add('hide'),220) }
 
 /* ----- stats ----- */
 function stats(){
@@ -1636,13 +1781,12 @@ function tabTrades(){
   const F=S.tf||(S.tf={side:'',out:'',sess:'',sym:''}); const all=allTrades();
   const tr=all.filter(x=>(!F.side||x.side===F.side)&&(!F.out||(F.out==='win'?x.pnl>0:x.pnl<=0))&&(!F.sess||x.sess.id===F.sess)&&(!F.sym||x.sym===F.sym));
   const sel=(k,opts)=>`<select class="lang" data-tf="${k}">${opts.map(([v,l])=>`<option value="${v}" ${F[k]===v?'selected':''}>${esc(l)}</option>`).join('')}</select>`;
-  const tot=tr.reduce((a,x)=>a+x.pnl,0), wins=tr.filter(x=>x.pnl>0).length;
-  const fm=(n,s)=>new Intl.NumberFormat(locale(),{style:'currency',currency:(DB.get('accounts',s.account)||{}).currency||'USD',currencyDisplay:'narrowSymbol',minimumFractionDigits:2}).format(n);
+  const pc=primCcy(), tot=tr.reduce((a,x)=>a+trIn(x,pc),0), wins=tr.filter(x=>x.pnl>0).length;
   const head=`<div class="toolbar">${sel('side',[['',t('f.side')+': '+t('all')],['buy','Long'],['sell','Short']])}${sel('out',[['',t('f.outcome')+': '+t('all')],['win','Wins'],['loss','Losses']])}${sel('sess',[['',t('f.session')+': '+t('all')],...DB.list('sessions').map(s=>[s.id,s.name])])}${sel('sym',[['',t('markets')+': '+t('all')],...ASSETS.map(a=>[a.sym,a.sym])])}
-    <div style="flex:1"></div>${tr.length?`<span class="pill">${tr.length} trades</span><span class="pill">${t('an.wr')} ${Math.round(wins/tr.length*100)}%</span><span class="pill ${tot>=0?'acc':'neg'}">${t('an.net')} ${tot>=0?'+':'−'}${fm(Math.abs(tot),{})}</span>`:''}</div>`;
+    <div style="flex:1"></div>${tr.length?`<span class="pill">${tr.length} trades</span><span class="pill">${t('an.wr')} ${Math.round(wins/tr.length*100)}%</span><span class="pill npill ${tot>=0?'pos':'neg'}">${t('an.net')} ${money2(tot,2,pc,true).replace('class="m2"','class="m2 inl"')}</span>`:''}</div>`;
   if(!tr.length) return head+`<table class="tbl"><tbody><tr><td><div class="empty"><div class="ei">${ic('doc',24)}</div><h4>${t('trades.empty')}</h4><div>${t('trades.emptysub')}</div></div></td></tr></tbody></table>`;
-  return head+`<table class="tbl"><thead><tr><th>${t('date')}</th><th>${t('f.session')}</th><th>${t('markets')}</th><th>${t('f.side')}</th><th>${t('tr.qty')}</th><th>Entry</th><th>Exit</th><th>R</th><th>${t('tr.reason')}</th><th style="text-align:right">P&L</th></tr></thead><tbody>
-   ${tr.map(x=>`<tr class="click" data-otr="${x.sess.id}|${x.id}"><td>${new Date(x.closeTime*1000).toLocaleString(locale(),{timeZone:'UTC',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</td><td>${esc(x.sess.name)}</td><td><b>${x.sym}</b></td><td><span class="pill ${x.side==='buy'?'acc':'neg'}">${x.side==='buy'?'Long':'Short'}</span></td><td>${x.qty}</td><td>${x.entry.toFixed(SYMCFG[x.sym].dec)}</td><td>${x.exit.toFixed(SYMCFG[x.sym].dec)}</td><td>${x.rr!=null?x.rr+'R':'—'}</td><td>${reasonLbl(x.reason)}</td><td style="text-align:right"><b class="${x.pnl>=0?'pos':'neg'}">${x.pnl>=0?'+':'−'}${fm(Math.abs(x.pnl),x.sess)}</b></td></tr>`).join('')}</tbody></table>`;
+  return head+`<table class="tbl trtbl"><thead><tr><th>${t('date')}</th><th>${t('f.session')}</th><th>${t('markets')}</th><th>${t('f.side')}</th><th>${t('tr.qty')}</th><th>Entry</th><th>Exit</th><th>R</th><th>${t('tr.reason')}</th><th style="text-align:right">P&L</th></tr></thead><tbody>
+   ${tr.map(x=>`<tr class="click" data-otr="${x.sess.id}|${x.id}"><td class="c-date">${new Date(x.closeTime*1000).toLocaleString(locale(),{timeZone:'UTC',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</td><td class="c-sess">${esc(x.sess.name)}</td><td class="c-sym"><b>${x.sym}</b></td><td class="c-side"><span class="pill ${x.side==='buy'?'acc':'neg'}">${x.side==='buy'?'Long':'Short'}</span></td><td data-l="${t('tr.qty')}">${x.qty}</td><td data-l="Entry">${x.entry.toFixed(SYMCFG[x.sym].dec)}</td><td data-l="Exit">${x.exit.toFixed(SYMCFG[x.sym].dec)}</td><td data-l="R">${x.rr!=null?x.rr+'R':'—'}</td><td data-l="${t('tr.reason')}">${reasonLbl(x.reason)}</td><td class="c-pnl" style="text-align:right"><b class="${x.pnl>=0?'pos':'neg'}">${money2(trIn(x,pc),2,pc,true)}</b></td></tr>`).join('')}</tbody></table>`;
 }
 
 /* ----- Get started ----- */
@@ -1849,6 +1993,7 @@ function sessionModal(type='backtest',editId,opts){
 /* =========================================================
    v7.8: PROP FIRMS
    ========================================================= */
+IC.extlink='<path d="M7 17L17 7M8 7h9v9"/>';
 IC.globe=IC.globe||'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.4 3 14.6 0 18M12 3c-3 3.4-3 14.6 0 18"/>';
 IC.spark=IC.spark||'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>';
 const DDTYPES=[['static','Statisch (vanaf startsaldo)','Static (from start balance)'],['trailing','Trailing (meeschuivend met hoogste equity)','Trailing (follows highest equity)'],['eod','End-of-day trailing','End-of-day trailing']];
@@ -2135,9 +2280,13 @@ function pageSettings(){
   else if(tab==='look') body=`<h2>${L('Weergave','Appearance')}</h2><div class="box">
      <div class="srow"><div class="stx"><b>${t('set.theme')}</b></div><div class="seg"><button class="${curTheme()==='dark'?'on':''}" data-th="dark">${t('set.dark')}</button><button class="${curTheme()==='light'?'on':''}" data-th="light">${t('set.light')}</button></div></div>
      <div class="srow"><div class="stx"><b>${t('set.lang')}</b><small>${L('De chart zelf is altijd Engels, net als TradingView.','The chart itself is always English, like TradingView.')}</small></div><div class="seg"><button class="${LANG==='nl'?'on':''}" data-lg="nl">NL</button><button class="${LANG==='en'?'on':''}" data-lg="en">EN</button></div></div>
-     <div class="srow"><div class="stx"><b>${L('Accentkleur','Accent colour')}</b><small>${L('Kleur van knoppen en highlights.','Colour of buttons and highlights.')}</small></div><div class="accs">${ACCENTS.map(([c,n],i)=>`<button class="acc ${(pf.accent||ACCENTS[0][0])===c?'on':''}" data-acc="${i===0?'':c}" title="${n}" style="background:${c}"></button>`).join('')}</div></div>
+     <div class="srow"><div class="stx"><b>${L('Accentkleur','Accent colour')}</b><small>${L('Kleur van knoppen en highlights.','Colour of buttons and highlights.')}</small></div><div class="accs">${ACCENTS.map(([c,n],i)=>`<button class="accsw ${(pf.accent||ACCENTS[0][0])===c?'on':''}" data-acc="${i===0?'':c}" title="${n}" style="background:${c}"></button>`).join('')}</div></div>
      ${TOG('compact',!!pf.compact,L('Compacte weergave','Compact view'),L('Kleinere marges in lijsten en tabellen.','Tighter spacing in lists and tables.'))}
-     ${TOG('anim',pf.anim!==false,L('Animaties','Animations'),L('Vloeiende overgangen in de app.','Smooth transitions in the app.'))}</div>`;
+     ${TOG('anim',pf.anim!==false,L('Animaties','Animations'),L('Vloeiende overgangen in de app.','Smooth transitions in the app.'))}</div>
+     <h3 style="margin:22px 0 10px">${L('Valuta','Currency')}</h3><div class="box">
+     <div class="srow"><div class="stx"><b>${L('Hoofdvaluta','Main currency')}</b><small>${L('Totalen en statistieken worden hierin getoond. Standaard: de valuta van je rekening.','Totals and statistics are shown in this. Default: your account currency.')}</small></div><select class="inp ssel" id="pCcy"><option value="">${L('Automatisch','Automatic')} (${primCcy()})</option>${CCYS.map(c=>`<option value="${c}" ${pf.ccy===c?'selected':''}>${c}</option>`).join('')}</select></div>
+     <div class="srow"><div class="stx"><b>${L('Ook tonen in','Also show in')}</b><small>${L('Naast de hoofdvaluta staat altijd '+(primCcy()==='USD'?'EUR':'USD')+'. Zet hier extra valuta aan.','Next to the main currency '+(primCcy()==='USD'?'EUR':'USD')+' is always shown. Turn on extra currencies here.')}</small></div><div class="seg ccyx">${CCYS.filter(c=>!showCcys().slice(0,2).includes(c)).map(c=>`<button class="${(pf.ccyExtra||[]).includes(c)?'on':''}" data-ccyx="${c}">${c}</button>`).join('')}</div></div>
+     <div class="srow"><div class="stx"><b>${L('Wisselkoers','Exchange rate')}</b><small>${L('ECB-koersen via Frankfurter, elke 6 uur ververst.','ECB rates via Frankfurter, refreshed every 6 hours.')}${FX.date?' · '+FX.date:''}</small></div><span class="pill">1 USD = ${fmtCcy(FX.rate('USD',primCcy()==='USD'?'EUR':primCcy()),primCcy()==='USD'?'EUR':primCcy(),4)}</span></div></div>`;
   else if(tab==='chart') body=`<h2>Chart</h2><div class="box">
      ${SELR('defaultTemplate',t('set.templates'),t('set.tplhint'),allTplOpts(),p.defaultTemplate||'tv-dark')}
      ${SELR('chartTz',L('Tijdzone','Timezone'),L('Tijden op de chart en in de klok.','Times on the chart and in the clock.'),TZS,tz)}
@@ -2162,7 +2311,7 @@ function pageSettings(){
      ${ROW(L('Marktdata beheren','Manage market data'),L('Importeren, bijwerken en verwijderen.','Import, update and delete.'),`<button class="btn btn-g" data-gs="data">${ic('db',15)} ${L('Naar Marktdata','Open Market data')}</button>`)}</div>
      <div class="box"><h3>${L('Marktdata per markt','Market data per market')}</h3><div id="dMk"></div></div>`;
   else if(tab==='links') body=`<h2>${L('Koppelingen','Connections')}</h2><div class="box" id="lnk"><div class="mut">…</div></div>
-     <div class="box"><h3>TWF Journal</h3>${ROW(L('Open TWF Journal','Open TWF Journal'),L('Zelfde account; je backtest-trades worden daar straks zichtbaar onder "Backtest".','Same account; your backtest trades will show up there under "Backtest".'),`<button class="btn btn-g" data-gs="journal">${ic('book',15)} TWF Journal ${ic('ext',14)}</button>`)}</div>`;
+     <div class="box"><h3>TWF Journal</h3>${ROW(L('Open TWF Journal','Open TWF Journal'),L('Zelfde account; je backtest-trades worden daar straks zichtbaar onder "Backtest".','Same account; your backtest trades will show up there under "Backtest".'),`<button class="btn btn-g" data-gs="journal">${ic('book',15)} TWF Journal ${ic('extlink',14)}</button>`)}</div>`;
   else body=`<h2>${L('Over TWF Backtest','About TWF Backtest')}</h2>
      ${updBoxHtml()}
      <div class="box sabout"><div class="logo big"><div class="mark"><b>TWF</b><i></i></div><span>BACKTEST</span></div>
@@ -2180,8 +2329,8 @@ function pageSettings(){
 }
 async function settingsLive(m){
   const L=(nl,en)=>LANG==='en'?en:nl, tab=S.setTab||'profile', ok=(b,txt)=>`<span class="chk ${b?'ok':b===null?'na':'bad'}"><i></i>${txt}</span>`;
-  if(tab==='profile'){ const ss=DB.list('sessions'), tr=ss.flatMap(s=>s.trades||[]), w=tr.filter(x=>x.pnl>0).length, net=tr.reduce((a,x)=>a+(x.pnl||0),0);
-    const el=m.querySelector('#sStats'); if(el) el.innerHTML=[[L('Sessies','Sessions'),ss.length],['Trades',tr.length],[L('Winratio','Win rate'),tr.length?Math.round(w/tr.length*100)+'%':'—'],[L('Netto','Net'),money(net)],[L('Strategieën','Strategies'),DB.list('strategies').length],[L('Rekeningen','Accounts'),DB.list('accounts').length]].map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('') }
+  if(tab==='profile'){ const ss=DB.list('sessions'), tr=ss.flatMap(s=>s.trades||[]), w=tr.filter(x=>x.pnl>0).length, net=tr.reduce((a,x)=>a+trIn(x,primCcy()),0);
+    const el=m.querySelector('#sStats'); if(el) el.innerHTML=[[L('Sessies','Sessions'),ss.length],['Trades',tr.length],[L('Winratio','Win rate'),tr.length?Math.round(w/tr.length*100)+'%':'—'],[L('Netto','Net'),money2(net)],[L('Strategieën','Strategies'),DB.list('strategies').length],[L('Rekeningen','Accounts'),DB.list('accounts').length]].map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('') }
   if(tab==='account'){ let email='local', role=L('Lokaal','Local');
     if(DB.sb){ try{ const {data}=await DB.sb.auth.getUser(); email=(data&&data.user&&data.user.email)||'—' }catch(e){}
       try{ const {data}=await DB.sb.from('bt_admins').select('user_id').eq('user_id',DB.uid); role=data&&data.length?'Admin':L('Lid','Member') }catch(e){ role=L('Lid','Member') } }
@@ -2237,6 +2386,8 @@ function bindPage(){
   const savePref=async(fn)=>{ const p=profile(); const np={...p,id:'me',prefs:{...(p.prefs||{})},trading:{...trSet()}}; fn(np); await DB.put('profile',np); toast(t('toast.saved'),'','ok',1400) };
   q('[data-ps]').forEach(s=>s.onchange=()=>savePref(np=>{ const k=s.dataset.ps; if(k==='defaultTemplate') np.defaultTemplate=s.value; else if(k==='chartTz') np.chartTz=s.value; else np.prefs[k]=['defSpeed'].includes(k)?+s.value:s.value }));
   q('[data-pt]').forEach(b=>b.onclick=()=>{ const k=b.dataset.pt, on=!b.classList.contains('on'); b.classList.toggle('on',on); savePref(np=>{ if(k.startsWith('ts.')) np.trading[k.slice(3)]=on; else np.prefs[k]=on }) });
+  const pcy=m.querySelector('#pCcy'); if(pcy) pcy.onchange=async()=>{ await savePref(np=>{ np.prefs.ccy=pcy.value||'' }); render() };
+  q('[data-ccyx]').forEach(b=>b.onclick=async()=>{ const c=b.dataset.ccyx; await savePref(np=>{ const x=new Set(np.prefs.ccyExtra||[]); x.has(c)?x.delete(c):x.add(c); np.prefs.ccyExtra=[...x] }); render() });
   q('[data-acc]').forEach(b=>b.onclick=async()=>{ await savePref(np=>{ np.prefs.accent=b.dataset.acc||'' }); applyAccent(); q('[data-acc]').forEach(x=>x.classList.toggle('on',x===b)) });
   const pq=m.querySelector('#pQty'); if(pq) pq.onchange=()=>savePref(np=>{ np.trading.qty=+pq.value||1 });
   const psd=m.querySelector('#pSnd'); if(psd) psd.onchange=async()=>{ await savePref(np=>{ np.trading.soundType=psd.value }); playSound(psd.value) };
@@ -2571,16 +2722,17 @@ function legend(d){ if(!SX) return;
   const b=d||(SX.rp?SX.rp.current():null); if(!b) return; const dec=SYMCFG[SX.sym].dec;
   const o=b.open??b.value, cl=b.close??b.value, ch=cl-o, pc=o?ch/o*100:0, col=ch>=0?'var(--pos)':'var(--neg)';
   const f=x=>x==null?'—':fmtPx(x), c=tplColors(), vc=ch>=0?(c.bodyUp||c.up):(c.bodyDown||c.down), a=asset(SX.sym)||{};
-  $('#sxLegend').innerHTML=`${c.slSymbol!==false?`<span class="lgt">${symBadge(SX.sym)}<span>${esc(a.nameEn||SX.sym)} · ${tvTf(SX.tf)} · TWF</span></span>`:''}
+  const html=`${c.slSymbol!==false?`<span class="lgt">${symBadge(SX.sym)}<span>${esc(a.nameEn||SX.sym)} · ${tvTf(SX.tf)} · TWF</span></span>`:''}
    ${c.slOHLC!==false?`<span class="lgv" style="--vc:${vc}">O<i>${f(b.open??b.value)}</i> H<i>${f(b.high??b.value)}</i> L<i>${f(b.low??b.value)}</i> C<i>${f(cl)}</i></span>`:''}
    ${c.slChange!==false?`<span class="lgv" style="--vc:${vc}"><i>${ch>=0?'+':''}${fmtPx(ch)} (${pc>=0?'+':''}${pc.toFixed(2)}%)</i></span>`:''}
    ${c.slVol&&b.volume!=null?`<span class="lgv" style="--vc:${vc}">Vol<i>${Math.round(b.volume).toLocaleString('en-US')}</i></span>`:''}`;
+  if(SX._lg!==html){ SX._lg=html; $('#sxLegend').innerHTML=html }
 }
 function hud(){ if(!SX) return;
   const f=SX.rp.f, sec=f.t[SX.rp.idx]+60;
   const d=new Date(sec*1000);
   { const o=tzParts(sec); $('#sxClock').textContent=`${o.weekday} ${o.day} ${o.month} '${o.year}  ${o.hour}:${o.minute}  ${tzLabel(sec)}` }
-  updTradeWidgets(); const op=SX.pos?openPnl():0; $('#sxBal').innerHTML=`${fmtBal(equity())}${SX.pos&&SX.pos.length?` <span class="dotsep">●</span> <span class="${op>=0?'pos':'neg'}">${fmtUsd(op)}</span>`:''}`;
+  updTradeWidgets(); const op=SX.pos?openPnl():0; const bh=`${fmtBal(equity())}${SX.pos&&SX.pos.length?` <span class="dotsep">●</span> <span class="${op>=0?'pos':'neg'}">${fmtUsd(op)}</span>`:''}`; if(SX._bh!==bh){ SX._bh=bh; $('#sxBal').innerHTML=bh }
   const pf=$('#sxPf'); if(pf&&SX.s.type==='propfirm'){const st=SX.s.startBalance??SX.acc.balance, g=((equity()-st)/st*100);pf.innerHTML=SX.s.pfStatus?`<b class="${SX.s.pfStatus==='passed'?'pos':'neg'}">${SX.s.pfStatus==='passed'?t('pf.passed'):t('pf.failed')}</b>`:`${t('pf.progress')} <b class="${g>=0?'pos':'neg'}">${g>=0?'+':''}${g.toFixed(2)}%</b> / ${SX.s.target||10}%`}
   liveOrderPanel();
 }
@@ -2625,12 +2777,12 @@ function startPlay(){
     const rp=SX.rp, f=rp.f;
     if(rp.idx>=f.n-2000) f.extendTo(f.t[f.n-1]+30*86400);
     if(SX.s.endMode==='custom'&&SX.s.end){ const endSec=new Date(SX.s.end+'T23:59:00Z').getTime()/1000; if(f.t[rp.idx]>=endSec){stopPlay();toast(t('sx.ended'),'', 'info');return} }
-    if(n>0){ for(let k=0;k<n;k++){const r=rp.tick();if(r.end){ if(f.real&&(f.loading||f.hasMore())){f.extendTo();break} stopPlay(); toast(t('md.enddata'),'','info'); break }applyTick(r)} pushBar(rp.current()); legend(null); hud(); afterTicks(); }
+    if(n>0){ for(let k=0;k<n;k++){const r=rp.tick();if(r.end){ if(f.real&&(f.loading||f.hasMore())){f.extendTo();break} stopPlay(); toast(t('md.enddata'),'','info'); break }applyTick(r)} pushBar(rp.current()); afterTicks(); if(!SX) return; if(!SX.playing||now-(SX.uiAt||0)>80){ SX.uiAt=now; legend(null); hud(); } }
     if(smooth&&SX&&SX.playing&&rp.sub<3){ rp.frac=acc; pushBar(rp.current()); }
     SX.raf=requestAnimationFrame(loop) };
   SX.raf=requestAnimationFrame(loop);
 }
-function stopPlay(){ if(!SX) return; SX.playing=false; if(SX.rp&&SX.rp.frac){SX.rp.frac=0; try{pushBar(SX.rp.current())}catch(e){}} if(SX.raf) cancelAnimationFrame(SX.raf); const b=$('#sxPlay'); if(b){b.innerHTML=ic('play',18);b.classList.remove('on')} }
+function stopPlay(){ if(!SX) return; const was=SX.playing; SX.playing=false; if(was) try{ legend(null); hud() }catch(e){} if(SX.rp&&SX.rp.frac){SX.rp.frac=0; try{pushBar(SX.rp.current())}catch(e){}} if(SX.raf) cancelAnimationFrame(SX.raf); const b=$('#sxPlay'); if(b){b.innerHTML=ic('play',18);b.classList.remove('on')} }
 function setTf(k){ SX.tf=k; SX.rp.tf=k; fullRender(true); updateTopbar(); }
 async function gotoReal(sec){
   const r=MD.range(SX.sym); if(r&&(sec<new Date(r.from).getTime()/1000||sec>new Date(r.to).getTime()/1000+86400)){toast(t('sx.goto'),t('md.outofrange',{a:fmtDate(r.from),b:fmtDate(r.to)}),'bad');return}
@@ -2829,10 +2981,10 @@ const ask=()=>bid()+spreadPx();
 const dirOf=p=>p.side==='buy'?1:-1;
 const rnd=(x,sym=SX.sym)=>+(+x).toFixed(SYMCFG[sym].dec);
 function closeQuote(p){return p.side==='buy'?bid():ask()}
-function pnlAt(p,level){return (level-p.entry)*dirOf(p)*p.qty*SPEC[p.sym].cs}
+function pnlAt(p,level){return (level-p.entry)*dirOf(p)*p.qty*ccs(p.sym)}
 function openPnl(){return SX.pos.reduce((a,p)=>a+(p.sym===SX.sym?pnlAt(p,closeQuote(p)):(p.lastPnl||0)),0)}
 function equity(){return (SX.s.balance??0)+openPnl()}
-function marginUsed(){const lev=+SX.acc.leverage||100;return SX.pos.reduce((a,p)=>a+p.entry*p.qty*SPEC[p.sym].cs/lev,0)}
+function marginUsed(){const lev=+SX.acc.leverage||100;return SX.pos.reduce((a,p)=>a+p.entry*p.qty*ccs(p.sym)/lev,0)}
 const cur=()=>SX.acc.currency||'USD';
 const fmtUsd=(n,dp=2)=>(n>=0?'+':'−')+new Intl.NumberFormat(locale(),{style:'currency',currency:cur(),currencyDisplay:'narrowSymbol',minimumFractionDigits:dp,maximumFractionDigits:dp}).format(Math.abs(n));
 const fmtBal=n=>new Intl.NumberFormat(locale(),{style:'currency',currency:cur(),currencyDisplay:'narrowSymbol',minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
@@ -2841,6 +2993,15 @@ const sideLbl=s=>s==='buy'?t('tr.buy'):t('tr.sell');
 function persistTrading(){SX.s.positions=SX.pos;SX.s.orders=SX.orders;saveSession()}
 
 /* ----- openen / sluiten ----- */
+/* v8.3: zelfde markt + richting + entry → één positie (lots opgeteld, bestaande TP/SL blijft) */
+function addPosition(p){
+  const tick=(SPEC[p.sym]&&SPEC[p.sym].pip)||Math.pow(10,-(SYMCFG[p.sym]?SYMCFG[p.sym].dec:2));
+  const ex=SX.pos.find(x=>x.sym===p.sym&&x.side===p.side&&Math.abs(x.entry-p.entry)<tick/2);
+  if(!ex){ SX.pos.push(p); return p }
+  ex.qty=+(ex.qty+p.qty).toFixed(2);
+  if(ex.tp==null&&p.tp!=null) ex.tp=p.tp; if(ex.sl==null&&p.sl!=null){ ex.sl=p.sl; if(ex.initSl==null) ex.initSl=p.sl }
+  SX.dirty=true; return ex;
+}
 function placeMarket(side,qty,sl,tp,silent){
   qty=+qty; if(!(qty>0)){toast(t('tr.badqty'),'', 'bad');return}
   const sp=SPEC[SX.sym]; qty=Math.round(qty/sp.step)*sp.step; qty=+qty.toFixed(2);
@@ -2854,10 +3015,9 @@ function placeMarket(side,qty,sl,tp,silent){
     if(remaining<=0){drawOverlay();persistTrading();return}
   }
   const price=rnd(side==='buy'?ask()+slipPx():bid()-slipPx());
-  const need=price*remaining*sp.cs/(+SX.acc.leverage||100);
+  const need=price*remaining*ccs(SX.sym)/(+SX.acc.leverage||100);
   if(equity()-marginUsed()<need){toast(t('tr.nomargin'),t('tr.nomargin2',{m:fmtBal(need)}),'bad');return}
-  const p={id:uid(),sym:SX.sym,side,qty:remaining,entry:price,openTime:nowSec(),sl:sl??null,tp:tp??null,initSl:sl??null,comm:0};
-  SX.pos.push(p);
+  const p=addPosition({id:uid(),sym:SX.sym,side,qty:remaining,entry:price,openTime:nowSec(),sl:sl??null,tp:tp??null,initSl:sl??null,comm:0});
   execSound(); if(!silent) toast(t('tr.mexec'),`${SX.sym} · ${sideLbl(side)} ${remaining} @ ${price.toFixed(SYMCFG[SX.sym].dec)}`,'ok');
   firstOneClickHint();
   drawOverlay(); persistTrading(); renderTradePanels(); return p;
@@ -2870,8 +3030,7 @@ function placePending(side,type,qty,price,sl,tp){
 }
 function fillOrder(o,px){
   SX.orders=SX.orders.filter(x=>x.id!==o.id);
-  const p={id:uid(),sym:o.sym,side:o.side,qty:o.qty,entry:rnd(px,o.sym),openTime:nowSec(),sl:o.sl,tp:o.tp,initSl:o.sl,comm:0};
-  SX.pos.push(p);
+  const p=addPosition({id:uid(),sym:o.sym,side:o.side,qty:o.qty,entry:rnd(px,o.sym),openTime:nowSec(),sl:o.sl,tp:o.tp,initSl:o.sl,comm:0});
   toast(t('tr.ofilled'),`${o.sym} · ${sideLbl(o.side)} ${o.type==='limit'?t('tr.limit'):t('tr.stop')} ${o.qty} @ ${p.entry.toFixed(SYMCFG[o.sym].dec)}`,'ok');
   execSound(); if(trSet().pauseOnHit) stopPlay();
   SX.dirty=true;
@@ -2879,10 +3038,10 @@ function fillOrder(o,px){
 function cancelOrder(id){SX.orders=SX.orders.filter(o=>o.id!==id);toast(t('tr.ocancel'),'','info');drawOverlay();persistTrading();renderTradePanels()}
 function closePos(p,exitQ,reason){
   SX.pos=SX.pos.filter(x=>x.id!==p.id);
-  const d=dirOf(p), sp=SPEC[p.sym], gross=(exitQ-p.entry)*d*p.qty*sp.cs, comm=(+SX.s.comm||0)*p.qty, pnl=gross-comm;
+  const d=dirOf(p), sp=SPEC[p.sym], gross=(exitQ-p.entry)*d*p.qty*ccs(p.sym), comm=(+SX.s.comm||0)*p.qty, pnl=gross-comm;
   const risk=p.initSl!=null?Math.abs(p.entry-p.initSl):0;
   const tr={id:uid(),sym:p.sym,side:p.side,qty:p.qty,entry:p.entry,exit:rnd(exitQ,p.sym),openTime:p.openTime,closeTime:nowSec(),sl:p.initSl,tp:p.tp,
-    gross:+gross.toFixed(2),comm:+comm.toFixed(2),pnl:+pnl.toFixed(2),rr:risk?+(((exitQ-p.entry)*d)/risk).toFixed(2):null,reason,
+    gross:+gross.toFixed(2),comm:+comm.toFixed(2),pnl:+pnl.toFixed(2),ccy:cur(),fx:+FX.rate(qccy(p.sym),cur()).toFixed(6),pnlUsd:+FX.conv(pnl,cur(),'USD').toFixed(2),rr:risk?+(((exitQ-p.entry)*d)/risk).toFixed(2):null,reason,
     strategy:SX.s.strategy||null,hadPlan:true,notes:'',tags:[],created:new Date().toISOString()};
   SX.s.trades=[...(SX.s.trades||[]),tr];
   SX.s.balance=+((SX.s.balance??SX.acc.balance)+pnl).toFixed(2);
@@ -2957,7 +3116,7 @@ function drawOverlay(){
       e.preventDefault(); startDrag(it,e);
     });
   });
-  placeOverlay();
+  placeOverlay(true);
 }
 function labelHtml(it){
   const q=it.p?it.p.qty:it.o.qty;
@@ -2966,27 +3125,37 @@ function labelHtml(it){
   if(it.k==='ord') return `<b>${sideLbl(it.o.side)} ${it.o.type==='limit'?t('tr.limit'):t('tr.stop')} ${q}</b><span data-v></span><button data-close>✕</button>`;
   return `<i>${it.k==='otp'?'TP':'SL'}</i><b>${q}</b><button data-close>✕</button>`;
 }
-function placeOverlay(){
+function placeOverlay(force){
   const ov=$('#sxOvl'); if(!ov||!SX||!SX.ovItems) return;
-  const sw=SX.chart.priceScale('right').width(); ov.style.right=sw+'px';
-  const placed=[];
-  ov.querySelectorAll('.olab').forEach(el=>{
-    const it=SX.ovItems[+el.dataset.i]; if(!it) return;
-    const y=SX.series.priceToCoordinate(it.price);
-    if(y==null||y<0||y>ov.clientHeight){el.style.display='none';return} el.style.display='';
-    el.style.top=(y-12)+'px';
-    let r=10; for(const q of placed){ if(Math.abs(q.y-y)<26) r=Math.max(r,q.r+q.w+6) }
-    el.style.right=r+'px'; placed.push({y,r,w:el.offsetWidth});
-    const v=el.querySelector('[data-v]'); if(!v) return;
+  const sw=SX.chart.priceScale('right').width(), H=ov.clientHeight, q=SX.pos.length?closeQuote(SX.pos[0]):0;
+  const ys=SX.ovItems.map(it=>SX.series.priceToCoordinate(it.price));
+  const sig=sw+'|'+H+'|'+ys.map(y=>y==null?'x':Math.round(y)).join(',')+'|'+(SX.pos.length?SX.pos.map(p=>closeQuote(p)).join(','):'')+'|'+SX.ovItems.length;
+  if(!force&&sig===SX.ovSig) return; SX.ovSig=sig;
+  if(ov.style.right!==sw+'px') ov.style.right=sw+'px';
+  const LH=27, els=[...ov.querySelectorAll('.olab')];
+  // zichtbare labels sorteren op hoogte en overlappende labels boven/onder elkaar stapelen
+  const vis=[]; els.forEach(el=>{ const i=+el.dataset.i, y=ys[i]; if(y==null||y<-12||y>H+12){ if(el.style.display!=='none') el.style.display='none'; return } if(el.style.display) el.style.display=''; vis.push({el,i,y}) });
+  vis.sort((a,b)=>a.y-b.y);
+  const groups=[]; vis.forEach(v=>{ let g={items:[v],sum:v.y}; groups.push(g);
+    while(groups.length>1){ const a=groups[groups.length-2], b=groups[groups.length-1]; const aTop=a.sum/a.items.length-(a.items.length-1)*LH/2, bTop=b.sum/b.items.length-(b.items.length-1)*LH/2;
+      if(aTop+a.items.length*LH>bTop){ a.items.push(...b.items); a.sum+=b.sum; groups.pop() } else break } });
+  groups.forEach(g=>{ let top=g.sum/g.items.length-(g.items.length-1)*LH/2; top=Math.max(12,Math.min(H-12-(g.items.length-1)*LH,top));
+    g.items.forEach((v,k)=>{ const yy=top+k*LH; v.el.style.top=(yy-12)+'px'; v.el.style.right='10px'; v.el.classList.toggle('shift',Math.abs(yy-v.y)>3) }) });
+  vis.forEach(({el,i})=>{ const it=SX.ovItems[i]; const v=el.querySelector('[data-v]'); if(!v) return;
     let val=null;
     if(it.k==='pos') val=pnlAt(it.p,closeQuote(it.p));
     else if(it.k==='tp'||it.k==='sl') val=pnlAt(it.p,it.price);
-    if(val!=null){v.textContent=fmtUsd(val);v.className=val>=0?'pos':'neg'}
-    else if(it.k==='ord') v.textContent='@ '+it.price.toFixed(SYMCFG[SX.sym].dec);
+    if(val!=null){ const tx=fmtUsd(val), cl=val>=0?'pos':'neg'; if(v.textContent!==tx) v.textContent=tx; if(v.className!==cl) v.className=cl }
+    else if(it.k==='ord'){ const tx='@ '+it.price.toFixed(SYMCFG[SX.sym].dec); if(v.textContent!==tx) v.textContent=tx }
   });
 }
-function ovLoop(){ if(!SX) return; placeOverlay(); renderDrawings(); SX.ovRaf=requestAnimationFrame(ovLoop) }
-function breakEven(p){ const sp=SPEC[p.sym], d=dirOf(p), cur=closeQuote(p), be=rnd(p.entry+d*((+SX.s.comm||0)/sp.cs),p.sym);
+function drawSig(){ try{ const cv=SX.canvas||document.querySelector('#sxDraw'), lr=SX.chart.timeScale().getVisibleLogicalRange(), b=SX.rp&&SX.rp.current(), c=b?(b.close??b.value):0;
+  return [cv&&cv.width,cv&&cv.height,lr?lr.from.toFixed(3)+':'+lr.to.toFixed(3):'',SX.series.priceToCoordinate(c||1),SX.series.priceToCoordinate((c||1)*1.01),SX.rp&&SX.rp.idx,SX.rp&&SX.rp.sub,c,SX.sel,SX.hideAll,(SX.s.drawings||[]).length,curTheme()].join('|') }catch(e){ return Math.random() } }
+function ovLoop(){ if(!SX) return; placeOverlay();
+  const sg=drawSig(); if(SX.drawDirty||SX.creating||sg!==SX._dsig){ SX._dsig=sg; SX.drawDirty=false; renderDrawings() }
+  SX.ovRaf=requestAnimationFrame(ovLoop) }
+['pointermove','pointerdown','pointerup','wheel','keydown','keyup','touchmove','resize'].forEach(ev=>(ev==='resize'?window:document).addEventListener(ev,()=>{ if(SX) SX.drawDirty=true },{passive:true}));
+function breakEven(p){ const sp=SPEC[p.sym], d=dirOf(p), cur=closeQuote(p), be=rnd(p.entry+d*((+SX.s.comm||0)/ccs(p.sym)),p.sym);
   if((d>0&&cur<=be)||(d<0&&cur>=be)){toast(t('tr.benot'),t('tr.benot2'),'bad');return}
   p.sl=be; if(p.initSl==null) p.initSl=be; toast(t('tr.updated'),t('tr.bedone',{p:be.toFixed(SYMCFG[p.sym].dec)}),'ok'); drawOverlay();persistTrading();renderTradePanels() }
 function closePart(p,frac){ const sp=SPEC[p.sym]; let q=Math.round(p.qty*frac/sp.step)*sp.step; q=+q.toFixed(2);
@@ -3053,8 +3222,8 @@ function orderSummary(){
   const o=SX.of, dec=SYMCFG[SX.sym].dec, sp=SPEC[SX.sym];
   const entry=o.type==='market'?(o.side==='buy'?ask():bid()):(+o.price||(o.side==='buy'?ask():bid()));
   const d=o.side==='buy'?1:-1, bal=SX.s.balance??SX.acc.balance;
-  const risk=o.useSl&&+o.sl?(entry-(+o.sl))*d*o.qty*sp.cs:null, rew=o.useTp&&+o.tp?((+o.tp)-entry)*d*o.qty*sp.cs:null;
-  const margin=entry*o.qty*sp.cs/(+SX.acc.leverage||100);
+  const risk=o.useSl&&+o.sl?(entry-(+o.sl))*d*o.qty*ccs(SX.sym):null, rew=o.useTp&&+o.tp?((+o.tp)-entry)*d*o.qty*ccs(SX.sym):null;
+  const margin=entry*o.qty*ccs(SX.sym)/(+SX.acc.leverage||100);
   el.innerHTML=`<div><span>${t('tr.risk')}</span><b class="neg">${risk!=null?fmtUsd(-Math.abs(risk))+' ('+(Math.abs(risk)/bal*100).toFixed(2)+'%)':'—'}</b></div>
    <div><span>${t('tr.reward')}</span><b class="pos">${rew!=null?fmtUsd(rew):'—'}</b></div>
    <div><span>R:R</span><b>${risk&&rew?'1 : '+(rew/Math.abs(risk)).toFixed(2):'—'}</b></div>
@@ -3072,7 +3241,7 @@ function bindOrderPanel(pn){
     renderPanel()}});
   $('#opCalc').onclick=()=>{readOrderForm(); if(!o.useSl||!+o.sl){toast(t('tr.needsl'),'','bad');return}
     const entry=o.type==='market'?(o.side==='buy'?ask():bid()):(+o.price||bid()); const dist=Math.abs(entry-(+o.sl)); if(!dist) return;
-    const sp=SPEC[SX.sym], bal=SX.s.balance??SX.acc.balance; let q=bal*o.risk/100/(dist*sp.cs); q=Math.max(sp.step,Math.floor(q/sp.step)*sp.step); o.qty=+q.toFixed(2); renderPanel()};
+    const sp=SPEC[SX.sym], bal=SX.s.balance??SX.acc.balance; let q=bal*o.risk/100/(dist*ccs(SX.sym)); q=Math.max(sp.step,Math.floor(q/sp.step)*sp.step); o.qty=+q.toFixed(2); renderPanel()};
   $('#opGo').onclick=()=>{ readOrderForm(); const sl=o.useSl&&+o.sl?rnd(+o.sl):null, tp=o.useTp&&+o.tp?rnd(+o.tp):null;
     if(o.type==='market') placeMarket(o.side,o.qty,sl,tp); else { if(!+o.price){toast(t('tr.needprice'),'','bad');return} placePending(o.side,o.type,o.qty,+o.price,sl,tp) } };
   const ca=$('#opCloseAll'); if(ca) ca.onclick=()=>closeAll();
@@ -3094,8 +3263,8 @@ function liveOrderPanel(){
 function sessionTradesHtml(){
   const tr=[...(SX.s.trades||[])].reverse();
   if(!tr.length) return `<div class="empty" style="flex:1"><div class="ei">${ic('doc',22)}</div><div>${t('tr.notrades')}</div></div>`;
-  const tot=tr.reduce((a,x)=>a+x.pnl,0), wins=tr.filter(x=>x.pnl>0).length;
-  return `<div class="jstats"><div><small>${t('an.netpnl')}</small><b class="${tot>=0?'pos':'neg'}">${fmtUsd(tot)}</b></div><div><small>${t('an.wr')}</small><b>${Math.round(wins/tr.length*100)}%</b></div><div><small>Trades</small><b>${tr.length}</b></div></div>
+  const tot=tr.reduce((a,x)=>a+trIn(x,cur()),0), wins=tr.filter(x=>x.pnl>0).length;
+  return `<div class="jstats"><div><small>${t('an.netpnl')}</small><b class="${tot>=0?'pos':'neg'}">${money2(tot,2,cur(),true)}</b></div><div><small>${t('an.wr')}</small><b>${Math.round(wins/tr.length*100)}%</b></div><div><small>Trades</small><b>${tr.length}</b></div></div>
    <div class="pnlist">${tr.map(x=>`<button class="wl jtr" data-tr="${x.id}"><span class="pill ${x.side==='buy'?'acc':'neg'}">${sideLbl(x.side)}</span><div><b>${x.sym} · ${x.qty}</b><small>${new Date(x.closeTime*1000).toLocaleString(locale(),{timeZone:'UTC',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})} · ${reasonLbl(x.reason)}</small></div><div style="margin-left:auto;text-align:right"><b class="${x.pnl>=0?'pos':'neg'}">${fmtUsd(x.pnl)}</b><small>${x.rr!=null?x.rr+'R':''}</small></div></button>`).join('')}</div>`;
 }
 const reasonLbl=r=>({tp:'TP',sl:'SL',partial:t('tr.partial'),manual:t('tr.manual'),stopout:'Stop out',rule:t('tr.rule')}[r]||r);
@@ -4011,7 +4180,7 @@ function bindData(m){
    ========================================================= */
 const AF0=()=>({type:[],assets:[],side:[],outcome:[],tags:[],sess:[],strat:[],day:[],h1:0,h2:24,tz:0,from:'',to:''});
 function anTrades(){
-  let tr=S.anDemo?demoTrades():allTrades();
+  const pc=primCcy(); let tr=(S.anDemo?demoTrades():allTrades()).map(x=>({...x,pnl:trIn(x,pc)}));
   const F=S.af||(S.af=AF0());
   return tr.filter(x=>{
     const s=x.sess||{}, tz=(F.tz||0)*3600, d=new Date((x.openTime+tz)*1000), dow=(d.getUTCDay()+6)%7, hr=d.getUTCHours();
@@ -4048,7 +4217,7 @@ function anStats(tr){
     exp:n?net/n:0,avgR:rs.length?rs.reduce((a,b)=>a+b,0)/rs.length:0,mdd,curve,ws,ls,best:n?Math.max(...tr.map(x=>x.pnl)):0,worst:n?Math.min(...tr.map(x=>x.pnl)):0,
     hold:n?tr.reduce((a,x)=>a+(x.closeTime-x.openTime),0)/n:0,days,greenDays:dv.length?dv.filter(v=>v>0).length/dv.length:0,plan:n?tr.filter(x=>x.hadPlan!==false).length/n:0};
 }
-const money=(v,dp=2)=>(v<0?'−':'')+new Intl.NumberFormat(locale(),{style:'currency',currency:'USD',currencyDisplay:'narrowSymbol',minimumFractionDigits:dp,maximumFractionDigits:dp}).format(Math.abs(v));
+const money=(v,dp=2,c)=>fmtCcy(v,c||primCcy(),dp);
 function svgEquity(curve){
   if(curve.length<2) return `<div class="empty" style="height:220px">${t('an.need2')}</div>`;
   const W=900,H=240,pad=8, vs=[0,...curve.map(c=>c.v)], mn=Math.min(...vs), mx=Math.max(...vs), rg=(mx-mn)||1;
@@ -4135,13 +4304,13 @@ function tabAnalytics(){
   const byHour=Array.from({length:24},(_,h)=>{const g=tr.filter(x=>new Date((x.openTime+tz)*1000).getUTCHours()===h);return {l:String(h),v:g.reduce((a,x)=>a+x.pnl,0),n:g.length}});
   const sessOf=x=>{const h=new Date(x.openTime*1000).getUTCHours();return h<7?'Asia':h<12?'London':h<13?'London/NY':h<21?'New York':t('an.off')};
   const bySess=['Asia','London','London/NY','New York',t('an.off')].map(k=>{const g=tr.filter(x=>sessOf(x)===k);return {l:k,v:g.reduce((a,x)=>a+x.pnl,0),n:g.length}}).filter(x=>x.n);
-  const tbl=(map,lab)=>[...map].map(([k,g])=>{const s=anStats(g);return `<tr><td><b>${esc(lab(k))}</b></td><td>${g.length}</td><td>${Math.round(s.wr*100)}%</td><td>${s.pf>=99?'∞':s.pf.toFixed(2)}</td><td>${s.avgR.toFixed(2)}R</td><td style="text-align:right"><b class="${s.net>=0?'pos':'neg'}">${money(s.net)}</b></td></tr>`}).join('');
+  const tbl=(map,lab)=>[...map].map(([k,g])=>{const s=anStats(g);return `<tr><td><b>${esc(lab(k))}</b></td><td>${g.length}</td><td>${Math.round(s.wr*100)}%</td><td>${s.pf>=99?'∞':s.pf.toFixed(2)}</td><td>${s.avgR.toFixed(2)}R</td><td style="text-align:right"><b class="${s.net>=0?'pos':'neg'}">${money2(s.net)}</b></td></tr>`}).join('');
   const strName=id=>{const s=DB.get('strategies',id);return s?s.name:t('ns.nostr')};
   const rB=[-2,-1,-0.5,0,0.5,1,1.5,2,3,4], rd=rB.map((b,i)=>{const nb=rB[i+1]??99;const g=tr.filter(x=>x.rr!=null&&x.rr>=b&&x.rr<nb);return {l:(b>0?'+':'')+b+'R',v:g.length*(b>=0?1:-1),n:g.length}});
   const kpi=(l,v,cls,sub)=>`<div class="box kpi"><div class="lab">${l}</div><div class="val ${cls||''}" style="font-size:24px">${v}</div>${sub?`<div class="sub" style="margin-top:4px">${sub}</div>`:''}</div>`;
   return head+`<div class="dash an">
-    <div class="box" style="grid-column:span 8"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div><div class="sub">${t('an.netpnl')}</div><div style="font-size:34px;font-weight:800;letter-spacing:-.02em" class="${st.net>=0?'pos':'neg'}">${money(st.net)}</div></div>
-      <div style="text-align:right"><div class="sub">${t('an.maxdd')}</div><b class="neg">${money(-st.mdd)}</b></div></div>${svgEquity(st.curve)}</div>
+    <div class="box" style="grid-column:span 8"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div><div class="sub">${t('an.netpnl')}</div><div style="font-size:34px;font-weight:800;letter-spacing:-.02em" class="${st.net>=0?'pos':'neg'} big">${money2(st.net)}</div></div>
+      <div style="text-align:right"><div class="sub">${t('an.maxdd')}</div><b class="neg">${money2(-st.mdd)}</b></div></div>${svgEquity(st.curve)}</div>
     <div class="box" style="grid-column:span 4;display:flex;flex-direction:column;align-items:center"><h3 style="align-self:flex-start">${t('an.edge')}</h3>${radar(eg.ax)}
       <div class="escore"><b>${eg.score}</b><span>/ 100</span></div><div class="ebar"><i style="left:${eg.score}%"></i></div></div>
     <div class="kpis" style="grid-column:1/-1;grid-template-columns:repeat(6,1fr)">
@@ -4159,7 +4328,7 @@ function tabAnalytics(){
     <div class="box" style="grid-column:span 6"><h3 style="margin-bottom:12px">${t('an.bystrat')}</h3><table class="tbl mini"><thead><tr><th>${t('strategy')}</th><th>#</th><th>${t('an.winp')}</th><th>${t('an.pfs')}</th><th>R</th><th style="text-align:right">${t('an.net')}</th></tr></thead><tbody>${tbl(groupBy(tr,x=>x.strategy||''),strName)}</tbody></table></div>
     <div class="box" style="grid-column:span 8"><h3 style="margin-bottom:12px">${t('an.cal')}</h3>${anCalendar(st.days)}</div>
     <div class="box" style="grid-column:span 4"><h3 style="margin-bottom:12px">${t('an.more')}</h3>
-      ${[[t('an.best'),money(st.best),'pos'],[t('an.worst'),money(st.worst),'neg'],[t('an.gp'),money(st.gp),'pos'],[t('an.gl'),money(-st.gl),'neg'],[t('an.hold'),dur(st.hold),''],[t('an.greendays'),Math.round(st.greenDays*100)+'%','']].map(([a,b,c])=>`<div class="row"><span style="flex:1;color:var(--ink2)">${a}</span><b class="${c}">${b}</b></div>`).join('')}</div>
+      ${[[t('an.best'),money2(st.best),'pos'],[t('an.worst'),money2(st.worst),'neg'],[t('an.gp'),money2(st.gp),'pos'],[t('an.gl'),money2(-st.gl),'neg'],[t('an.hold'),dur(st.hold),''],[t('an.greendays'),Math.round(st.greenDays*100)+'%','']].map(([a,b,c])=>`<div class="row"><span style="flex:1;color:var(--ink2)">${a}</span><b class="${c}">${b}</b></div>`).join('')}</div>
   </div>`;
 }
 function anCalendar(days){
@@ -4168,8 +4337,8 @@ function anCalendar(days){
   const first=new Date(Date.UTC(y,m-1,1)), nd=new Date(Date.UTC(y,m,0)).getUTCDate(), lead=(first.getUTCDay()+6)%7;
   const wd=LANG==='en'?['Mon','Tue','Wed','Thu','Fri','Sat','Sun']:['Ma','Di','Wo','Do','Vr','Za','Zo'];
   let cells='', tot=0; for(let i=0;i<lead;i++) cells+='<div></div>';
-  for(let d=1;d<=nd;d++){const k=`${ym}-${String(d).padStart(2,'0')}`, v=days[k]; if(v!=null) tot+=v; cells+=`<div class="acd ${v>0?'p':v<0?'n':''}"><span>${d}</span>${v!=null?`<b>${money(v,0)}</b>`:''}</div>`}
-  return `<div class="calh"><button class="ib" data-anm="-1">${ic('back',16)}</button><b style="text-transform:capitalize">${first.toLocaleDateString(locale(),{month:'long',year:'numeric',timeZone:'UTC'})} · <span class="${tot>=0?'pos':'neg'}">${money(tot)}</span></b><button class="ib" data-anm="1">${ic('next',16)}</button></div>
+  for(let d=1;d<=nd;d++){const k=`${ym}-${String(d).padStart(2,'0')}`, v=days[k]; if(v!=null) tot+=v; cells+=`<div class="acd ${v>0?'p':v<0?'n':''}"><span>${d}</span>${v!=null?`<b title="${showCcys().map(c=>fmtCcy(FX.conv(v,primCcy(),c),c)).join(' · ')}">${money(v,0)}</b>`:''}</div>`}
+  return `<div class="calh"><button class="ib" data-anm="-1">${ic('back',16)}</button><b style="text-transform:capitalize">${first.toLocaleDateString(locale(),{month:'long',year:'numeric',timeZone:'UTC'})} · <span class="${tot>=0?'pos':'neg'}">${money2(tot).replace('class="m2"','class="m2 inl"')}</span></b><button class="ib" data-anm="1">${ic('next',16)}</button></div>
     <div class="acal">${wd.map(x=>`<div class="wd">${x}</div>`).join('')}${cells}</div>`;
 }
 function bindAnalytics(m){
@@ -4341,12 +4510,12 @@ function drawCanvasInds(ctx,W,H){
 
 /* ----- Analytics van deze sessie (knop in de chart) ----- */
 function sessionAnalytics(){
-  const tr=(SX.s.trades||[]).map(x=>({...x,sess:SX.s})).sort((a,b)=>a.closeTime-b.closeTime);
+  const tr=(SX.s.trades||[]).map(x=>({...x,sess:SX.s,pnl:trIn(x,cur())})).sort((a,b)=>a.closeTime-b.closeTime);
   if(!tr.length){ toast(t('tab.analytics'),t('tr.notrades'),'info'); return }
   const st=anStats(tr), eg=edgeScore(st), start=SX.s.startBalance??SX.acc.balance;
   const ov=modal(`<div class="mh"><h3>${t('tab.analytics')} · ${esc(SX.s.name)}</h3><div class="spacer"></div><button class="ib" data-x>${ic('x')}</button></div>
    <div class="mbody single"><div class="mcont"><div class="dash an" style="grid-template-columns:repeat(12,1fr);gap:14px">
-     <div class="box" style="grid-column:span 8"><div class="sub">${t('an.netpnl')}</div><div style="font-size:30px;font-weight:800" class="${st.net>=0?'pos':'neg'}">${money(st.net)} <small style="font-size:14px;color:var(--ink3)">${(st.net/start*100).toFixed(2)}%</small></div>${svgEquity(st.curve)}</div>
+     <div class="box" style="grid-column:span 8"><div class="sub">${t('an.netpnl')}</div><div style="font-size:30px;font-weight:800" class="${st.net>=0?'pos':'neg'}">${money2(st.net,2,cur()).replace('class="m2"','class="m2 inl"')} <small style="font-size:14px;color:var(--ink3)">${(st.net/start*100).toFixed(2)}%</small></div>${svgEquity(st.curve)}</div>
      <div class="box" style="grid-column:span 4;display:flex;flex-direction:column;align-items:center"><h3 style="align-self:flex-start">${t('an.edge')}</h3>${radar(eg.ax)}<div class="escore"><b>${eg.score}</b><span>/ 100</span></div></div>
      <div class="kpis" style="grid-column:1/-1;grid-template-columns:repeat(4,1fr);gap:14px">
        <div class="box">${gauge(st.wr,1,t('an.wr'),Math.round(st.wr*100)+'%',st.wr>=0.5?'var(--pos)':'var(--amber)')}</div>
@@ -4552,7 +4721,7 @@ function bindTradeWidgets(){
   const tw=$('#sxTw'); if(tw) tw.onpointerdown=e=>e.stopPropagation();
 }
 function updTradeWidgets(){ if(!SX||!SX.rp) return; const dec=SYMCFG[SX.sym].dec; const b=bid(), a=ask();
-  document.querySelectorAll('[data-q="bid"]').forEach(e=>e.textContent=b.toFixed(dec)); document.querySelectorAll('[data-q="ask"]').forEach(e=>e.textContent=a.toFixed(dec)); }
+  const bs=b.toFixed(dec), as=a.toFixed(dec); if(SX._q===bs+as) return; SX._q=bs+as; document.querySelectorAll('[data-q="bid"]').forEach(e=>e.textContent=bs); document.querySelectorAll('[data-q="ask"]').forEach(e=>e.textContent=as); }
 
 /* ----- spatiebalk: tik = 1 candle, 2 s vasthouden = afspelen, tik = stop ----- */
 function spaceDown(e){
@@ -4651,7 +4820,7 @@ function drawItemText(ctx,d,P,W,H){
 
 /* ----- long/short-positie (zoals TradingView) ----- */
 function posCalc(d){ const sp=SPEC[SX.sym], e=d.pts[0].p, dist=Math.abs(e-d.stop)||1e-9, acct=d.acct??(SX.s.balance??SX.acc.balance);
-  const riskCash=d.riskMode==='cur'?(d.riskAmt??acct*0.01):acct*(d.risk??1)/100; let qty=riskCash/(dist*sp.cs); qty=Math.max(sp.step,Math.floor(qty/sp.step)*sp.step);
+  const riskCash=d.riskMode==='cur'?(d.riskAmt??acct*0.01):acct*(d.risk??1)/100; let qty=riskCash/(dist*ccs(SX.sym)); qty=Math.max(sp.step,Math.floor(qty/sp.step)*sp.step);
   const rew=Math.abs(d.target-e); return {sp,e,dist,acct,riskCash,qty,rew,rr:rew/dist} }
 function drawPosTool(ctx,d,P){
   const e=d.pts[0], isL=d.type==='long', wt=posWt(d), x1=P[0].x, x2=X(e.t+wt), ye=P[0].y, yt=Y(d.target), ys=Y(d.stop);
@@ -4660,11 +4829,11 @@ function drawPosTool(ctx,d,P){
   ctx.strokeStyle=cL; ctx.lineWidth=1; line(ctx,{x:x1,y:ye},{x:x2,y:ye});
   const c=posCalc(d), sp=c.sp, dec=SYMCFG[SX.sym].dec, show=d.alwaysStats===true||SX.sel===d.id||SX.hoverId===d.id||SX.drag&&SX.drag.d===d, cx=(x1+x2)/2;
   if(show){ const pct=v=>(v/c.e*100).toFixed(2), tk=v=>(v*Math.pow(10,dec)).toLocaleString('en-US',{maximumFractionDigits:1}), num=v=>(+v).toLocaleString('en-US',{maximumFractionDigits:2}), money=v=>num(v);
-    const tp=d.compact?`${fmtP(c.rew)} (${pct(c.rew)}%) · ${money(c.rew*c.qty*sp.cs)}`:`Target: ${fmtPx(c.rew)} (${pct(c.rew)}%) ${tk(c.rew)}, Amount: ${money(c.rew*c.qty*sp.cs)}`;
-    const sl=d.compact?`${fmtP(c.dist)} (${pct(c.dist)}%) · ${money(-c.dist*c.qty*sp.cs)}`:`Stop: ${fmtPx(c.dist)} (${pct(c.dist)}%) ${tk(c.dist)}, Amount: ${money(c.dist*c.qty*sp.cs)}`;
+    const tp=d.compact?`${fmtP(c.rew)} (${pct(c.rew)}%) · ${money(c.rew*c.qty*ccs(SX.sym))}`:`Target: ${fmtPx(c.rew)} (${pct(c.rew)}%) ${tk(c.rew)}, Amount: ${money(c.rew*c.qty*ccs(SX.sym))}`;
+    const sl=d.compact?`${fmtP(c.dist)} (${pct(c.dist)}%) · ${money(-c.dist*c.qty*ccs(SX.sym))}`:`Stop: ${fmtPx(c.dist)} (${pct(c.dist)}%) ${tk(c.dist)}, Amount: ${money(c.dist*c.qty*ccs(SX.sym))}`;
     label(ctx,tp,cx,yt+(yt<ye?-6:6),{align:'center',valign:yt<ye?'bottom':'top',bg:cT,color:cX,size:11,r:2,free:1});
     label(ctx,sl,cx,ys+(ys<ye?-6:6),{align:'center',valign:ys<ye?'bottom':'top',bg:cS,color:cX,size:11,r:2,free:1});
-    const last=SX.rp.current().close, started=SX.rp.f.t[SX.rp.idx]>=e.t, opnl=started?(last-c.e)*(isL?1:-1)*c.qty*sp.cs:0;
+    const last=SX.rp.current().close, started=SX.rp.f.t[SX.rp.idx]>=e.t, opnl=started?(last-c.e)*(isL?1:-1)*c.qty*ccs(SX.sym):0;
     label(ctx,`Open P&L: ${num(opnl)}, Qty: ${num(c.qty)}\nRisk/reward ratio: ${num(c.rr)}`,cx,ye,{align:'center',valign:'middle',bg:hexA('#5D606B',.95),color:cX,size:11,r:3,pad:6,free:1}) }
   if(d.showPrices){ [[e.p,cL],[d.target,cT],[d.stop,cS]].forEach(([p,cc])=>label(ctx,fmtP(p),x2+4,Y(p),{valign:'middle',bg:cc,color:'#fff',size:10.5,r:2,free:1})) }
   const after=bl().filter(b=>b.time>e.t&&b.time<=e.t+wt); let res=null;
@@ -5045,6 +5214,7 @@ function sessionKeys(e){
    INIT
    ========================================================= */
 function init(){
+  FX.init();
   document.querySelectorAll('[data-ic]').forEach(el=>el.outerHTML=ic(el.dataset.ic));
   $('#btnCollapse').innerHTML=ic('menu');$('#btnHelp').innerHTML=ic('help');$('#btnFull').innerHTML=ic('full');$('#btnBell').innerHTML=ic('bell');$('#fab').innerHTML=ic('spark');
   setTheme(lsGet('twfbt_theme')||'dark'); setLang(LANG); drawLoginCandles();
@@ -5056,12 +5226,17 @@ function init(){
   $('#lgLang').onchange=e=>setLang(e.target.value);$('#appLang').onchange=e=>setLang(e.target.value);
   $('#lgTheme').onclick=()=>setTheme(curTheme()==='dark'?'light':'dark');
   $('#btnTheme').onclick=()=>{setTheme(curTheme()==='dark'?'light':'dark');if(S.page==='settings')render()};
-  $('#btnCollapse').onclick=()=>{document.body.classList.toggle('side-collapsed');lsSet('twfbt_side',document.body.classList.contains('side-collapsed')?'1':'0')};
+  $('#btnCollapse').onclick=()=>{ if(matchMedia('(max-width:900px)').matches){ openSheet(); return } document.body.classList.toggle('side-collapsed');lsSet('twfbt_side',document.body.classList.contains('side-collapsed')?'1':'0')};
   $('#btnBell').onclick=toggleNotif;
   $('#btnHelp').onclick=()=>go('start');
   $('#btnFull').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()};
   $('#fab').onclick=()=>toast('TWF AI',t('soon.ai'));
-  document.querySelectorAll('#app [data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  document.querySelectorAll('#app [data-go],#tabbar [data-go],#msheet [data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  $('#tbMore').onclick=openSheet; $('#msheet').querySelector('[data-msx]').onclick=closeSheet;
+  $('#mshTheme').onclick=()=>{ setTheme(curTheme()==='dark'?'light':'dark'); openSheet(); render() };
+  $('#mshLang').onclick=()=>{ setLang(LANG==='en'?'nl':'en'); openSheet() };
+  $('#mshBell').onclick=()=>{ closeSheet(); setTimeout(toggleNotif,60) };
+  { let y0=null; const m=$('#msheet .msh'); m.addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true}); m.addEventListener('touchend',e=>{ if(y0!=null&&e.changedTouches[0].clientY-y0>60) closeSheet(); y0=null },{passive:true}) }
   setTimeout(()=>$('#lgName').focus(),50);
   if(sessionStorage.getItem('twfbt_resume')) tryResume(); else if(location.search.includes('v=')) try{ history.replaceState(null,'',location.pathname) }catch(e){}
 }
