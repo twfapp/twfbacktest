@@ -902,7 +902,6 @@ button,a,.btn,.ib{touch-action:manipulation}
   #session .sbar{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}#session .sbar::-webkit-scrollbar{display:none}
   #session .sbar>*{flex:none}
   #session .tfbar{max-width:none!important}
-  #session .favbar{display:none!important}
   .sxbottom{padding-bottom:calc(8px + env(safe-area-inset-bottom))!important}
 }
 .sxchartwrap,.sxchartwrap *{touch-action:none!important;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -935,6 +934,46 @@ button,a,.btn,.ib{touch-action:manipulation}
 .olab .ox .mk-tp{color:#089981}.olab .ox .mk-sl{color:#F7A600}
 .olab.o-pos{cursor:pointer}
 body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
+
+/* v8.8: telefoon-chart zoals TradingView — favorieten zwevend, afspeelbalk op de chart */
+#session .sbar{position:relative;z-index:20;background:var(--bg)}
+@media (max-width:700px), (max-height:500px) and (pointer:coarse){
+  #session .sxtools{display:none!important}
+  #session .sxranges{display:none!important}
+  #session .favbar{display:flex!important}
+  .favbar.vert{flex-direction:column;padding:4px 3px;border-radius:14px!important;gap:1px;max-height:calc(100% - 150px);overflow-y:auto;scrollbar-width:none}
+  .favbar.vert::-webkit-scrollbar{display:none}
+  .favbar.vert .dth{transform:rotate(90deg);padding:6px 0;font-size:16px;line-height:1}
+  .favbar.vert button{width:40px;height:40px;display:grid;place-items:center;border-radius:10px}
+  .favbar.vert button svg.i{width:23px;height:23px}
+  .favbar.vert button.on{background:var(--accentSoft);color:var(--accent)}
+  .sxplayer.onchart{position:absolute;left:calc(50% + 22px);bottom:12px;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:16px;
+    background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .sxplayer.onchart .sxspeed input{width:56px!important}.sxplayer.onchart .vsep{display:none}
+  .sxplayer.onchart .ib,.sxplayer.onchart .sxplay{width:40px;height:40px}
+  .favtog{position:absolute;left:10px;bottom:14px;z-index:9;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--ink2);
+    background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 6px 18px rgba(0,0,0,.4)}
+  .favtog.on{color:var(--accent);border-color:var(--accent)}
+  #session .sxtest{display:none!important}
+}
+
+/* v8.8: logo-kiezers netjes in een raster op de telefoon */
+@media (max-width:700px){ .srow:has(.lgpick)>.stx{flex-basis:100%} .lgpick{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1 1 100%;justify-items:center} .lgpick button{width:100%} }
+/* v8.8: inlogscherm op de telefoon — merk-hero bovenin, formulier als kaart */
+@media (max-width:900px){
+  #login:not(.hide){display:flex!important;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:0!important}
+  #login .art{display:flex!important;flex:none;min-height:clamp(260px,40vh,380px);padding:calc(28px + env(safe-area-inset-top)) 24px 54px;justify-content:space-between}
+  #login .art .logo .lgtile{width:38px;height:38px}
+  #login .art .candles{right:-110px;top:calc(40px + env(safe-area-inset-top));bottom:auto;width:400px;height:230px;opacity:.28}
+  #login .art h1{font-size:34px;margin:0 0 8px;position:relative}
+  #login .art p{font-size:14.5px;line-height:1.5;max-width:320px;position:relative}
+  #login .form{flex:1 0 auto;align-items:flex-start;padding:0;margin-top:-28px;position:relative;z-index:2}
+  #login .card-login{width:100%;max-width:none;background:var(--panel);border-radius:26px 26px 0 0;border-top:1px solid var(--line2);padding:28px 22px calc(28px + env(safe-area-inset-bottom));box-shadow:0 -12px 40px rgba(0,0,0,.35);min-height:100%}
+  #login .m-logo{display:none!important}
+  #login .card-login h2{font-size:26px;margin-bottom:4px}
+  #login .inp{height:52px;border-radius:14px}
+  #login .btn-block{height:52px;border-radius:14px;font-size:16px}
+}
 /* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
 @media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
 
@@ -956,6 +995,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v8.8: telefoon — chart als TradingView (favorieten zwevend, afspeelbalk op chart), nieuw inlogscherm, logo-raster */
 /* v8.7: orderlabels in TradingView-stijl met beugel */
 /* v8.6: orderlabels weer zoals TradingView (geen kleuren/nummers per positie) */
 /* v8.5: passkey los van Journal + blijft na uitloggen, tekenpreview op touch, safe-area iPad-app */
@@ -1089,7 +1129,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.7', BUILD: '2026-11-14c'
+  VERSION: 'v8.8', BUILD: '2026-11-14d'
 };
 
 /* ---------------- Icons ---------------- */
@@ -2710,6 +2750,10 @@ function buildSessionDom(){
     <div class="sxbal"><span class="hide-m" style="color:var(--ink3)">${ic('wallet',15)}</span><b id="sxBal"></b></div>
   </div>`;
   setSpeedUI(); $('#sxMode').value=SX.mode;
+  if(isPhone()){ const wrap=$('.sxchartwrap'), pl=$('.sxplayer'); if(wrap&&pl){ wrap.appendChild(pl); pl.classList.add('onchart') }
+    const tg=document.createElement('button'); tg.className='favtog'; tg.id='sxFavTog'; tg.innerHTML=ic('pen',20); tg.title='Tekenen'; wrap.appendChild(tg);
+    tg.classList.toggle('on',!SX.favBarOff); tg.onpointerdown=e=>{ e.stopPropagation(); e.preventDefault() };
+    tg.onclick=e=>{ e.stopPropagation(); SX.favBarOff=!SX.favBarOff; lsSet('twfbt_favoff',SX.favBarOff?'1':''); tg.classList.toggle('on',!SX.favBarOff); if(SX.favBarOff) setTool('cross'); renderFavBar() } }
 }
 function setSpeedUI(){ let i=SPEEDS.indexOf(SX.speed); if(i<0){i=3;SX.speed=SPEEDS[i]} const r=$('#sxSpeedR'); if(!r) return; r.value=i;
   r.style.setProperty('--fill',(i/(SPEEDS.length-1)*100)+'%'); $('#sxSpeedL').textContent=SX.speed+'×'; }
@@ -4773,23 +4817,24 @@ function tfMenu(){
 function tfName(k){ const m=tfMinutes(k); if(k==='D') return t('tf.d'); if(k==='W') return t('tf.w'); if(k==='M') return t('tf.mo'); return m<60?`${m} ${t(m===1?'tf.min1':'tf.min')}`:`${m/60} ${t(m===60?'tf.h1':'tf.h')}` }
 
 /* ----- favoriete tekentools: zwevende balk ----- */
+const isPhone=()=>{ try{ return matchMedia('(max-width:700px), (max-height:500px) and (pointer:coarse)').matches }catch(e){ return false } };
 function renderFavBar(){
   const wrap=$('.sxchartwrap'); if(!wrap) return; let fb=$('#sxFavBar'); const fav=favTools();
   if(!fav.length||SX.favBarOff){ if(fb) fb.remove(); return }
-  let fresh=false; if(!fb){ fresh=true; fb=document.createElement('div'); fb.id='sxFavBar'; fb.className='favbar'; wrap.appendChild(fb) }
+  const ph=isPhone(), PK='twfbt_favpos'+(ph?'_m':''); let fresh=false; if(!fb){ fresh=true; fb=document.createElement('div'); fb.id='sxFavBar'; fb.className='favbar'; wrap.appendChild(fb) } fb.classList.toggle('vert',ph);
   fb.innerHTML=`<span class="dth" title="Move">⠿</span>`+fav.map(k=>`<button data-fv="${k}" class="${SX.tool===k?'on':''}" title="${toolName(k)}">${ic(TOOLS[k].i,28)}</button>`).join('');
-  if(fresh){ let pos=null; try{pos=JSON.parse(lsGet('twfbt_favpos')||'null')}catch(e){} fb.style.left=(pos?Math.min(pos.x,wrap.clientWidth-fb.offsetWidth-70):Math.max(10,(wrap.clientWidth-70)/2-fb.offsetWidth/2))+'px'; fb.style.top=(pos?pos.y:120)+'px' }
+  if(fresh){ let pos=null; try{pos=JSON.parse(lsGet(PK)||'null')}catch(e){} if(ph){ fb.style.left=(pos?Math.min(pos.x,wrap.clientWidth-fb.offsetWidth-8):8)+'px'; fb.style.top=(pos?Math.min(pos.y,wrap.clientHeight-fb.offsetHeight-8):96)+'px' } else { fb.style.left=(pos?Math.min(pos.x,wrap.clientWidth-fb.offsetWidth-70):Math.max(10,(wrap.clientWidth-70)/2-fb.offsetWidth/2))+'px'; fb.style.top=(pos?pos.y:120)+'px' } }
   fb.onpointerdown=e=>e.stopPropagation();
   // klik = tool kiezen, slepen = volgorde wijzigen
-  fb.querySelectorAll('[data-fv]').forEach(b=>{ b.onpointerdown=e=>{ e.stopPropagation(); e.preventDefault(); const sx=e.clientX; let moving=false;
-    const mv=ev=>{ if(!moving&&Math.abs(ev.clientX-sx)>6){moving=true;b.classList.add('drag')} if(!moving) return;
-      const sibs=[...fb.querySelectorAll('[data-fv]')].filter(x=>x!==b); let ref=null; for(const s of sibs){const r=s.getBoundingClientRect(); if(ev.clientX<r.left+r.width/2){ref=s;break}} fb.insertBefore(b,ref) };
+  fb.querySelectorAll('[data-fv]').forEach(b=>{ b.onpointerdown=e=>{ e.stopPropagation(); e.preventDefault(); const V=fb.classList.contains('vert'), sx=V?e.clientY:e.clientX; let moving=false;
+    const mv=ev=>{ const c=V?ev.clientY:ev.clientX; if(!moving&&Math.abs(c-sx)>6){moving=true;b.classList.add('drag')} if(!moving) return;
+      const sibs=[...fb.querySelectorAll('[data-fv]')].filter(x=>x!==b); let ref=null; for(const s of sibs){const r=s.getBoundingClientRect(); if(V?c<r.top+r.height/2:c<r.left+r.width/2){ref=s;break}} fb.insertBefore(b,ref) };
     const up=()=>{ document.removeEventListener('pointermove',mv); document.removeEventListener('pointerup',up); b.classList.remove('drag');
-      if(moving){ const order=[...fb.querySelectorAll('[data-fv]')].map(x=>x.dataset.fv); DB.put('profile',{...profile(),id:'me',favTools:order}) } else { setTool(b.dataset.fv); renderFavBar() } };
+      if(moving){ const order=[...fb.querySelectorAll('[data-fv]')].map(x=>x.dataset.fv); DB.put('profile',{...profile(),id:'me',favTools:order}) } else { setTool(SX.tool===b.dataset.fv?'cross':b.dataset.fv); renderFavBar() } };
     document.addEventListener('pointermove',mv); document.addEventListener('pointerup',up) } });
   fb.querySelector('.dth').onpointerdown=e=>{ e.preventDefault(); const sx=e.clientX-parseFloat(fb.style.left), sy=e.clientY-parseFloat(fb.style.top);
     const mv=ev=>{fb.style.left=Math.max(0,Math.min(ev.clientX-sx,wrap.clientWidth-fb.offsetWidth))+'px';fb.style.top=Math.max(0,Math.min(ev.clientY-sy,wrap.clientHeight-fb.offsetHeight))+'px'};
-    const up=()=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);lsSet('twfbt_favpos',JSON.stringify({x:parseFloat(fb.style.left),y:parseFloat(fb.style.top)}))};
+    const up=()=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);lsSet(PK,JSON.stringify({x:parseFloat(fb.style.left),y:parseFloat(fb.style.top)}))};
     document.addEventListener('pointermove',mv); document.addEventListener('pointerup',up) };
 }
 
