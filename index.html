@@ -956,7 +956,8 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
-/* v8.5: passkey los van Journal + blijft na uitloggen, tekenpreview op touch, positiekleuren/verbindingslijnen, safe-area iPad-app */
+/* v8.6: orderlabels weer zoals TradingView (geen kleuren/nummers per positie) */
+/* v8.5: passkey los van Journal + blijft na uitloggen, tekenpreview op touch, safe-area iPad-app */
 /* v8.4: tekenen met touch (iPad), logo-thema's voor app en beginscherm-icoon */
 /* v8.3: valuta (rekening + USD), posities samenvoegen/labels stapelen, vloeiendere chart, mobiele tabbalk, geen iOS-zoom, pil-fix */
 /* v8.2: eigen TWF-icoon in meldingen */
@@ -1087,7 +1088,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.5', BUILD: '2026-11-14'
+  VERSION: 'v8.6', BUILD: '2026-11-14b'
 };
 
 /* ---------------- Icons ---------------- */
@@ -3158,10 +3159,10 @@ function drawOverlay(){
   SX.pos.filter(p=>p.sym===SX.sym).forEach(p=>{items.push({k:'pos',p,price:p.entry});if(p.tp!=null)items.push({k:'tp',p,price:p.tp});if(p.sl!=null)items.push({k:'sl',p,price:p.sl})});
   SX.orders.filter(o=>o.sym===SX.sym).forEach(o=>{items.push({k:'ord',o,price:o.price});if(o.tp!=null)items.push({k:'otp',o,price:o.tp});if(o.sl!=null)items.push({k:'osl',o,price:o.sl})});
   const col={pos:'#4c74ff',tp:'#2fbf71',sl:'#e0a33a',ord:'#4c74ff',otp:'#2fbf71',osl:'#e0a33a'};
-  const myPos=SX.pos.filter(p=>p.sym===SX.sym), multi=myPos.length>1; items.forEach(it=>{ if(it.p){ const i=myPos.indexOf(it.p); it.ci=i; it.pc=multi?POSCOL[i%POSCOL.length]:null } });
+  const myPos=SX.pos.filter(p=>p.sym===SX.sym), multi=false; items.forEach(it=>{ if(it.p){ const i=myPos.indexOf(it.p); it.ci=i; it.pc=multi?POSCOL[i%POSCOL.length]:null } });
   items.forEach(it=>{it.pl=SX.series.createPriceLine({price:it.price,color:it.k==='pos'&&it.pc?it.pc:col[it.k],lineWidth:it.k==='pos'?2:1,lineStyle:it.k==='pos'?0:2,axisLabelVisible:true,title:''});SX.plines.push(it.pl)});
   SX.ovItems=items;
-  ov.innerHTML=items.map((it,i)=>`<div class="olead" data-l="${i}"${it.pc?` style="--pc:${it.pc}"`:''}></div><div class="olab o-${it.k}${it.pc?' pcol':''}" data-i="${i}"${it.pc?` style="--pc:${it.pc}"`:''}>${labelHtml(it)}</div>`).join('');
+  ov.innerHTML=items.map((it,i)=>`${it.pc?`<div class="olead" data-l="${i}" style="--pc:${it.pc}"></div>`:''}<div class="olab o-${it.k}${it.pc?' pcol':''}" data-i="${i}"${it.pc?` style="--pc:${it.pc}"`:''}>${labelHtml(it)}</div>`).join('');
   ov.querySelectorAll('.olab').forEach(el=>{
     const it=items[+el.dataset.i];
     el.addEventListener('pointerdown',e=>{
