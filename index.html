@@ -358,11 +358,18 @@ body.in-sx #toasts{bottom:112px;left:66px}
 .olab{position:absolute;right:10px;display:flex;align-items:stretch;height:24px;border-radius:6px;overflow:hidden;pointer-events:auto;cursor:ns-resize;font-size:12px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.35);user-select:none;touch-action:none}
 .olab>*{display:flex;align-items:center;padding:0 8px;background:var(--panel);border:1px solid var(--line2);margin-left:-1px}
 .olab b{color:var(--ink)}
-.olab.shift{box-shadow:0 2px 10px rgba(0,0,0,.35),-3px 0 0 0 var(--accent)}
 .olab i{font-style:normal;font-size:10.5px;color:#fff}
 .olab button{color:var(--ink3);cursor:pointer}.olab button:hover{color:var(--ink)}
 .olab .mk{font-size:10.5px;color:var(--pos)}.olab .mk.sl{color:var(--amber)}
 .o-pos{cursor:default}.o-pos b{background:#4c74ff;color:#fff;border-color:#4c74ff}
+.olab.pcol{box-shadow:inset 3px 0 0 var(--pc),0 2px 8px rgba(0,0,0,.35)}.olab.pcol.o-pos b{background:var(--pc);border-color:var(--pc)}
+.olab .pnum{font-style:normal;font-size:10.5px;font-weight:800;color:#fff;background:var(--pc,#4c74ff);border-color:var(--pc,#4c74ff);padding:0 6px}
+.olab .mk:not(.be){font-size:10.5px;font-weight:800;letter-spacing:.02em;background:var(--panel)!important;border-style:dashed!important}
+.olab .mk:not(.be):not(.sl){border-color:var(--pos)!important}.olab .mk.sl{border-color:var(--amber)!important}
+.olead{position:absolute;width:14px;pointer-events:none;border-left:1.5px solid var(--pc,#8a94a6);opacity:.9}
+.olead::before,.olead::after{content:'';position:absolute;left:-1.5px;width:15.5px;border-top:1.5px solid var(--pc,#8a94a6)}
+.olead::before{top:0}.olead::after{bottom:-1.5px}
+.olab.shift{box-shadow:0 2px 10px rgba(0,0,0,.35)}.olab.shift.pcol{box-shadow:inset 3px 0 0 var(--pc),0 2px 10px rgba(0,0,0,.35)}
 .o-tp i{background:var(--pos);border-color:var(--pos)}.o-sl i{background:var(--amber);border-color:var(--amber)}
 .o-tp,.o-otp{border:1px dashed var(--pos)}.o-sl,.o-osl{border:1px dashed var(--amber)}
 .o-ord b{background:var(--accentSoft);color:var(--accent)}
@@ -917,7 +924,17 @@ button,a,.btn,.ib{touch-action:manipulation}
   #session .favbar{display:none!important}
   .sxbottom{padding-bottom:calc(8px + env(safe-area-inset-bottom))!important}
 }
-@media (pointer:coarse){ .sxchartwrap,.sxchartwrap canvas,#sxDraw{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none} }
+.sxchartwrap,.sxchartwrap *{touch-action:none!important;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.sxchartwrap input,.sxchartwrap textarea,.sxchartwrap [contenteditable]{-webkit-user-select:text;user-select:text}
+/* v8.5: statusbalk (klok/batterij) van iPhone/iPad-app nooit over de inhoud, op elke breedte */
+#app{grid-template-rows:calc(64px + env(safe-area-inset-top)) minmax(0,1fr)}
+.topbar{padding-top:env(safe-area-inset-top);padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+#session{padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
+.sxbottom{padding-bottom:env(safe-area-inset-bottom)}
+#login{padding-top:env(safe-area-inset-top)}
+/* instellingen: tekst links nooit per woord laten afbreken */
+.srow{flex-wrap:wrap}.srow>.stx{min-width:min(240px,100%)}
+.srow:has(.lgpick)>.stx{flex:1 1 260px}.lgpick{flex:1 1 360px}
 /* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
 @media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
 
@@ -939,6 +956,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v8.5: passkey los van Journal + blijft na uitloggen, tekenpreview op touch, positiekleuren/verbindingslijnen, safe-area iPad-app */
 /* v8.4: tekenen met touch (iPad), logo-thema's voor app en beginscherm-icoon */
 /* v8.3: valuta (rekening + USD), posities samenvoegen/labels stapelen, vloeiendere chart, mobiele tabbalk, geen iOS-zoom, pil-fix */
 /* v8.2: eigen TWF-icoon in meldingen */
@@ -1069,7 +1087,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.4', BUILD: '2026-11-13'
+  VERSION: 'v8.5', BUILD: '2026-11-14'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1466,7 +1484,7 @@ const SupaBackend={
   name:'supabase',
   async init(){
     if(this.sb) return;
-    await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';s.onload=res;s.onerror=()=>rej(new Error('Supabase kon niet laden'));document.head.appendChild(s)});
+    if(!window.supabase) await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';s.onload=res;s.onerror=()=>rej(new Error('Supabase kon niet laden'));document.head.appendChild(s)});
     this.sb=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY,{auth:{persistSession:false}});
     try{ this.sb.auth.onAuthStateChange((ev,sess)=>{ if(sess&&sess.refresh_token&&sess.user) PK.update(sess.user.id,sess.refresh_token) }) }catch(e){}
   },
@@ -1475,7 +1493,7 @@ const SupaBackend={
   async signUp(login,pass){await this.init();const {data,error}=await this.sb.auth.signUp({email:loginNameToEmail(login),password:pass});if(error) throw new Error(/registered/i.test(error.message)?t('err.exists'):error.message);if(!data.session){const r=await this.sb.auth.signInWithPassword({email:loginNameToEmail(login),password:pass});if(r.error) throw r.error;} this.uid=(await this.sb.auth.getUser()).data.user.id;await this.load();return {id:this.uid}},
   async signIn(login,pass){await this.init();const {data,error}=await this.sb.auth.signInWithPassword({email:loginNameToEmail(login),password:pass});if(error) throw new Error(t('err.login'));this.uid=data.user.id;await this.load();return {id:this.uid}},
   async journalName(){ try{ const {data}=await this.sb.from('settings').select('name').eq('user_id',this.uid).maybeSingle(); return data&&data.name||null }catch(e){ return null } },
-  async signOut(){try{await this.sb.auth.signOut({scope:'local'})}catch(e){}this.uid=null;this.cache=null},
+  async signOut(keep){ if(keep){ try{ this.sb.auth.stopAutoRefresh&&this.sb.auth.stopAutoRefresh() }catch(e){} this.sb=null } else { try{await this.sb.auth.signOut({scope:'local'})}catch(e){} } this.uid=null;this.cache=null},
   async load(){const {data,error}=await this.sb.from('bt_items').select('kind,id,data').eq('user_id',this.uid);if(error) throw error;this.cache={};(data||[]).forEach(r=>{(this.cache[r.kind]=this.cache[r.kind]||{})[r.id]=r.data})},
   list(kind){return Object.values(this.cache[kind]||{})},
   get(kind,id){return (this.cache[kind]||{})[id]},
@@ -1544,27 +1562,28 @@ const PK={
     if(!this.supported()) throw new Error(L('Deze browser ondersteunt geen passkeys.','This browser does not support passkeys.'));
     const p=profile(), login=(lsGet('twfbt_lastlogin')||p.name||'TWF').slice(0,60);
     const cred=await navigator.credentials.create({publicKey:{ challenge:crypto.getRandomValues(new Uint8Array(32)), rp:{name:'TWF Backtest',id:location.hostname},
-      user:{id:new TextEncoder().encode(String(DB.uid||'local')).slice(0,64),name:login,displayName:p.name||login},
-      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}], authenticatorSelection:{residentKey:'preferred',userVerification:'required'}, timeout:60000, attestation:'none' }});
+      user:{id:new TextEncoder().encode('twfbt:'+String(DB.uid||'local')).slice(0,64),name:login+' · Backtest',displayName:(p.name||login)+' · TWF Backtest'},
+      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}], authenticatorSelection:{authenticatorAttachment:'platform',residentKey:'preferred',userVerification:'required'}, timeout:60000, attestation:'none' }});
     if(!cred) throw new Error('cancel');
     const sec=await DB.secret(); if(!sec) throw new Error(L('Geen actieve sessie, log opnieuw in.','No active session, sign in again.'));
     const sl=await this.seal(sec); this.save({id:b64u.enc(cred.rawId),uid:DB.uid,name:p.name||login,login,be:DB.name,created:Date.now(),...sl}); return true },
   async login(){ const r=this.rec(); if(!r) throw new Error('none');
-    const as=await navigator.credentials.get({publicKey:{ challenge:crypto.getRandomValues(new Uint8Array(32)), rpId:location.hostname, allowCredentials:[{type:'public-key',id:b64u.dec(r.id)}], userVerification:'required', timeout:60000 }});
+    const as=await navigator.credentials.get({publicKey:{ challenge:crypto.getRandomValues(new Uint8Array(32)), rpId:location.hostname, userVerification:'required', timeout:60000 }});
     if(!as) throw new Error('cancel'); const sec=await this.open(r); await DB.resume(sec); return true },
   remove(){ try{localStorage.removeItem('twfbt_pk')}catch(e){} }
 };
+const isStandalone=()=>{ try{ return !!(navigator.standalone||matchMedia('(display-mode: standalone)').matches) }catch(e){ return false } };
 function pkLoginUI(){ const b=$('#lgPk'), o=$('#lgPkOr'); if(!b) return; const on=PK.supported(); b.classList.toggle('hide',!on); o.classList.toggle('hide',!on);
   const r=PK.rec(), L=(nl,en)=>LANG==='en'?en:nl; $('#lgPkT').innerHTML=r?`${L('Inloggen met passkey','Sign in with passkey')} <small>· ${esc(r.name||'')}</small>`:L('Inloggen met passkey','Sign in with passkey') }
 async function doPkLogin(){ const L=(nl,en)=>LANG==='en'?en:nl, er=$('#lgErr'); er.textContent='';
-  if(!PK.rec()){ er.textContent=L('Nog geen passkey op dit apparaat. Log één keer in met je wachtwoord en zet hem aan via Instellingen → Account.','No passkey on this device yet. Sign in once with your password and turn it on in Settings → Account.'); return }
+  if(!PK.rec()){ er.textContent=isStandalone()?L('In de beginscherm-app staat je passkey nog niet aan (de app bewaart zijn eigen gegevens). Log hier één keer in met je wachtwoord, dan vragen we meteen of je Face ID wilt gebruiken.','The home-screen app keeps its own data, so the passkey is not on yet here. Sign in once with your password and we will offer Face ID right away.'):L('Nog geen passkey op dit apparaat. Log één keer in met je wachtwoord en zet hem aan via Instellingen → Account.','No passkey on this device yet. Sign in once with your password and turn it on in Settings → Account.'); return }
   const b=$('#lgPk'); b.disabled=true;
   try{ await PK.login(); enterApp() }
   catch(e){ if(e&&(e.name==='NotAllowedError'||e.message==='cancel')) er.textContent=L('Passkey geannuleerd.','Passkey cancelled.');
     else if(e&&e.message==='expired'){ er.textContent=L('Je passkey-sessie is verlopen. Log één keer in met je wachtwoord; de passkey werkt daarna weer.','Your passkey session expired. Sign in once with your password; the passkey works again after that.'); PK.remove(); pkLoginUI() }
     else er.textContent=(e&&e.message)||'Passkey error' }
   finally{ b.disabled=false } }
-function pkOffer(){ if(!PK.supported()||PK.rec()||lsGet('twfbt_pkno')) return; const L=(nl,en)=>LANG==='en'?en:nl;
+function pkOffer(){ if(!PK.supported()||PK.rec()||(lsGet('twfbt_pkno')&&!isStandalone())) return; const L=(nl,en)=>LANG==='en'?en:nl;
   if(sessionStorage.getItem('twfbt_pkasked')) return;
   setTimeout(()=>{ if(SX||document.querySelector('.ov')) return; try{sessionStorage.setItem('twfbt_pkasked','1')}catch(e){} toast(L('Sneller inloggen?','Sign in faster?'),L('Zet een passkey aan en log voortaan in met Touch ID of Face ID.','Turn on a passkey and sign in with Touch ID or Face ID.'),'info',12000,{label:L('Passkey instellen','Set up passkey'),fn:()=>{ lsSet('twfbt_pkno','1'); S.setTab='account'; go('settings') }}) },1800) }
 
@@ -1641,7 +1660,7 @@ function enterApp(resumed){
   if(!resumed) toast(t('toast.welcome')+', '+(profile().name||''),'', 'ok',2500);
   updatedToast(); startUpdateWatch(); markUpdate(); if(!resumed) pkOffer();
 }
-async function logout(){await DB.signOut();document.body.classList.remove('in-app');closeSheet(); pkLoginUI();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
+async function logout(){const r=PK.rec(), keep=!!(r&&r.uid&&r.uid===DB.uid&&DB.name==='supabase'); await DB.signOut(keep);document.body.classList.remove('in-app');closeSheet(); pkLoginUI();$('#app').classList.add('hide');$('#fab').classList.add('hide');$('#session').classList.add('hide');$('#login').classList.remove('hide');showReg(false);document.querySelectorAll('.ov').forEach(o=>o.remove())}
 
 /* =========================================================
    RENDER
@@ -2821,7 +2840,7 @@ function startPlay(){
   SX.raf=requestAnimationFrame(loop);
 }
 function stopPlay(){ if(!SX) return; const was=SX.playing; SX.playing=false; if(was) try{ legend(null); hud() }catch(e){} if(SX.rp&&SX.rp.frac){SX.rp.frac=0; try{pushBar(SX.rp.current())}catch(e){}} if(SX.raf) cancelAnimationFrame(SX.raf); const b=$('#sxPlay'); if(b){b.innerHTML=ic('play',18);b.classList.remove('on')} }
-function setTf(k){ SX.tf=k; SX.rp.tf=k; fullRender(true); updateTopbar(); }
+function setTf(k){ if(!TFS.find(x=>x.k===k)&&!(+k>0)) return; SX.tf=k; SX.rp.tf=k; fullRender(true); updateTopbar(); }
 async function gotoReal(sec){
   const r=MD.range(SX.sym); if(r&&(sec<new Date(r.from).getTime()/1000||sec>new Date(r.to).getTime()/1000+86400)){toast(t('sx.goto'),t('md.outofrange',{a:fmtDate(r.from),b:fmtDate(r.to)}),'bad');return}
   stopPlay(); let f=SX.rp.f;
@@ -3139,9 +3158,10 @@ function drawOverlay(){
   SX.pos.filter(p=>p.sym===SX.sym).forEach(p=>{items.push({k:'pos',p,price:p.entry});if(p.tp!=null)items.push({k:'tp',p,price:p.tp});if(p.sl!=null)items.push({k:'sl',p,price:p.sl})});
   SX.orders.filter(o=>o.sym===SX.sym).forEach(o=>{items.push({k:'ord',o,price:o.price});if(o.tp!=null)items.push({k:'otp',o,price:o.tp});if(o.sl!=null)items.push({k:'osl',o,price:o.sl})});
   const col={pos:'#4c74ff',tp:'#2fbf71',sl:'#e0a33a',ord:'#4c74ff',otp:'#2fbf71',osl:'#e0a33a'};
-  items.forEach(it=>{it.pl=SX.series.createPriceLine({price:it.price,color:col[it.k],lineWidth:it.k==='pos'?2:1,lineStyle:it.k==='pos'?0:2,axisLabelVisible:true,title:''});SX.plines.push(it.pl)});
+  const myPos=SX.pos.filter(p=>p.sym===SX.sym), multi=myPos.length>1; items.forEach(it=>{ if(it.p){ const i=myPos.indexOf(it.p); it.ci=i; it.pc=multi?POSCOL[i%POSCOL.length]:null } });
+  items.forEach(it=>{it.pl=SX.series.createPriceLine({price:it.price,color:it.k==='pos'&&it.pc?it.pc:col[it.k],lineWidth:it.k==='pos'?2:1,lineStyle:it.k==='pos'?0:2,axisLabelVisible:true,title:''});SX.plines.push(it.pl)});
   SX.ovItems=items;
-  ov.innerHTML=items.map((it,i)=>`<div class="olab o-${it.k}" data-i="${i}">${labelHtml(it)}</div>`).join('');
+  ov.innerHTML=items.map((it,i)=>`<div class="olead" data-l="${i}"${it.pc?` style="--pc:${it.pc}"`:''}></div><div class="olab o-${it.k}${it.pc?' pcol':''}" data-i="${i}"${it.pc?` style="--pc:${it.pc}"`:''}>${labelHtml(it)}</div>`).join('');
   ov.querySelectorAll('.olab').forEach(el=>{
     const it=items[+el.dataset.i];
     el.addEventListener('pointerdown',e=>{
@@ -3156,10 +3176,11 @@ function drawOverlay(){
   });
   placeOverlay(true);
 }
+const POSCOL=['#4c74ff','#c084fc','#22d3ee','#f472b6','#a3e635','#fb923c'];
 function labelHtml(it){
   const q=it.p?it.p.qty:it.o.qty;
-  if(it.k==='pos'){const p=it.p;return `${p.tp==null?'<button data-mk="tp" class="mk">+TP</button>':''}${p.sl==null?'<button data-mk="sl" class="mk sl">+SL</button>':''}<b>${q}</b><span data-v></span><button data-be title="Break-even" class="mk be">BE</button><button data-half title="${t('tr.half')}" class="mk be">½</button><button data-close>✕</button>`}
-  if(it.k==='tp'||it.k==='sl') return `<i>${it.k.toUpperCase()}</i><b>${q}</b><span data-v></span><button data-close>✕</button>`;
+  if(it.k==='pos'){const p=it.p;return `${p.tp==null?'<button data-mk="tp" class="mk">+TP</button>':''}${p.sl==null?'<button data-mk="sl" class="mk sl">+SL</button>':''}${it.pc?`<em class="pnum">#${it.ci+1}</em>`:''}<b>${q}</b><span data-v></span><button data-be title="Break-even" class="mk be">BE</button><button data-half title="${t('tr.half')}" class="mk be">½</button><button data-close>✕</button>`}
+  if(it.k==='tp'||it.k==='sl') return `<i>${it.k.toUpperCase()}${it.pc?` #${it.ci+1}`:''}</i><b>${q}</b><span data-v></span><button data-close>✕</button>`;
   if(it.k==='ord') return `<b>${sideLbl(it.o.side)} ${it.o.type==='limit'?t('tr.limit'):t('tr.stop')} ${q}</b><span data-v></span><button data-close>✕</button>`;
   return `<i>${it.k==='otp'?'TP':'SL'}</i><b>${q}</b><button data-close>✕</button>`;
 }
@@ -3178,7 +3199,9 @@ function placeOverlay(force){
     while(groups.length>1){ const a=groups[groups.length-2], b=groups[groups.length-1]; const aTop=a.sum/a.items.length-(a.items.length-1)*LH/2, bTop=b.sum/b.items.length-(b.items.length-1)*LH/2;
       if(aTop+a.items.length*LH>bTop){ a.items.push(...b.items); a.sum+=b.sum; groups.pop() } else break } });
   groups.forEach(g=>{ let top=g.sum/g.items.length-(g.items.length-1)*LH/2; top=Math.max(12,Math.min(H-12-(g.items.length-1)*LH,top));
-    g.items.forEach((v,k)=>{ const yy=top+k*LH; v.el.style.top=(yy-12)+'px'; v.el.style.right='10px'; v.el.classList.toggle('shift',Math.abs(yy-v.y)>3) }) });
+    g.items.forEach((v,k)=>{ const yy=top+k*LH, sh=Math.abs(yy-v.y)>3; v.el.style.top=(yy-12)+'px'; v.el.style.right='10px'; v.el.classList.toggle('shift',sh);
+      const ld=ov.querySelector(`.olead[data-l="${v.i}"]`); if(ld){ if(!sh){ ld.style.display='none' } else { const w=v.el.offsetWidth; ld.style.display=''; ld.style.right=(10+w-1)+'px'; ld.style.top=Math.min(yy,v.y)+'px'; ld.style.height=Math.max(1,Math.abs(yy-v.y))+'px'; ld.classList.toggle('up',v.y<yy) } } }) });
+  ov.querySelectorAll('.olead').forEach(ld=>{ const i=+ld.dataset.l; if(!vis.some(v=>v.i===i)) ld.style.display='none' });
   vis.forEach(({el,i})=>{ const it=SX.ovItems[i]; const v=el.querySelector('[data-v]'); if(!v) return;
     let val=null;
     if(it.k==='pos') val=pnlAt(it.p,closeQuote(it.p));
@@ -3603,6 +3626,7 @@ function renderDrawings(){
   if(SX.hideAll) return;
   const list=drawings(); const all=SX.creating?[...list.filter(d=>d!==SX.creating.d),SX.creating.d]:list;
   for(const d of all){ if(d.hidden||!visibleNow(d)||(d._editing&&TEXTTYPES.includes(d.type))) continue; try{ drawOne(ctx,d,cv._w,cv._h) }catch(e){} }
+  if(SX.creating&&SX.creating.d&&SX.creating.d.pts&&!SX.creating.free){ const cd=SX.creating.d, r=SX.touch?7:4; cd.pts.forEach((q,i)=>{ const px=X(q.t), py=Y(q.p); if(px==null||py==null) return; ctx.beginPath(); ctx.arc(px,py,r,0,7); ctx.fillStyle=i===cd.pts.length-1&&!SX.creating.pend?'rgba(76,116,255,.35)':tplColors().bg; ctx.fill(); ctx.lineWidth=2; ctx.strokeStyle='#4c74ff'; ctx.setLineDash([]); ctx.stroke() }) }
   const sel=SX.sel&&list.find(d=>d.id===SX.sel);
   if(sel&&!sel.hidden){ handlesOf(sel).forEach(h=>{ctx.beginPath();ctx.arc(h.x,h.y,SX.touch?8:5,0,7);ctx.fillStyle=tplColors().bg;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=sel.locked?'#8a94a6':'#4c74ff';ctx.stroke()}) }
   placeDtb(sel);
@@ -3880,7 +3904,9 @@ function onDown(e){
   if(tool==='zoom'){ block(); SX.zoomFrom=x; return }
   if(SX.creating){ block(); const c=SX.creating, pt=toPt(x,y,true); if(!pt) return;
     if(c.need===-1||TOOLS[c.d.type].n===-1){ c.d.pts[c.d.pts.length-1]=pt; c.d.pts.push({...pt}); return }
-    const pc=(e.shiftKey&&c.idx>0&&constrainPt(c.d.type,c.d.pts[c.idx-1],x,y))||pt; c.d.pts[c.idx]=pc; c.idx++; if(c.idx>=c.need){ finishCreate() } else c.d.pts.push({...pc}); return }
+    const pc=(e.shiftKey&&c.idx>0&&constrainPt(c.d.type,c.d.pts[c.idx-1],x,y))||pt; c.d.pts[c.idx]=pc;
+    if(SX.touch){ c.pend=true; return }   // touch: punt volgt de vinger, vastzetten bij loslaten
+    c.idx++; if(c.idx>=c.need){ finishCreate() } else c.d.pts.push({...pc}); return }
   if(g!=='cursor'&&!(SX.lockAll)){ block(); const pt=toPt(x,y,true); if(!pt) return; startCreate(tool,pt,x,y); return }
   // selecteren / slepen
   const h=hitTest(x,y);
@@ -3920,10 +3946,12 @@ function onUp(e){
   if(SX.zoomFrom!=null){ const {x}=relXY(e), ts=SX.chart.timeScale(), a=ts.coordinateToLogical(Math.min(x,SX.zoomFrom)), b=ts.coordinateToLogical(Math.max(x,SX.zoomFrom)); SX.zoomFrom=null;
     if(a!=null&&b!=null&&b-a>3) ts.setVisibleLogicalRange({from:a,to:b}); setTool('cross'); return }
   if(SX.creating){ const c=SX.creating;
+    if(e.type==='pointercancel') return;   // iOS-onderbreking: tekening niet half afronden
     if(c.free){ finishCreate(); return }
+    if(c.pend){ c.pend=false; const {x,y}=relXY(e), pt=(e.shiftKey&&c.idx>0&&constrainPt(c.d.type,c.d.pts[c.idx-1],x,y))||toPt(x,y,true); if(pt) c.d.pts[c.idx]=pt; c.idx++; if(c.idx>=c.need) finishCreate(); else c.d.pts.push({...c.d.pts[c.idx-1]}); return }
     if(c.down&&c.idx===1&&c.need===2){ const {x,y}=relXY(e); if(Math.hypot(x-c.down.x,y-c.down.y)>8){ const pt=(e.shiftKey&&constrainPt(c.d.type,c.d.pts[0],x,y))||toPt(x,y,true); if(pt) c.d.pts[1]=pt; c.idx=2; finishCreate() } }
     return }
-  if(SX.drag){ const g=SX.drag; SX.drag=null; SX._hsOff=false; SX.chart.applyOptions({handleScroll:true,handleScale:true}); if(!g.moved){SX.hist.pop(); if(g.wasSel&&canInline(g.d)&&!g.d.locked) inlineEdit(g.d)} else saveDrawLater() }
+  if(SX.drag){ const g=SX.drag; SX.drag=null; SX._hsOff=false; SX.chart.applyOptions({handleScroll:true,handleScale:true}); if(!g.moved){SX.hist.pop(); if(g.wasSel&&canInline(g.d)&&!g.d.locked&&!SX.touch) inlineEdit(g.d)} else saveDrawLater() }
 }
 function onDbl(e){
   if(!SX) return false; if(e.type==='dblclick'&&performance.now()-(SX._dblAt||0)<600) return false;
@@ -4046,7 +4074,10 @@ function bindDrawing(){
   window.addEventListener('pointerup',onUp);
   window.addEventListener('pointercancel',onUp);
   window.addEventListener('blur',()=>{ if(SX&&SX.drag){ onUp({clientX:0,clientY:0}) } });
-  const tblock=e=>{ if(SX&&(SX.touchBlock||SX.creating||SX.drag||SX.zoomFrom!=null)){ e.stopPropagation(); if(e.cancelable) e.preventDefault() } };
+  const tblock=e=>{ if(SX&&(SX.touchBlock||SX.creating||SX.drag||SX.zoomFrom!=null)){ e.stopPropagation(); if(e.cancelable) e.preventDefault();
+      const tp=(e.touches&&e.touches[0])||(e.changedTouches&&e.changedTouches[0]); if(!tp||(e.touches&&e.touches.length>1)) return;
+      if(e.type==='touchmove'&&performance.now()-(SX._pmAt||0)>60) onMove({clientX:tp.clientX,clientY:tp.clientY,buttons:1,shiftKey:false,pointerType:'touch',type:'pointermove'}) } };
+  wrap.addEventListener('pointermove',()=>{ if(SX) SX._pmAt=performance.now() },{capture:true,passive:true});
   ['touchstart','touchmove','touchend'].forEach(ev=>wrap.addEventListener(ev,tblock,{capture:true,passive:false}));
   wrap.addEventListener('wheel',priceWheel,{capture:true,passive:false});
   wrap.addEventListener('dblclick',priceDbl,true);
