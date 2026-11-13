@@ -936,6 +936,7 @@ button,a,.btn,.ib{touch-action:manipulation}
 .olab.o-pos{cursor:pointer}
 body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
 
+/* v9.0: telefoon-dock zoals TradingView (markt + timeframe, tekenen, traden, meer) */
 /* v8.8: telefoon-chart zoals TradingView — favorieten zwevend, afspeelbalk op de chart */
 #session .sbar{position:relative;z-index:20;background:var(--bg)}
 @media (max-width:700px), (max-height:500px) and (pointer:coarse){
@@ -948,13 +949,10 @@ body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
   .favbar.vert button{width:40px;height:40px;display:grid;place-items:center;border-radius:10px}
   .favbar.vert button svg.i{width:23px;height:23px}
   .favbar.vert button.on{background:var(--accentSoft);color:var(--accent)}
-  .sxplayer.onchart{position:absolute;left:calc(50% + 22px);bottom:12px;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:16px;
+  .sxplayer.onchart{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:16px;
     background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 8px 24px rgba(0,0,0,.45)}
   .sxplayer.onchart .sxspeed input{width:56px!important}.sxplayer.onchart .vsep{display:none}
   .sxplayer.onchart .ib,.sxplayer.onchart .sxplay{width:40px;height:40px}
-  .favtog{position:absolute;left:10px;bottom:14px;z-index:9;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--ink2);
-    background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 6px 18px rgba(0,0,0,.4)}
-  .favtog.on{color:var(--accent);border-color:var(--accent)}
   #session .sxtest{display:none!important}
 }
 
@@ -990,6 +988,27 @@ html.pwa .topbar{padding-top:calc(env(safe-area-inset-top) + 6px)!important}
 html.pwa #app{grid-template-rows:calc(56px + env(safe-area-inset-top) + 6px) minmax(0,1fr)!important}
 @media (min-width:901px){ html.pwa #app{grid-template-rows:calc(64px + env(safe-area-inset-top) + 6px) minmax(0,1fr)!important} }
 html.pwa #session{padding-top:calc(env(safe-area-inset-top) + 6px)!important}
+
+/* v9.0: telefoon-dock */
+.mdock{display:none}
+#session.phone .sbar,#session.phone .sxrail,#session.phone .sxbottom{display:none!important}
+#session.phone .mdock{display:flex;flex:none;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line)}
+.mdk-l,.mdk-r{display:flex;align-items:center;height:52px;border-radius:26px;background:var(--panel2);border:1px solid var(--line2);padding:0 4px}
+.mdk-l{min-width:0;flex:1 1 auto;padding:0 6px 0 4px}
+.mdk-ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--ink)}
+.mdk-ic.on{color:var(--accent);background:var(--accentSoft)}
+.mdk-sym{display:flex;align-items:center;gap:8px;min-width:0;padding:0 6px;height:44px;font-size:16px;font-weight:800;color:var(--ink)}
+.mdk-sym .sym{width:28px;height:28px;flex:none}.mdk-sym b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mdk-sep{width:1px;height:24px;background:var(--line2);margin:0 4px;flex:none}
+.mdk-tf{height:44px;padding:0 12px;font-size:16px;font-weight:700;color:var(--ink);flex:none}
+#session.phone .sxbal{display:none}
+#session.phone.tradeopen .sxbottom>*:not(.sxtrade){display:none!important}
+#session.phone.tradeopen .sxbottom{display:flex!important;position:absolute;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:30;height:auto!important;min-height:0!important;padding:12px!important;border:1px solid var(--line2);border-radius:18px;background:var(--panel);box-shadow:0 12px 32px rgba(0,0,0,.5);justify-content:center}
+#session.phone.tradeopen .sxbottom .sxtrade{width:100%;justify-content:center}
+#session.phone.tradeopen .sxplayer.onchart{bottom:118px}
+#session.phone .sxpanel{left:0!important;right:0!important;width:auto!important;top:auto!important;bottom:0!important;max-height:72%;border-radius:20px 20px 0 0;z-index:40}
+.sxmenu.tfm{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px}.sxmenu.tfm button{justify-content:center;height:40px;font-weight:700}
+.sxmenu.more button{min-height:44px;font-size:15px}
 /* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
 @media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
 
@@ -1011,6 +1030,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v9.0: telefoon-dock zoals TradingView (markt + timeframe, tekenen, traden, meer) */
 /* v8.8: telefoon — chart als TradingView (favorieten zwevend, afspeelbalk op chart), nieuw inlogscherm, logo-raster */
 /* v8.7: orderlabels in TradingView-stijl met beugel */
 /* v8.6: orderlabels weer zoals TradingView (geen kleuren/nummers per positie) */
@@ -1145,7 +1165,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.9', BUILD: '2026-11-14e'
+  VERSION: 'v9.0', BUILD: '2026-11-14f'
 };
 
 /* ---------------- Icons ---------------- */
@@ -2766,10 +2786,7 @@ function buildSessionDom(){
     <div class="sxbal"><span class="hide-m" style="color:var(--ink3)">${ic('wallet',15)}</span><b id="sxBal"></b></div>
   </div>`;
   setSpeedUI(); $('#sxMode').value=SX.mode;
-  if(isPhone()){ const wrap=$('.sxchartwrap'), pl=$('.sxplayer'); if(wrap&&pl){ wrap.appendChild(pl); pl.classList.add('onchart') }
-    const tg=document.createElement('button'); tg.className='favtog'; tg.id='sxFavTog'; tg.innerHTML=ic('pen',20); tg.title='Tekenen'; wrap.appendChild(tg);
-    tg.classList.toggle('on',!SX.favBarOff); tg.onpointerdown=e=>{ e.stopPropagation(); e.preventDefault() };
-    tg.onclick=e=>{ e.stopPropagation(); SX.favBarOff=!SX.favBarOff; lsSet('twfbt_favoff',SX.favBarOff?'1':''); tg.classList.toggle('on',!SX.favBarOff); if(SX.favBarOff) setTool('cross'); renderFavBar() } }
+  if(isPhone()) buildDock();
 }
 function setSpeedUI(){ let i=SPEEDS.indexOf(SX.speed); if(i<0){i=3;SX.speed=SPEEDS[i]} const r=$('#sxSpeedR'); if(!r) return; r.value=i;
   r.style.setProperty('--fill',(i/(SPEEDS.length-1)*100)+'%'); $('#sxSpeedL').textContent=SX.speed+'×'; }
@@ -2857,7 +2874,7 @@ function hud(){ if(!SX) return;
 }
 function updateTopbar(){
   $('#sxSym').innerHTML=`${symBadge(SX.sym)}<b>${SX.sym}</b><span style="opacity:.6">▾</span>`;
-  renderTfBar();
+  renderTfBar(); try{ updDock() }catch(e){}
   const types={candles:'candle',hollow:'candle',bars:'ohlc',line:'chart',area:'area'}; $('#sxType').innerHTML=ic(types[SX.type]||'candle');
 }
 
@@ -4834,6 +4851,29 @@ function tfName(k){ const m=tfMinutes(k); if(k==='D') return t('tf.d'); if(k==='
 
 /* ----- favoriete tekentools: zwevende balk ----- */
 const isPhone=()=>{ try{ return matchMedia('(max-width:700px), (max-height:500px) and (pointer:coarse)').matches }catch(e){ return false } };
+/* v9.0: telefoon-dock zoals TradingView — markt + timeframe links, tekenen / traden / meer rechts */
+IC.trade=IC.trade||'<path d="M7 4v14M7 4l-3 3M7 4l3 3M17 20V6M17 20l-3-3M17 20l3-3"/>';
+function buildDock(){
+  const ses=$('#session'), wrap=$('.sxchartwrap'), pl=$('.sxplayer'); if(!ses||!wrap) return;
+  if(pl){ wrap.appendChild(pl); pl.classList.add('onchart') }
+  ses.classList.add('phone'); ses.classList.remove('tradeopen');
+  let dk=$('#sxDock'); if(dk) dk.remove(); dk=document.createElement('div'); dk.className='mdock'; dk.id='sxDock';
+  dk.innerHTML=`<div class="mdk-l"><button class="mdk-sym" id="dkSym"></button><span class="mdk-sep"></span><button class="mdk-tf" id="dkTf"></button></div>
+    <div class="mdk-r"><button class="mdk-ic" id="dkPen" aria-label="Draw">${ic('pen',22)}</button><button class="mdk-ic" id="dkTrade" aria-label="Trade">${ic('trade',22)}</button><button class="mdk-ic" id="dkMore" aria-label="More">${ic('dots',22)}</button></div>`;
+  ses.appendChild(dk); updDock();
+  const stop=e=>e.stopPropagation();
+  dk.querySelectorAll('button').forEach(b=>b.addEventListener('pointerdown',stop));
+  $('#dkSym').onclick=e=>symMenu(e.currentTarget);
+  $('#dkTf').onclick=e=>popMenu(e.currentTarget,TFS.map(x=>`<button data-v="${x.k}" class="${x.k===SX.tf?'on':''}">${x.l}</button>`).join(''),v=>{ setTf(v); updDock() },'tfm');
+  const pen=$('#dkPen'); pen.classList.toggle('on',!SX.favBarOff);
+  pen.onclick=()=>{ SX.favBarOff=!SX.favBarOff; lsSet('twfbt_favoff',SX.favBarOff?'1':''); pen.classList.toggle('on',!SX.favBarOff); if(SX.favBarOff) setTool('cross'); renderFavBar() };
+  $('#dkTrade').onclick=()=>{ const on=ses.classList.toggle('tradeopen'); $('#dkTrade').classList.toggle('on',on) };
+  $('#dkMore').onclick=e=>{ const L=(nl,en)=>LANG==='en'?en:nl, items=[['close','back',L('Sessie sluiten','Close session')],['ind','chart','Indicators'],['ana','bars','Analytics'],['order','plusc','Order'],['tree','layers',t('sx.tree')],['watch','list',t('sx.watch')],['journal','edit','Journal'],['type','candle',L('Grafiektype','Chart type')],['undo','undo',L('Ongedaan maken','Undo')],['redo','redo',L('Opnieuw','Redo')],['settings','gear',t('sx.chartset')]];
+    popMenu(e.currentTarget,items.map(([k,i,l])=>`<button data-v="${k}">${ic(i,18)} ${esc(l)}</button>`).join(''),v=>{
+      const q={close:'#sxBack',ind:'#sxInd',ana:'#sxAna',undo:'#sxUndo',redo:'#sxRedo',type:'#sxType'}[v]; if(q){ const el=$(q); if(el) el.click(); return }
+      const rb=document.querySelector(`.sxrail [data-panel="${v}"]`); if(rb) rb.click() },'more') };
+}
+function updDock(){ const s=$('#dkSym'), f=$('#dkTf'); if(!s||!SX) return; s.innerHTML=`${symBadge(SX.sym)}<b>${SX.sym}</b>`; f.textContent=tfLabel(SX.tf) }
 function renderFavBar(){
   const wrap=$('.sxchartwrap'); if(!wrap) return; let fb=$('#sxFavBar'); const fav=favTools();
   if(!fav.length||SX.favBarOff){ if(fb) fb.remove(); return }
