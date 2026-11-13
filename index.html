@@ -355,24 +355,6 @@ body.in-sx #toasts{bottom:112px;left:66px}
 .pos{color:var(--pos)}.neg{color:var(--neg)}
 .pill.neg{background:rgba(229,83,75,.12);color:var(--neg);border-color:transparent}
 .sxovl{position:absolute;left:0;top:0;bottom:30px;right:60px;pointer-events:none;z-index:4;overflow:hidden}
-.olab{position:absolute;right:10px;display:flex;align-items:stretch;height:24px;border-radius:6px;overflow:hidden;pointer-events:auto;cursor:ns-resize;font-size:12px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.35);user-select:none;touch-action:none}
-.olab>*{display:flex;align-items:center;padding:0 8px;background:var(--panel);border:1px solid var(--line2);margin-left:-1px}
-.olab b{color:var(--ink)}
-.olab i{font-style:normal;font-size:10.5px;color:#fff}
-.olab button{color:var(--ink3);cursor:pointer}.olab button:hover{color:var(--ink)}
-.olab .mk{font-size:10.5px;color:var(--pos)}.olab .mk.sl{color:var(--amber)}
-.o-pos{cursor:default}.o-pos b{background:#4c74ff;color:#fff;border-color:#4c74ff}
-.olab.pcol{box-shadow:inset 3px 0 0 var(--pc),0 2px 8px rgba(0,0,0,.35)}.olab.pcol.o-pos b{background:var(--pc);border-color:var(--pc)}
-.olab .pnum{font-style:normal;font-size:10.5px;font-weight:800;color:#fff;background:var(--pc,#4c74ff);border-color:var(--pc,#4c74ff);padding:0 6px}
-.olab .mk:not(.be){font-size:10.5px;font-weight:800;letter-spacing:.02em;background:var(--panel)!important;border-style:dashed!important}
-.olab .mk:not(.be):not(.sl){border-color:var(--pos)!important}.olab .mk.sl{border-color:var(--amber)!important}
-.olead{position:absolute;width:14px;pointer-events:none;border-left:1.5px solid var(--pc,#8a94a6);opacity:.9}
-.olead::before,.olead::after{content:'';position:absolute;left:-1.5px;width:15.5px;border-top:1.5px solid var(--pc,#8a94a6)}
-.olead::before{top:0}.olead::after{bottom:-1.5px}
-.olab.shift{box-shadow:0 2px 10px rgba(0,0,0,.35)}.olab.shift.pcol{box-shadow:inset 3px 0 0 var(--pc),0 2px 10px rgba(0,0,0,.35)}
-.o-tp i{background:var(--pos);border-color:var(--pos)}.o-sl i{background:var(--amber);border-color:var(--amber)}
-.o-tp,.o-otp{border:1px dashed var(--pos)}.o-sl,.o-osl{border:1px dashed var(--amber)}
-.o-ord b{background:var(--accentSoft);color:var(--accent)}
 .o-otp i{background:var(--pos)}.o-osl i{background:var(--amber)}
 .dotsep{color:var(--pos);font-size:9px;margin:0 4px}
 .sxpf{font-size:12.5px;color:var(--ink2);padding:0 10px;border-right:1px solid var(--line2)}
@@ -494,7 +476,6 @@ body.in-sx #toasts{bottom:112px;left:66px}
 
 
 /* ---------- v6.1 ---------- */
-.olab .mk.be{color:var(--ink2);font-size:10.5px}
 .ib.tsm{width:auto;padding:0 7px;height:28px;font-size:11.5px;font-weight:800;color:var(--ink2)}
 .lvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ck.lv{padding:8px 10px;border:1px solid var(--line2);border-radius:9px;background:var(--panel2)}
@@ -503,7 +484,7 @@ body.in-sx #toasts{bottom:112px;left:66px}
 /* ---------- v7: TradingView-look ---------- */
 #session{font-family:-apple-system,BlinkMacSystemFont,'Trebuchet MS',Roboto,Ubuntu,sans-serif;font-size:13px}
 #session .ib,#session .sxbtn,#session .sxsym,#session .btn,#session .inp,#session .lang,#session .seg,#session .seg button,#session .sxplayer,#session .sxbal,#session .sxranges button,
-#session .sxrail button,#session .olab,#session .pill,#session .wl,#session .oli,#session .bs button,#session .osum div,#session .jstats div,#session .cpick,#session .tog,#session .sxtest{border-radius:4px!important}
+#session .sxrail button,#session .pill,#session .wl,#session .oli,#session .bs button,#session .osum div,#session .jstats div,#session .cpick,#session .tog,#session .sxtest{border-radius:4px!important}
 #session .sxplay{border-radius:4px}
 .sxmenu,.sxmenu button,.dtb,.dtb button,.cpop,.cpop button,.favbar,.favbar button,.tw button,.tw .inp{border-radius:4px!important}
 .sxmenu{border-radius:6px!important;padding:4px}
@@ -935,6 +916,25 @@ button,a,.btn,.ib{touch-action:manipulation}
 /* instellingen: tekst links nooit per woord laten afbreken */
 .srow{flex-wrap:wrap}.srow>.stx{min-width:min(240px,100%)}
 .srow:has(.lgpick)>.stx{flex:1 1 260px}.lgpick{flex:1 1 360px}
+
+/* v8.7: orderlabels zoals TradingView */
+.sxovl{position:absolute;left:0;top:0;bottom:30px;right:60px;pointer-events:none;z-index:4;overflow:hidden}
+.obrk{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.olab{position:absolute;display:flex;align-items:stretch;height:26px;border:1.5px solid var(--oc);border-radius:7px;background:var(--panel);color:var(--oc);font-size:12.5px;font-weight:700;line-height:1;pointer-events:auto;user-select:none;-webkit-user-select:none;touch-action:none;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:ns-resize;overflow:hidden}
+.olab>*{display:flex;align-items:center;padding:0 10px}
+.olab .oq{min-width:30px;justify-content:center;border-right:1.5px solid var(--oc);font-weight:800}
+.olab.o-pos .oq{background:var(--oc);color:#fff}
+.olab [data-v]{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.olab button{color:inherit;font:inherit;cursor:pointer}
+.olab>[data-close]{border-left:1.5px solid var(--oc);padding:0 9px;font-size:15px;font-weight:500;opacity:.9}
+.olab .ox{display:none;padding:0}
+.olab.o-pos.open .ox{display:flex}
+@media (hover:hover){ .olab.o-pos:hover .ox{display:flex} }
+.olab .ox button{display:flex;align-items:center;padding:0 9px;border-left:1px solid var(--line2);color:var(--ink2);font-size:11px;font-weight:800}
+.olab .ox button:hover{color:var(--ink);background:var(--panel2)}
+.olab .ox .mk-tp{color:#089981}.olab .ox .mk-sl{color:#F7A600}
+.olab.o-pos{cursor:pointer}
+body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
 /* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
 @media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
 
@@ -956,6 +956,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v8.7: orderlabels in TradingView-stijl met beugel */
 /* v8.6: orderlabels weer zoals TradingView (geen kleuren/nummers per positie) */
 /* v8.5: passkey los van Journal + blijft na uitloggen, tekenpreview op touch, safe-area iPad-app */
 /* v8.4: tekenen met touch (iPad), logo-thema's voor app en beginscherm-icoon */
@@ -1088,7 +1089,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v8.6', BUILD: '2026-11-14b'
+  VERSION: 'v8.7', BUILD: '2026-11-14c'
 };
 
 /* ---------------- Icons ---------------- */
@@ -3152,17 +3153,18 @@ function firstOneClickHint(){ if(_ocHint||profile().ocHintSeen) return; _ocHint=
 }
 
 /* ----- overlay: sleepbare lijnen op de chart ----- */
+/* v8.7: orderlabels zoals TradingView — [aantal][P&L][×] op de lijn, beugel rechts die entry/TP/SL verbindt */
+const OCOL={long:'#2962FF',short:'#F23645',tp:'#089981',sl:'#F7A600'};
+function itemCol(it){ const side=(it.p||it.o).side; return (it.k==='tp'||it.k==='otp')?OCOL.tp:(it.k==='sl'||it.k==='osl')?OCOL.sl:side==='sell'?OCOL.short:OCOL.long }
 function drawOverlay(){
   const ov=$('#sxOvl'); if(!ov||!SX.series) return;
   (SX.plines||[]).forEach(l=>{try{SX.series.removePriceLine(l)}catch(e){}}); SX.plines=[];
-  const items=[];
-  SX.pos.filter(p=>p.sym===SX.sym).forEach(p=>{items.push({k:'pos',p,price:p.entry});if(p.tp!=null)items.push({k:'tp',p,price:p.tp});if(p.sl!=null)items.push({k:'sl',p,price:p.sl})});
-  SX.orders.filter(o=>o.sym===SX.sym).forEach(o=>{items.push({k:'ord',o,price:o.price});if(o.tp!=null)items.push({k:'otp',o,price:o.tp});if(o.sl!=null)items.push({k:'osl',o,price:o.sl})});
-  const col={pos:'#4c74ff',tp:'#2fbf71',sl:'#e0a33a',ord:'#4c74ff',otp:'#2fbf71',osl:'#e0a33a'};
-  const myPos=SX.pos.filter(p=>p.sym===SX.sym), multi=false; items.forEach(it=>{ if(it.p){ const i=myPos.indexOf(it.p); it.ci=i; it.pc=multi?POSCOL[i%POSCOL.length]:null } });
-  items.forEach(it=>{it.pl=SX.series.createPriceLine({price:it.price,color:it.k==='pos'&&it.pc?it.pc:col[it.k],lineWidth:it.k==='pos'?2:1,lineStyle:it.k==='pos'?0:2,axisLabelVisible:true,title:''});SX.plines.push(it.pl)});
-  SX.ovItems=items;
-  ov.innerHTML=items.map((it,i)=>`${it.pc?`<div class="olead" data-l="${i}" style="--pc:${it.pc}"></div>`:''}<div class="olab o-${it.k}${it.pc?' pcol':''}" data-i="${i}"${it.pc?` style="--pc:${it.pc}"`:''}>${labelHtml(it)}</div>`).join('');
+  const items=[]; let g=0;
+  SX.pos.filter(p=>p.sym===SX.sym).forEach(p=>{const gi=g++; items.push({k:'pos',p,price:p.entry,g:gi});if(p.tp!=null)items.push({k:'tp',p,price:p.tp,g:gi});if(p.sl!=null)items.push({k:'sl',p,price:p.sl,g:gi})});
+  SX.orders.filter(o=>o.sym===SX.sym).forEach(o=>{const gi=g++; items.push({k:'ord',o,price:o.price,g:gi});if(o.tp!=null)items.push({k:'otp',o,price:o.tp,g:gi});if(o.sl!=null)items.push({k:'osl',o,price:o.sl,g:gi})});
+  items.forEach(it=>{ it.c=itemCol(it); it.pl=SX.series.createPriceLine({price:it.price,color:it.c,lineWidth:1,lineStyle:it.k==='ord'||it.k==='otp'||it.k==='osl'?2:0,axisLabelVisible:true,title:''}); SX.plines.push(it.pl) });
+  SX.ovItems=items; SX.ovGroups=g; const open=SX.olOpen;
+  ov.innerHTML=`<svg class="obrk" id="sxBrk"></svg>`+items.map((it,i)=>`<div class="olab o-${it.k}${it.k==='ord'?' o-'+it.o.side:''}${it.p&&it.p.id===open&&it.k==='pos'?' open':''}" data-i="${i}" style="--oc:${it.c}">${labelHtml(it)}</div>`).join('');
   ov.querySelectorAll('.olab').forEach(el=>{
     const it=items[+el.dataset.i];
     el.addEventListener('pointerdown',e=>{
@@ -3171,45 +3173,51 @@ function drawOverlay(){
       if(b&&b.dataset.be!==undefined){e.stopPropagation();breakEven(it.p);return}
       if(b&&b.dataset.half!==undefined){e.stopPropagation();closePart(it.p,0.5);return}
       if(b&&b.dataset.mk){e.stopPropagation();e.preventDefault();startMk(it.p,b.dataset.mk,e);return}
-      if(it.k==='pos') return;
+      if(it.k==='pos'){ e.stopPropagation(); const op=el.classList.toggle('open'); SX.olOpen=op?it.p.id:null; ov.querySelectorAll('.olab.o-pos.open').forEach(x=>{ if(x!==el) x.classList.remove('open') }); placeOverlay(true); return }
       e.preventDefault(); startDrag(it,e);
     });
   });
   placeOverlay(true);
 }
-const POSCOL=['#4c74ff','#c084fc','#22d3ee','#f472b6','#a3e635','#fb923c'];
 function labelHtml(it){
-  const q=it.p?it.p.qty:it.o.qty;
-  if(it.k==='pos'){const p=it.p;return `${p.tp==null?'<button data-mk="tp" class="mk">+TP</button>':''}${p.sl==null?'<button data-mk="sl" class="mk sl">+SL</button>':''}${it.pc?`<em class="pnum">#${it.ci+1}</em>`:''}<b>${q}</b><span data-v></span><button data-be title="Break-even" class="mk be">BE</button><button data-half title="${t('tr.half')}" class="mk be">½</button><button data-close>✕</button>`}
-  if(it.k==='tp'||it.k==='sl') return `<i>${it.k.toUpperCase()}${it.pc?` #${it.ci+1}`:''}</i><b>${q}</b><span data-v></span><button data-close>✕</button>`;
-  if(it.k==='ord') return `<b>${sideLbl(it.o.side)} ${it.o.type==='limit'?t('tr.limit'):t('tr.stop')} ${q}</b><span data-v></span><button data-close>✕</button>`;
-  return `<i>${it.k==='otp'?'TP':'SL'}</i><b>${q}</b><button data-close>✕</button>`;
+  const src=it.p||it.o, q=src.qty, sq=(src.side==='sell'&&(it.k==='pos'||it.k==='ord')?'−':'')+q, X='<button data-close aria-label="Close">×</button>';
+  if(it.k==='pos'){ const p=it.p; return `<span class="oq">${sq}</span><span data-v></span><span class="ox">${p.tp==null?'<button data-mk="tp" class="mk-tp">+TP</button>':''}${p.sl==null?'<button data-mk="sl" class="mk-sl">+SL</button>':''}<button data-be title="Break-even">BE</button><button data-half title="${t('tr.half')}">½</button></span>${X}` }
+  if(it.k==='ord') return `<span class="oq">${sq}</span><span data-v></span>${X}`;
+  return `<span class="oq">${q}</span><span data-v></span>${X}`;
 }
 function placeOverlay(force){
   const ov=$('#sxOvl'); if(!ov||!SX||!SX.ovItems) return;
-  const sw=SX.chart.priceScale('right').width(), H=ov.clientHeight, q=SX.pos.length?closeQuote(SX.pos[0]):0;
+  const sw=SX.chart.priceScale('right').width(), H=ov.clientHeight, W=ov.clientWidth;
   const ys=SX.ovItems.map(it=>SX.series.priceToCoordinate(it.price));
-  const sig=sw+'|'+H+'|'+ys.map(y=>y==null?'x':Math.round(y)).join(',')+'|'+(SX.pos.length?SX.pos.map(p=>closeQuote(p)).join(','):'')+'|'+SX.ovItems.length;
+  const sig=sw+'|'+W+'|'+H+'|'+ys.map(y=>y==null?'x':Math.round(y)).join(',')+'|'+(SX.pos.length?SX.pos.map(p=>closeQuote(p)).join(','):'')+'|'+SX.ovItems.length+'|'+SX.olOpen;
   if(!force&&sig===SX.ovSig) return; SX.ovSig=sig;
   if(ov.style.right!==sw+'px') ov.style.right=sw+'px';
-  const LH=27, els=[...ov.querySelectorAll('.olab')];
-  // zichtbare labels sorteren op hoogte en overlappende labels boven/onder elkaar stapelen
-  const vis=[]; els.forEach(el=>{ const i=+el.dataset.i, y=ys[i]; if(y==null||y<-12||y>H+12){ if(el.style.display!=='none') el.style.display='none'; return } if(el.style.display) el.style.display=''; vis.push({el,i,y}) });
+  const LH=30, NG=Math.max(1,SX.ovGroups||1), BX=gi=>W-18-gi*12, R=W-BX(NG-1)+16;
+  const els=[...ov.querySelectorAll('.olab')];
+  const vis=[]; els.forEach(el=>{ const i=+el.dataset.i, y=ys[i]; if(y==null||y<-14||y>H+14){ if(el.style.display!=='none') el.style.display='none'; return } if(el.style.display) el.style.display=''; vis.push({el,i,y}) });
   vis.sort((a,b)=>a.y-b.y);
-  const groups=[]; vis.forEach(v=>{ let g={items:[v],sum:v.y}; groups.push(g);
+  // labels die elkaar raken boven/onder elkaar zetten (blijven zo dicht mogelijk bij hun lijn)
+  const groups=[]; vis.forEach(v=>{ groups.push({items:[v],sum:v.y});
     while(groups.length>1){ const a=groups[groups.length-2], b=groups[groups.length-1]; const aTop=a.sum/a.items.length-(a.items.length-1)*LH/2, bTop=b.sum/b.items.length-(b.items.length-1)*LH/2;
       if(aTop+a.items.length*LH>bTop){ a.items.push(...b.items); a.sum+=b.sum; groups.pop() } else break } });
-  groups.forEach(g=>{ let top=g.sum/g.items.length-(g.items.length-1)*LH/2; top=Math.max(12,Math.min(H-12-(g.items.length-1)*LH,top));
-    g.items.forEach((v,k)=>{ const yy=top+k*LH, sh=Math.abs(yy-v.y)>3; v.el.style.top=(yy-12)+'px'; v.el.style.right='10px'; v.el.classList.toggle('shift',sh);
-      const ld=ov.querySelector(`.olead[data-l="${v.i}"]`); if(ld){ if(!sh){ ld.style.display='none' } else { const w=v.el.offsetWidth; ld.style.display=''; ld.style.right=(10+w-1)+'px'; ld.style.top=Math.min(yy,v.y)+'px'; ld.style.height=Math.max(1,Math.abs(yy-v.y))+'px'; ld.classList.toggle('up',v.y<yy) } } }) });
-  ov.querySelectorAll('.olead').forEach(ld=>{ const i=+ld.dataset.l; if(!vis.some(v=>v.i===i)) ld.style.display='none' });
-  vis.forEach(({el,i})=>{ const it=SX.ovItems[i]; const v=el.querySelector('[data-v]'); if(!v) return;
-    let val=null;
-    if(it.k==='pos') val=pnlAt(it.p,closeQuote(it.p));
-    else if(it.k==='tp'||it.k==='sl') val=pnlAt(it.p,it.price);
-    if(val!=null){ const tx=fmtUsd(val), cl=val>=0?'pos':'neg'; if(v.textContent!==tx) v.textContent=tx; if(v.className!==cl) v.className=cl }
-    else if(it.k==='ord'){ const tx='@ '+it.price.toFixed(SYMCFG[SX.sym].dec); if(v.textContent!==tx) v.textContent=tx }
-  });
+  groups.forEach(g=>{ let top=g.sum/g.items.length-(g.items.length-1)*LH/2; top=Math.max(14,Math.min(H-14-(g.items.length-1)*LH,top));
+    g.items.forEach((v,k)=>{ v.yy=top+k*LH; v.el.style.top=(v.yy-13)+'px'; v.el.style.right=R+'px' }) });
+  // waarden
+  vis.forEach(v=>{ const it=SX.ovItems[v.i], el=v.el, val=el.querySelector('[data-v]'); if(!val) return; let n=null;
+    if(it.k==='pos') n=pnlAt(it.p,closeQuote(it.p));
+    else if(it.k==='tp'||it.k==='sl') n=pnlAt(it.p,it.price);
+    else if(it.k==='otp'||it.k==='osl') n=(it.price-it.o.price)*(it.o.side==='buy'?1:-1)*it.o.qty*ccs(it.o.sym);
+    const tx=n!=null?fmtUsd(n):(it.o.type==='limit'?'LMT ':'STP ')+it.price.toFixed(SYMCFG[SX.sym].dec); if(val.textContent!==tx) val.textContent=tx });
+  // beugel: verbindt entry/TP/SL van dezelfde positie of order
+  const svg=ov.querySelector('#sxBrk'); if(!svg) return; let h='';
+  const byG={}; vis.forEach(v=>{ const it=SX.ovItems[v.i]; (byG[it.g]=byG[it.g]||[]).push({v,it}) });
+  Object.keys(byG).forEach(gk=>{ const L=byG[gk], bx=BX(+gk), main=L.find(x=>x.it.k==='pos'||x.it.k==='ord'), col=main?main.it.c:L[0].it.c;
+    const yb=L.map(x=>Math.max(1,Math.min(H-1,x.v.y)));
+    if(L.length>1) h+=`<line x1="${bx}" x2="${bx}" y1="${Math.min(...yb)}" y2="${Math.max(...yb)}" stroke="${col}" stroke-width="1.5"/>`;
+    L.forEach((x,k)=>{ const lx=W-R, y0=x.v.yy, y1=yb[k], c=x.it.c, filled=x.it.k==='pos'||x.it.k==='ord';
+      h+=`<path d="M${lx} ${y0} L${bx-10} ${y0} L${bx} ${y1}" fill="none" stroke="${c}" stroke-width="1.5"/>`;
+      h+=`<circle cx="${bx}" cy="${y1}" r="${filled?4.5:4}" fill="${filled?col:'var(--panel)'}" stroke="${filled?col:c}" stroke-width="1.5"/>` }) });
+  if(svg._h!==h){ svg._h=h; svg.innerHTML=h }
 }
 function drawSig(){ try{ const cv=SX.canvas||document.querySelector('#sxDraw'), lr=SX.chart.timeScale().getVisibleLogicalRange(), b=SX.rp&&SX.rp.current(), c=b?(b.close??b.value):0;
   return [cv&&cv.width,cv&&cv.height,lr?lr.from.toFixed(3)+':'+lr.to.toFixed(3):'',SX.series.priceToCoordinate(c||1),SX.series.priceToCoordinate((c||1)*1.01),SX.rp&&SX.rp.idx,SX.rp&&SX.rp.sub,c,SX.sel,SX.hideAll,(SX.s.drawings||[]).length,curTheme()].join('|') }catch(e){ return Math.random() } }
