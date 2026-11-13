@@ -980,12 +980,6 @@ body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
 /* v8.9: beginscherm-app (iOS standalone) — echt schermvullend.
    iOS schuift de pagina onder de doorzichtige statusbalk, maar het viewport blijft even lang;
    daardoor bleef onderin een strook leeg. In de app rekenen we met de volle schermhoogte (lvh). */
-html.pwa,html.pwa body{min-height:100lvh}
-html.pwa #app,html.pwa #session,html.pwa #login,html.pwa .msheet,html.pwa .ov{bottom:calc(100% - 100lvh)!important;height:auto}
-html.pwa .tabbar{bottom:calc(100% - 100lvh)!important}
-html.pwa body.in-app:not(.in-sx) #toasts{bottom:calc(84px + env(safe-area-inset-bottom) + 100% - 100lvh)}
-html.pwa .fab{bottom:calc(84px + env(safe-area-inset-bottom) + 100% - 100lvh)}
-@media (min-width:901px){ html.pwa .fab{bottom:calc(24px + 100% - 100lvh)} }
 
 /* v9.1: inhoud onder iOS 26-glasstrook vandaan, ronde zachte afspeelbalk, strakkere stapeling */
 /* v9.0: telefoon-dock */
@@ -1222,7 +1216,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v9.3', BUILD: '2026-11-14i'
+  VERSION: 'v9.4', BUILD: '2026-11-15'
 };
 
 /* ---------------- Icons ---------------- */
