@@ -936,6 +936,7 @@ button,a,.btn,.ib{touch-action:manipulation}
 .olab.o-pos{cursor:pointer}
 body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
 
+/* v9.1: inhoud onder iOS 26-glasstrook vandaan, ronde zachte afspeelbalk, strakkere stapeling */
 /* v9.0: telefoon-dock zoals TradingView (markt + timeframe, tekenen, traden, meer) */
 /* v8.8: telefoon-chart zoals TradingView — favorieten zwevend, afspeelbalk op de chart */
 #session .sbar{position:relative;z-index:20;background:var(--bg)}
@@ -989,6 +990,7 @@ html.pwa #app{grid-template-rows:calc(56px + env(safe-area-inset-top) + 6px) min
 @media (min-width:901px){ html.pwa #app{grid-template-rows:calc(64px + env(safe-area-inset-top) + 6px) minmax(0,1fr)!important} }
 html.pwa #session{padding-top:calc(env(safe-area-inset-top) + 6px)!important}
 
+/* v9.1: inhoud onder iOS 26-glasstrook vandaan, ronde zachte afspeelbalk, strakkere stapeling */
 /* v9.0: telefoon-dock */
 .mdock{display:none}
 #session.phone .sbar,#session.phone .sxrail,#session.phone .sxbottom{display:none!important}
@@ -1009,6 +1011,22 @@ html.pwa #session{padding-top:calc(env(safe-area-inset-top) + 6px)!important}
 #session.phone .sxpanel{left:0!important;right:0!important;width:auto!important;top:auto!important;bottom:0!important;max-height:72%;border-radius:20px 20px 0 0;z-index:40}
 .sxmenu.tfm{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px}.sxmenu.tfm button{justify-content:center;height:40px;font-weight:700}
 .sxmenu.more button{min-height:44px;font-size:15px}
+
+/* v9.1: iOS 26 'glas' bovenin — inhoud verder omlaag zodat niets onder de vervaagde strook valt */
+html.pwa .topbar{padding-top:calc(env(safe-area-inset-top) + 18px)!important}
+html.pwa #app{grid-template-rows:calc(56px + env(safe-area-inset-top) + 18px) minmax(0,1fr)!important}
+@media (min-width:901px){ html.pwa #app{grid-template-rows:calc(64px + env(safe-area-inset-top) + 18px) minmax(0,1fr)!important} }
+html.pwa #session{padding-top:calc(env(safe-area-inset-top) + 18px)!important}
+html.pwa #session.phone{padding-top:calc(env(safe-area-inset-top) + 34px)!important}
+/* v9.1: zachtere, ronde afspeelbalk + strak gestapeld boven trade-kaart en dock */
+#session.phone .sxplayer.onchart{border-radius:999px!important;padding:5px 6px 5px 14px;gap:4px;border:1px solid rgba(255,255,255,.08);
+  background:color-mix(in srgb,var(--panel2) 78%,transparent);box-shadow:0 6px 20px rgba(0,0,0,.28);bottom:10px}
+#session.phone .sxplayer.onchart .ib{border-radius:50%!important;color:var(--ink2)}
+#session.phone .sxplayer.onchart .sxplay{width:42px;height:42px;border-radius:50%!important;box-shadow:0 2px 10px rgba(76,116,255,.35)}
+#session.phone .sxplayer.onchart #sxSpeedL{font-size:13px;color:var(--ink2);min-width:30px}
+body.theme-light #session.phone .sxplayer.onchart{border-color:rgba(0,0,0,.08)}
+#session.phone.tradeopen .sxbottom{bottom:calc(76px + env(safe-area-inset-bottom))!important;padding:8px!important;border-radius:22px!important;border-color:rgba(255,255,255,.08)!important;box-shadow:0 6px 20px rgba(0,0,0,.3)!important}
+#session.phone.tradeopen .sxplayer.onchart{bottom:76px}
 /* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
 @media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
 
@@ -1030,6 +1048,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 .sxmenu .tplrow .tplck{width:14px;flex:none;color:var(--accent);font-weight:700}
 
 /* v8.0: update, passkey, rekeningen */
+/* v9.1: inhoud onder iOS 26-glasstrook vandaan, ronde zachte afspeelbalk, strakkere stapeling */
 /* v9.0: telefoon-dock zoals TradingView (markt + timeframe, tekenen, traden, meer) */
 /* v8.8: telefoon — chart als TradingView (favorieten zwevend, afspeelbalk op chart), nieuw inlogscherm, logo-raster */
 /* v8.7: orderlabels in TradingView-stijl met beugel */
@@ -1165,7 +1184,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v9.0', BUILD: '2026-11-14f'
+  VERSION: 'v9.1', BUILD: '2026-11-14g'
 };
 
 /* ---------------- Icons ---------------- */
@@ -4851,6 +4870,7 @@ function tfName(k){ const m=tfMinutes(k); if(k==='D') return t('tf.d'); if(k==='
 
 /* ----- favoriete tekentools: zwevende balk ----- */
 const isPhone=()=>{ try{ return matchMedia('(max-width:700px), (max-height:500px) and (pointer:coarse)').matches }catch(e){ return false } };
+/* v9.1: inhoud onder iOS 26-glasstrook vandaan, ronde zachte afspeelbalk, strakkere stapeling */
 /* v9.0: telefoon-dock zoals TradingView — markt + timeframe links, tekenen / traden / meer rechts */
 IC.trade=IC.trade||'<path d="M7 4v14M7 4l-3 3M7 4l3 3M17 20V6M17 20l-3-3M17 20l3-3"/>';
 function buildDock(){
