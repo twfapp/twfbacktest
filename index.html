@@ -936,6 +936,7 @@ button,a,.btn,.ib{touch-action:manipulation}
 .olab.o-pos{cursor:pointer}
 body.theme-light .olab{background:#fff;box-shadow:0 2px 8px rgba(20,30,60,.15)}
 
+/* v9.3: Analysis hub, timeframe-lijst, dashboard-fixes telefoon */
 /* v9.2: effen zwarte statusbalk i.p.v. doorzichtig (geen glas, geen gat) */
 /* v9.1: inhoud onder iOS 26-glasstrook vandaan, ronde zachte afspeelbalk, strakkere stapeling */
 /* v9.0: telefoon-dock zoals TradingView (markt + timeframe, tekenen, traden, meer) */
@@ -1022,6 +1023,48 @@ html.pwa #session,html.pwa #session.phone{padding-top:env(safe-area-inset-top)!i
 body.theme-light #session.phone .sxplayer.onchart{border-color:rgba(0,0,0,.08)}
 #session.phone.tradeopen .sxbottom{bottom:calc(76px + env(safe-area-inset-bottom))!important;padding:8px!important;border-radius:22px!important;border-color:rgba(255,255,255,.08)!important;box-shadow:0 6px 20px rgba(0,0,0,.3)!important}
 #session.phone.tradeopen .sxplayer.onchart{bottom:76px}
+
+/* v9.3: dashboard op de telefoon netjes */
+@media (max-width:700px){
+  .tabs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;overflow:visible!important}
+  .tabs button{justify-content:center;padding:12px 4px;font-size:14px;gap:6px}.tabs button svg.i{display:none}
+  body.in-app .fab{display:none!important}
+  .srow-s{display:grid!important;grid-template-columns:auto 1fr auto auto;grid-template-areas:"ic nm bal ch" "ic ty bal ch";column-gap:12px;row-gap:4px;align-items:center}
+  .srow-s .srs-ic{grid-area:ic}.srow-s>div:nth-child(2){grid-area:nm}.srow-s .srs-ty{grid-area:ty;justify-self:start;font-size:12px}.srow-s .srs-bal{grid-area:bal;min-width:0!important}.srow-s>:nth-child(n+5){grid-area:ch;color:var(--ink3)}
+  .srow-s>div:nth-child(2) b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow-s>div:nth-child(2) .sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .slide .ill{height:96px}.slide .ill svg{width:34px;height:34px}
+}
+/* v9.3: schuifpaneel + timeframe-lijst zoals TradingView */
+.tvsheet-bg{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.5);opacity:0;transition:opacity .2s}.tvsheet-bg.on{opacity:1}
+.tvsheet{position:fixed;left:8px;right:8px;bottom:8px;z-index:96;max-height:82vh;display:flex;flex-direction:column;background:#1c1c1e;color:#f2f2f7;border-radius:28px;box-shadow:0 -10px 40px rgba(0,0,0,.5);transform:translateY(110%);transition:transform .24s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom)}
+.tvsheet.on{transform:none}
+body.theme-light .tvsheet{background:#fff;color:#111}
+.tvs-grip{width:44px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);margin:10px auto 2px}
+body.theme-light .tvs-grip{background:rgba(0,0,0,.18)}
+.tvs-head{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:6px 14px 10px}.tvs-head b{text-align:center;font-size:18px;font-weight:800}
+.tvs-x{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:inherit}
+body.theme-light .tvs-x{background:rgba(0,0,0,.06)}
+.tvs-body{overflow-y:auto;padding:4px 16px 18px;-webkit-overflow-scrolling:touch}
+.tvs-sec{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(235,235,245,.55);margin:18px 4px 10px}
+body.theme-light .tvs-sec{color:#6b7280}
+.tvs-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.tvs-chips::-webkit-scrollbar{display:none}.tvs-chips.wrap{flex-wrap:wrap}
+.tvs-chips button{flex:none;min-width:58px;height:46px;padding:0 16px;border-radius:14px;background:rgba(255,255,255,.08);color:inherit;font-size:16px;font-weight:700}
+.tvs-chips button.on{background:#fff;color:#111}
+body.theme-light .tvs-chips button{background:rgba(0,0,0,.06)}body.theme-light .tvs-chips button.on{background:#111;color:#fff}
+.tvs-grid{display:grid;gap:10px}.tvs-grid.g3{grid-template-columns:repeat(3,1fr)}.tvs-grid.g2{grid-template-columns:repeat(2,1fr)}
+.tvs-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:80px;padding:12px 6px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);color:inherit;font-size:13.5px;font-weight:700;text-align:center}
+.tvs-tile.big{min-height:96px;font-size:14.5px}.tvs-tile svg.i{width:26px;height:26px}
+.tvs-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.tvs-tile.wide{flex-direction:row;min-height:52px;gap:10px}
+.tvs-tile:active,.tvs-chips button:active{transform:scale(.97)}
+body.theme-light .tvs-tile{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.06)}
+.tvs-close{margin-top:16px;width:100%;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(242,54,69,.12);color:#F23645;font-weight:800;font-size:15px}
+.tfwheel{position:fixed;z-index:96;width:220px;max-height:300px;border-radius:26px;background:rgba(44,44,46,.82);-webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6);border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 40px rgba(0,0,0,.5);opacity:0;transform:scale(.94) translateY(8px);transform-origin:bottom left;transition:opacity .16s,transform .16s;overflow:hidden}
+.tfwheel.on{opacity:1;transform:none}
+.tfw-list{max-height:300px;overflow-y:auto;padding:10px;scrollbar-width:none;-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}.tfw-list::-webkit-scrollbar{display:none}
+.tfw-list button{display:block;width:100%;text-align:left;height:44px;padding:0 18px;border-radius:22px;color:rgba(255,255,255,.75);font-size:17px;font-weight:600}
+.tfw-list button.on{background:rgba(255,255,255,.14);color:#fff}
+body.theme-light .tfwheel{background:rgba(255,255,255,.88);border-color:rgba(0,0,0,.06)}body.theme-light .tfw-list button{color:#333}body.theme-light .tfw-list button.on{background:rgba(0,0,0,.08);color:#000}
 /* iOS zoomt in op velden kleiner dan 16px: op touch-schermen altijd 16px */
 @media (pointer:coarse){ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important} }
 
@@ -1179,7 +1222,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v9.2', BUILD: '2026-11-14h'
+  VERSION: 'v9.3', BUILD: '2026-11-14i'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1900,11 +1943,11 @@ function tabDash(){
 }
 function sessRow(s){
   const acc=DB.get('accounts',s.account), str=DB.get('strategies',s.strategy);
-  return `<div class="row" style="cursor:pointer" data-open="${s.id}">
-    <div style="display:flex">${(s.assets||[]).slice(0,3).map(symBadge).join('')}</div>
+  return `<div class="row srow-s" style="cursor:pointer" data-open="${s.id}">
+    <div class="srs-ic" style="display:flex">${(s.assets||[]).slice(0,3).map(symBadge).join('')}</div>
     <div style="flex:1;min-width:0"><b>${esc(s.name)}</b><div class="sub" style="color:var(--ink3);font-size:13px">${esc((s.assets||[]).join(', '))} · ${fmtDate(s.start)}${str?` · <span class="swatch" style="background:${str.color}"></span>${esc(str.name)}`:''}</div></div>
-    <span class="stype ${s.type==='propfirm'?'pf':''}">${s.type==='propfirm'?t('propfirm'):t('backtest')}</span>
-    <div style="text-align:right;min-width:110px"><b>${fmtMoney(s.balance??(acc&&acc.balance),acc?acc.currency:'USD')}</b><div style="color:var(--ink3);font-size:12px">${(s.trades||[]).length} ${t('trades')}</div></div>
+    <span class="stype srs-ty ${s.type==='propfirm'?'pf':''}">${s.type==='propfirm'?t('propfirm'):t('backtest')}</span>
+    <div class="srs-bal" style="text-align:right;min-width:110px"><b>${fmtMoney(s.balance??(acc&&acc.balance),acc?acc.currency:'USD')}</b><div style="color:var(--ink3);font-size:12px">${(s.trades||[]).length} ${t('trades')}</div></div>
     <span style="color:var(--ink3)">${ic('next')}</span></div>`;
 }
 function tabSessions(){
@@ -1946,7 +1989,7 @@ function pageAccounts(){
   const ac=DB.list('accounts').sort((a,b)=>a.created.localeCompare(b.created)), ss=DB.list('sessions');
   return `<div class="phead"><h1>${t('acc.title')}</h1><div style="color:var(--ink2);margin:-12px 0 24px">${t('acc.sub')}</div></div>
   <div class="pbody"><div class="toolbar"><div style="flex:1"></div><button class="btn btn-p" data-act="newacc">${ic('plus',16)} ${t('acc.new')}</button></div>
-  ${ac.length?`<div class="grid-cards">${ac.map(a=>`<div class="ccard"><div class="top"><div><div class="ttl">${esc(a.name)}</div><div style="color:var(--ink3);font-size:13px;margin-top:4px">${t('acc.used')} ${ss.filter(s=>s.account===a.id).length} ${t('acc.sessions')}</div></div><span class="pill acc">1:${a.leverage}</span></div>
+  ${ac.length?`<div class="grid-cards">${ac.map(a=>`<div class="ccard"><div class="top"><div><div class="ttl">${esc(a.name)}</div><div style="color:var(--ink3);font-size:13px;margin-top:4px">${t('acc.used')} ${(n=>n+' '+(n===1?(LANG==='en'?'session':'sessie'):t('acc.sessions')))(ss.filter(s=>s.account===a.id).length)}</div></div><span class="pill acc">1:${a.leverage}</span></div>
    ${(()=>{ const L=(nl,en)=>LANG==='en'?en:nl, r=accRealized(a.id), pc=a.balance?r/a.balance*100:0, cls=r>0?'pos':r<0?'neg':'', sg=r>0?'+':r<0?'−':'';
      return `<div><div class="bal">${fmtMoney(a.balance+r,a.currency)}</div><div class="bals">${fmtMoney(a.balance,a.currency)} ${L('startkapitaal','starting capital')}</div></div>
    <div class="meta"><div><small>${L('Gerealiseerd','Realized')}</small><b class="${cls}">${sg}${fmtMoney(Math.abs(r),a.currency)}</b></div><div><small>${L('Gerealiseerd %','Realized %')}</small><b class="${cls}">${sg}${Math.abs(pc).toFixed(2)}%</b></div><div><small>${t('acc.currency')}</small><b>${esc(a.currency)}</b></div><div><small>${t('acc.leverage')}</small><b>1:${a.leverage}</b></div><div><small>${t('acc.mc')}</small><b>${a.mc}%</b></div><div><small>${t('acc.so')}</small><b>${a.so}%</b></div></div>` })()}
@@ -4879,15 +4922,55 @@ function buildDock(){
   const stop=e=>e.stopPropagation();
   dk.querySelectorAll('button').forEach(b=>b.addEventListener('pointerdown',stop));
   $('#dkSym').onclick=e=>symMenu(e.currentTarget);
-  $('#dkTf').onclick=e=>popMenu(e.currentTarget,TFS.map(x=>`<button data-v="${x.k}" class="${x.k===SX.tf?'on':''}">${x.l}</button>`).join(''),v=>{ setTf(v); updDock() },'tfm');
+  { const tf=$('#dkTf'); let lp=null, long=false; tf.addEventListener('pointerdown',()=>{ long=false; lp=setTimeout(()=>{ long=true; tfSheet() },450) }); ['pointerup','pointerleave','pointercancel'].forEach(ev=>tf.addEventListener(ev,()=>clearTimeout(lp))); tf.onclick=e=>{ if(long) return; tfWheel(e.currentTarget) } }
   const pen=$('#dkPen'); pen.classList.toggle('on',!SX.favBarOff);
   pen.onclick=()=>{ SX.favBarOff=!SX.favBarOff; lsSet('twfbt_favoff',SX.favBarOff?'1':''); pen.classList.toggle('on',!SX.favBarOff); if(SX.favBarOff) setTool('cross'); renderFavBar() };
   $('#dkTrade').onclick=()=>{ const on=ses.classList.toggle('tradeopen'); $('#dkTrade').classList.toggle('on',on) };
-  $('#dkMore').onclick=e=>{ const L=(nl,en)=>LANG==='en'?en:nl, items=[['close','back',L('Sessie sluiten','Close session')],['ind','chart','Indicators'],['ana','bars','Analytics'],['order','plusc','Order'],['tree','layers',t('sx.tree')],['watch','list',t('sx.watch')],['journal','edit','Journal'],['type','candle',L('Grafiektype','Chart type')],['undo','undo',L('Ongedaan maken','Undo')],['redo','redo',L('Opnieuw','Redo')],['settings','gear',t('sx.chartset')]];
-    popMenu(e.currentTarget,items.map(([k,i,l])=>`<button data-v="${k}">${ic(i,18)} ${esc(l)}</button>`).join(''),v=>{
-      const q={close:'#sxBack',ind:'#sxInd',ana:'#sxAna',undo:'#sxUndo',redo:'#sxRedo',type:'#sxType'}[v]; if(q){ const el=$(q); if(el) el.click(); return }
-      const rb=document.querySelector(`.sxrail [data-panel="${v}"]`); if(rb) rb.click() },'more') };
+  $('#dkMore').onclick=()=>moreHub();
 }
+/* v9.3: schuifpaneel van onderen (zoals TradingView) */
+function mSheet(title,html,cls=''){
+  document.querySelectorAll('.tvsheet,.tvsheet-bg').forEach(x=>x.remove());
+  const bg=document.createElement('div'); bg.className='tvsheet-bg'; const sh=document.createElement('div'); sh.className='tvsheet '+cls;
+  sh.innerHTML=`<div class="tvs-grip"></div><div class="tvs-head"><span></span><b>${esc(title)}</b><button class="tvs-x" aria-label="Close">${ic('x',20)}</button></div><div class="tvs-body">${html}</div>`;
+  document.body.append(bg,sh); requestAnimationFrame(()=>{bg.classList.add('on');sh.classList.add('on')});
+  const close=()=>{ bg.classList.remove('on'); sh.classList.remove('on'); setTimeout(()=>{bg.remove();sh.remove()},220) };
+  bg.onclick=close; sh.querySelector('.tvs-x').onclick=close;
+  let y0=null; sh.addEventListener('touchstart',e=>{ if(sh.querySelector('.tvs-body').scrollTop<=0) y0=e.touches[0].clientY },{passive:true}); sh.addEventListener('touchend',e=>{ if(y0!=null&&e.changedTouches[0].clientY-y0>70) close(); y0=null },{passive:true});
+  sh.addEventListener('pointerdown',e=>e.stopPropagation()); sh.close=close; return sh;
+}
+const TFLONG=k=>{ const m=tfMinutes(k), en=LANG==='en'; if(k==='D') return en?'1 day':'1 dag'; if(k==='W') return en?'1 week':'1 week'; if(k==='M') return en?'1 month':'1 maand'; if(m>=60){ const h=m/60; return h+(en?(h===1?' hour':' hours'):' uur') } return m+(en?(m===1?' minute':' minutes'):(m===1?' minuut':' minuten')) };
+/* timeframe: rond keuzelijstje boven de knop (zoals TradingView) */
+function tfWheel(anchor){
+  document.querySelectorAll('.tfwheel').forEach(x=>x.remove());
+  const w=document.createElement('div'); w.className='tfwheel';
+  w.innerHTML=`<div class="tfw-list">${TFS.map(x=>`<button data-tf="${x.k}" class="${x.k===SX.tf?'on':''}">${TFLONG(x.k)}</button>`).join('')}</div>`;
+  document.body.appendChild(w); const r=anchor.getBoundingClientRect();
+  w.style.left=Math.max(10,Math.min(r.left,innerWidth-w.offsetWidth-10))+'px'; w.style.bottom=(innerHeight-r.top+10)+'px';
+  const on=w.querySelector('.on'); if(on) on.scrollIntoView({block:'center'});
+  requestAnimationFrame(()=>w.classList.add('on'));
+  w.querySelectorAll('[data-tf]').forEach(b=>b.onclick=()=>{ setTf(b.dataset.tf); updDock(); w.remove() });
+  setTimeout(()=>{ const off=e=>{ if(!w.contains(e.target)){ w.remove(); document.removeEventListener('pointerdown',off,true) } }; document.addEventListener('pointerdown',off,true) },0);
+}
+/* lang indrukken op timeframe: datumbereik + interval (zoals TradingView) */
+function tfSheet(){ const L=(nl,en)=>LANG==='en'?en:nl, R=['1D','5D','1M','3M','6M','YTD','1Y','5Y','All'];
+  const sh=mSheet(L('Datumbereik','Date range'),`<div class="tvs-chips">${R.map(r=>`<button data-rg="${r}">${r}</button>`).join('')}</div>
+    <div class="tvs-sec">Interval</div><div class="tvs-chips wrap">${TFS.map(x=>`<button data-tf="${x.k}" class="${x.k===SX.tf?'on':''}">${x.l}</button>`).join('')}</div>`);
+  sh.querySelectorAll('[data-rg]').forEach(b=>b.onclick=()=>{ setRange(b.dataset.rg); sh.close() });
+  sh.querySelectorAll('[data-tf]').forEach(b=>b.onclick=()=>{ setTf(b.dataset.tf); updDock(); sh.close() }); }
+/* ⋯ : Analysis hub met tegels */
+function moreHub(){ const L=(nl,en)=>LANG==='en'?en:nl;
+  const top=[['settings','gear',t('sx.chartset')],['type','candle',L('Grafiektype','Chart type')],['shot','camera','Screenshot']];
+  const tools=[['ind','chart','Indicators'],['ana','bars','Analytics'],['order','plusc','Order'],['watch','list',t('sx.watch')],['tree','layers',t('sx.tree')],['journal','edit','Journal'],['range','calendar',L('Datumbereik','Date range')],['goto','clock',L('Ga naar datum','Go to date')]];
+  const tile=([k,i,l],big)=>`<button class="tvs-tile${big?' big':''}" data-v="${k}">${ic(i,24)}<span>${esc(l)}</span></button>`;
+  const sh=mSheet('Analysis hub',`<div class="tvs-grid g3">${top.map(x=>tile(x)).join('')}</div>
+    <div class="tvs-row2"><button class="tvs-tile wide" data-v="undo">${ic('undo',22)}<span>${L('Ongedaan maken','Undo')}</span></button><button class="tvs-tile wide" data-v="redo">${ic('redo',22)}<span>${L('Opnieuw','Redo')}</span></button></div>
+    <div class="tvs-sec">${L('Tools','Tools')}</div><div class="tvs-grid g2">${tools.map(x=>tile(x,1)).join('')}</div>
+    <button class="tvs-close" data-v="close">${ic('back',18)} ${L('Sessie sluiten','Close session')}</button>`,'hub');
+  sh.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; sh.close();
+    if(v==='range'){ setTimeout(tfSheet,230); return }
+    const q={close:'#sxBack',ind:'#sxInd',ana:'#sxAna',undo:'#sxUndo',redo:'#sxRedo',type:'#sxType',shot:'#sxShot',goto:'#sxGoto'}[v];
+    setTimeout(()=>{ if(q){ const el=$(q); if(el) el.click(); return } const rb=document.querySelector(`.sxrail [data-panel="${v}"]`); if(rb) rb.click() },q==='#sxType'?240:0) }); }
 function updDock(){ const s=$('#dkSym'), f=$('#dkTf'); if(!s||!SX) return; s.innerHTML=`${symBadge(SX.sym)}<b>${SX.sym}</b>`; f.textContent=tfLabel(SX.tf) }
 function renderFavBar(){
   const wrap=$('.sxchartwrap'); if(!wrap) return; let fb=$('#sxFavBar'); const fav=favTools();
