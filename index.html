@@ -1216,7 +1216,7 @@ body:not(.theme-light) .sxmenu button:hover{background:#262626}
 const CFG = {
   SUPABASE_URL: 'https://pntyqppxwibvpxqcchoo.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_KFShMCH-HTv6yAiGVPVytQ_LmJaWT6P',
-  VERSION: 'v9.4', BUILD: '2026-11-15'
+  VERSION: 'v9.5', BUILD: '2026-11-16'
 };
 
 /* ---------------- Icons ---------------- */
@@ -1872,7 +1872,9 @@ function render(){
   wrapTables(m); bindPage();
 }
 const JOURNAL_URL='https://twfapp.github.io/twfjournal/';
-function go(p){ closeSheet(); if(p==='journal'){ window.open(JOURNAL_URL,'_blank','noopener'); return } S.page=p;render(); }
+let _jWin=null;
+function openJournal(){ try{ if(_jWin&&!_jWin.closed){ _jWin.focus(); return } }catch(e){} _jWin=window.open(JOURNAL_URL,'twf-journal'); try{ _jWin&&_jWin.focus() }catch(e){} }
+function go(p){ closeSheet(); if(p==='journal'){ openJournal(); return } S.page=p;render(); }
 function openSheet(){ const sh=$('#msheet'), p=profile(); const L=(nl,en)=>LANG==='en'?en:nl;
   $('#mshProf').innerHTML=`${avatarHtml('avatar')}<div><b>${esc(p.name||'—')}</b><small>${p.tier==='elite'?'Elite':'Institute'} · ${CFG.VERSION}</small></div>`;
   $('#mshTheme').innerHTML=ic(curTheme()==='dark'?'sun':'moon')+`<span>${curTheme()==='dark'?L('Licht','Light'):L('Donker','Dark')}</span>`;
